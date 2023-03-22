@@ -36,7 +36,7 @@ class _LoginViewState extends State<LoginView> {
 
   Future<String?> attemptLogIn(String username, String password) async {
     Map loginDTO = {
-      'login': username,
+      'username': username,
       'password': password
     };
 
