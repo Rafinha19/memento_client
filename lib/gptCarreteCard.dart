@@ -40,7 +40,7 @@ class CarreteCard extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.0),
                       image: DecorationImage(
-                        image: NetworkImage(carrete.imageUrls[index]),
+                        image: NetworkImage("$SERVER_IP/api/users/rafa/image"+carrete.imageUrls[index]),
                         fit: BoxFit.cover,
                       ),
                     ),

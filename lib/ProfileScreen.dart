@@ -40,6 +40,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     } catch (e) {
       //return "Connection Error";
       debugPrint('Connection error');
+      return null;
     }
   }
 
@@ -123,8 +124,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
             _carrete != null ?
-              CarreteCard(carrete: _carrete):
-              CircularProgressIndicator()
+              CarreteCard(carrete: _carrete!):
+              Expanded(child: CircularProgressIndicator())
 
 
 
