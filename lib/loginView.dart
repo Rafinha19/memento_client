@@ -1,13 +1,12 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:memento_flutter_client/TabPage.dart';
 import 'package:memento_flutter_client/signUpView.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:memento_flutter_client/Config/Properties.dart' as properties;
 
-const SERVER_IP = 'http://localhost:8080';
 final storage = FlutterSecureStorage();
 
 

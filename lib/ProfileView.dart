@@ -74,7 +74,7 @@ class _profileViewState extends StatefulWidget {
     var token = await storage.read(key: "jwt");
     try {
       var res = await http.get(
-        Uri.parse("$SERVER_IP/api/api/carretes/mylastcarrete"),
+        Uri.parse("$SERVER_IP/api/carretes/mylastcarrete"),
         headers: {"Content-Type": "application/json",
           'Authorization': 'Bearer $token',
         },

@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
-
+import 'package:memento_flutter_client/Config/Properties.dart' as properties;
+import 'Config/Properties.dart';
 import 'Model/carrete.dart';
 
 
@@ -8,7 +9,9 @@ import 'Model/carrete.dart';
 class CarreteCard extends StatelessWidget {
   final Carrete carrete;
 
+
   const CarreteCard({Key? key, required this.carrete}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +29,8 @@ class CarreteCard extends StatelessWidget {
             height: 150.0,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: carrete.imageUrls.length,
+              itemCount: carrete.ids_fotos.length,
+              shrinkWrap: true,
               itemBuilder: (BuildContext context, int index) {
                 if (index > 8) {
                   // Only display up to 9 images
@@ -40,7 +44,7 @@ class CarreteCard extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.0),
                       image: DecorationImage(
-                        image: NetworkImage("$SERVER_IP/api/users/rafa/image"+carrete.imageUrls[index]),
+                        image: NetworkImage("$SERVER_IP/api/foto"+carrete.ids_fotos[index]),
                         fit: BoxFit.cover,
                       ),
                     ),
