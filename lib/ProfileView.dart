@@ -1,12 +1,20 @@
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:http/http.dart' as http;
+import 'package:memento_flutter_client/gptCarreteCard.dart';
+
+import 'Model/carrete.dart';
 import 'carreteCard.dart';
 
-void main() => runApp(const MyApp());
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+
+
+class ProfileView extends StatefulWidget {
+  const ProfileView({super.key});
+
+
 
   static const String _title = 'Perfil';
 
@@ -16,15 +24,33 @@ class MyApp extends StatelessWidget {
       title: _title,
       home: Scaffold(
         appBar: AppBar(title: const Text(_title)),
-        body: const ProfileView(),
+        body: _profileViewState(),
       ),
     );
   }
+
+
+
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    throw UnimplementedError();
+  }
+
+
 }
 
-class ProfileView extends StatelessWidget {
-  const ProfileView({super.key});
+class _profileViewState extends StatefulWidget {
+  _profileViewState({super.key});
 
+
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    throw UnimplementedError();
+  }
+
+  final storage = FlutterSecureStorage();
   static const SERVER_IP = 'http://localhost:8080';
 
   Future<String?> getProfilePicture(String username) async {
@@ -43,8 +69,34 @@ class ProfileView extends StatelessWidget {
     }
   }
 
+
+  Future<Carrete?> getMyLastCarrete() async {
+    var token = await storage.read(key: "jwt");
+    try {
+      var res = await http.get(
+        Uri.parse("$SERVER_IP/api/api/carretes/mylastcarrete"),
+        headers: {"Content-Type": "application/json",
+          'Authorization': 'Bearer $token',
+        },
+
+      );
+      if (res.statusCode == 200) {
+        return Carrete.fromJson(jsonDecode(res.body));
+      } else {
+        return null;
+      }
+    } catch (e) {
+      //return "Connection Error";
+      debugPrint('Connection error');
+    }
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
+
+
     return Center(
         child: Column(
       children: [
@@ -115,8 +167,9 @@ class ProfileView extends StatelessWidget {
             ),
           ),
         ),
-        MementoCard(),
+
       ],
     ));
   }
+
 }

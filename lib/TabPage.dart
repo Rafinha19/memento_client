@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:memento_flutter_client/ProfileScreen.dart';
 import 'package:memento_flutter_client/ProfileView.dart';
 import 'carreteCard.dart';
 
@@ -43,7 +44,7 @@ class _TabPageState extends State<TabPage> {
     Center(
       child: Padding(
         padding: EdgeInsets.all(16.0),
-        child: ProfileView(),
+        child: ProfileScreen(),
       ),
     ),
   ];
