@@ -5,7 +5,7 @@ import 'package:memento_flutter_client/TabPage.dart';
 import 'package:memento_flutter_client/signUpView.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:memento_flutter_client/Config/Properties.dart' as properties;
+import 'package:memento_flutter_client/Config/Properties.dart';
 
 final storage = FlutterSecureStorage();
 
@@ -34,11 +34,11 @@ class _LoginViewState extends State<LoginView> {
       );
 
   Future<String?> attemptLogIn(String username, String password) async {
+
     Map loginDTO = {
       'username': username,
       'password': password
     };
-
     try{
       var res = await http.post(
           Uri.parse("$SERVER_IP/api/authenticate") ,
