@@ -24,17 +24,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Future<Carrete?> getMyLastCarrete() async {
-    var token = await storage.read(key: "jwt");
+    var jsonString = await storage.read(key: "jwt");
+    Map<String, dynamic> jsonData = jsonDecode(jsonString!);
+    String token = jsonData['token'];
     try {
       var res = await http.get(
         Uri.parse("$SERVER_IP/api/carretes/mylastcarrete"),
         headers: {
           "Content-Type": "application/json",
-          HttpHeaders.authorizationHeader: '$token', //'bearer token'
+          'Authorization': 'Bearer $token', //'bearer token'
         },
       );
       if (res.statusCode == 200) {
         _carrete = Carrete.fromJson(jsonDecode(res.body));
+        debugPrint(_carrete.toString());
       } else {
         return null;
       }
