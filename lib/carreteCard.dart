@@ -39,9 +39,19 @@ class _carreteCardState extends State<carreteCard> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          widget.carrete.ano_mes + " " + widget.carrete.num_fotos.toString() + "/9",
+                        padding: const EdgeInsets.all(10.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                               "Carrete actual " + widget.carrete.num_fotos.toString() + "/9",
+                                style: TextStyle(color: Colors.white, fontSize: 15),
+                            ),
+                            Text(
+                              widget.carrete.ano_mes,
+                              style: TextStyle(color: Colors.white, fontSize: 15),
+                            )
+                          ],
                         ),
                       ),
                       SizedBox(
@@ -61,7 +71,7 @@ class _carreteCardState extends State<carreteCard> {
                                 width: 150.0,
                                 height: 150.0,
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10.0),
+                                  borderRadius: BorderRadius.circular(4.0),
                                   image: DecorationImage(
                                     image: NetworkImage(
                                       "$SERVER_IP/api/fotos/"+widget.carrete.ids_fotos[index].toString(),

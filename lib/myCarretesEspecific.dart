@@ -5,17 +5,17 @@ import 'package:memento_flutter_client/repository/AccountRepository.dart';
 
 import 'Config/Properties.dart';
 
-class gptCarreteCard extends StatefulWidget {
+class myCarretesEspecific extends StatefulWidget {
 
   final Carrete carrete;
 
-  gptCarreteCard({Key? key, required this.carrete}) : super(key: key);
+  myCarretesEspecific({Key? key, required this.carrete}) : super(key: key);
 
   @override
-  State<gptCarreteCard> createState() => _gptCarreteCardState();
+  State<myCarretesEspecific> createState() => _myCarretesEspecificState();
 }
 
-class _gptCarreteCardState extends State<gptCarreteCard> {
+class _myCarretesEspecificState extends State<myCarretesEspecific> {
   late Future<String> futureToken;
 
 
@@ -39,9 +39,19 @@ class _gptCarreteCardState extends State<gptCarreteCard> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        widget.carrete.ano_mes + " " + widget.carrete.num_fotos.toString() + "/9",
+                      padding: const EdgeInsets.all(10.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            widget.carrete.ano_mes,
+                            style: TextStyle(color: Colors.white, fontSize: 15),
+                          ),
+                          Text(
+                            widget.carrete.num_fotos.toString() + "/9",
+                            style: TextStyle(color: Colors.white, fontSize: 15),
+                          ),
+                        ],
                       ),
                     ),
                     SizedBox(
@@ -61,7 +71,7 @@ class _gptCarreteCardState extends State<gptCarreteCard> {
                               width: 150.0,
                               height: 150.0,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10.0),
+                                borderRadius: BorderRadius.circular(4.0),
                                 image: DecorationImage(
                                   image: NetworkImage(
                                       "$SERVER_IP/api/fotos/"+widget.carrete.ids_fotos[index].toString(),

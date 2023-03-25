@@ -1,9 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:memento_flutter_client/ProfileScreen.dart';
-import 'package:memento_flutter_client/DeprecatedProfileView.dart';
+import 'package:memento_flutter_client/ProfileView.dart';
 import 'package:memento_flutter_client/carreteCard.dart';
+import 'package:memento_flutter_client/myCarretes.dart';
+import 'Config/Properties.dart';
 import 'dummycarreteCard.dart';
 
 class TabPage extends StatefulWidget {
@@ -45,7 +46,7 @@ class _TabPageState extends State<TabPage> {
     Center(
       child: Padding(
         padding: EdgeInsets.all(16.0),
-        child: ProfileScreen(),
+        child: ProfileView(),
       ),
     ),
   ];
@@ -72,7 +73,7 @@ class _TabPageState extends State<TabPage> {
         selectedItemColor: Colors.orange,
         showSelectedLabels: false,
         showUnselectedLabels: false,
-        items: const <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: "home",

@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.orange,
         brightness: Brightness.dark,
+        accentColor: Colors.grey[700],
       ),
       home: FutureBuilder(
           future: jwtOrEmpty,
