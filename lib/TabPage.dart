@@ -2,8 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:memento_flutter_client/ProfileScreen.dart';
-import 'package:memento_flutter_client/ProfileView.dart';
-import 'carreteCard.dart';
+import 'package:memento_flutter_client/DeprecatedProfileView.dart';
+import 'package:memento_flutter_client/carreteCard.dart';
+import 'dummycarreteCard.dart';
 
 class TabPage extends StatefulWidget {
   TabPage(this.jwt, this.payload);
@@ -30,7 +31,7 @@ class _TabPageState extends State<TabPage> {
         children: [
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 15.0),
-            child: MementoCard(),
+            child: DummyCarreteCard(),
           ),
         ],
       ),

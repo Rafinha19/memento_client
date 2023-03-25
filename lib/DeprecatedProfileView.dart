@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:memento_flutter_client/gptCarreteCard.dart';
+import 'package:memento_flutter_client/loginView.dart';
+import 'package:memento_flutter_client/repository/AccountRepository.dart';
 
 import 'Model/carrete.dart';
-import 'carreteCard.dart';
+import 'dummycarreteCard.dart';
 
 
 
@@ -125,7 +127,16 @@ class _profileViewState extends StatefulWidget {
                     color: Colors.orange, borderRadius: BorderRadius.circular(10)),
                 child:
                 TextButton(
-                  onPressed: () async {},
+                  onPressed: () async {
+                    AccountRepository().logOut();
+                    debugPrint('Logout tapped.');
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => LoginView()
+                        )
+                    );
+                  },
                   child: Text(
                     'Cerrar sesion',
                     style: TextStyle(color: Colors.white, fontSize: 15),

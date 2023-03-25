@@ -1,0 +1,6 @@
+
+class UsersRepository {
+  logOut(){
+    
+  }
+}
