@@ -1,81 +1,95 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:memento_flutter_client/Model/carrete.dart';
+import 'package:memento_flutter_client/repository/AccountRepository.dart';
 
-void main() => runApp(const MyApp());
+import 'Config/Properties.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class carreteCard extends StatefulWidget {
 
-  static const String _title = 'Flutter Code Sample';
+  final Carrete carrete;
+
+  carreteCard({Key? key, required this.carrete}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: _title,
-      home: Scaffold(
-        appBar: AppBar(title: const Text(_title)),
-        body: const MementoCard(),
-      ),
-    );
-  }
+  State<carreteCard> createState() => _carreteCardState();
 }
 
-class MementoCard extends StatelessWidget {
-  const MementoCard({super.key});
+class _carreteCardState extends State<carreteCard> {
+  late Future<String> futureToken;
+
+
+  @override
+  void initState() {
+    super.initState();
+    futureToken = AccountRepository().getJwtToken();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Card(
-        // clipBehavior is necessary because, without it, the InkWell's animation
-        // will extend beyond the rounded edges of the [Card] (see https://github.com/flutter/flutter/issues/109776)
-        // This comes with a small performance cost, and you should not set [clipBehavior]
-        // unless you need it.
-        clipBehavior: Clip.hardEdge,
-        child: InkWell(
-          splashColor: Colors.blue.withAlpha(30),
-          onTap: () {
-            debugPrint('Card tapped.');
-          },
-          child: Padding(
-            padding: EdgeInsets.all(15),
-            child: Column(
-              children: [
-                Text("Carrete 2/9"),
-                Container(
-                  margin: const EdgeInsets.symmetric(vertical: 20.0),
-                  height: 150.0,
-                  child: ListView(
-                    // This next line does the trick.
-                    scrollDirection: Axis.horizontal,
-                    children: <Widget>[
-                      Container(
-                        width: 150.0,
-                        color: Colors.red,
+    return Scaffold(
+        body: Center(
+          child: FutureBuilder<String>(
+            future: futureToken,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                String token = snapshot.data!;
+                return Card(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          widget.carrete.ano_mes + " " + widget.carrete.num_fotos.toString() + "/9",
+                        ),
                       ),
-                      Container(
-                        width: 150.0,
-                        color: Colors.blue,
-                      ),
-                      Container(
-                        width: 150.0,
-                        color: Colors.green,
-                      ),
-                      Container(
-                        width: 150.0,
-                        color: Colors.yellow,
-                      ),
-                      Container(
-                        width: 150.0,
-                        color: Colors.orange,
+                      SizedBox(
+                        height: 150.0,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: widget.carrete.ids_fotos.length,
+                          shrinkWrap: true,
+                          itemBuilder: (BuildContext context, int index) {
+                            if (index > 8) {
+                              // Only display up to 9 images
+                              return SizedBox.shrink();
+                            }
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                width: 150.0,
+                                height: 150.0,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  image: DecorationImage(
+                                    image: NetworkImage(
+                                      "$SERVER_IP/api/fotos/"+widget.carrete.ids_fotos[index].toString(),
+                                      headers: {
+                                        'Authorization': 'Bearer $token', //'beare
+                                      }
+                                    ),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
                       ),
                     ],
                   ),
-                ),
-              ],
-            ),
+                );
+
+              } else if (snapshot.hasError) {
+                return Text('${snapshot.error}');
+              }
+
+              // By default, show a loading spinner.
+              return const CircularProgressIndicator();
+            },
           ),
         ),
-      ),
-    );
+      );
   }
 }
