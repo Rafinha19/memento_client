@@ -36,15 +36,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
         },
       );
       if (res.statusCode == 200) {
-        _carrete = Carrete.fromJson(jsonDecode(res.body));
-        debugPrint(_carrete.toString());
+        setState(() {
+          _carrete = Carrete.fromJson(jsonDecode(res.body));
+        });
       } else {
-        return null;
+        setState(() {
+          _carrete = null;
+        });
       }
     } catch (e) {
       //return "Connection Error";
+      setState(() {
+        _carrete = null;
+      });
       debugPrint('Connection error');
-      return null;
     }
   }
 
