@@ -47,6 +47,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15.0),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text("rafa", textAlign: TextAlign.left),
                     Text("4 publicaciones", textAlign: TextAlign.left)
