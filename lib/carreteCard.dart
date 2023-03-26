@@ -8,8 +8,9 @@ import 'Config/Properties.dart';
 class carreteCard extends StatefulWidget {
 
   final Carrete carrete;
+  final bool ismyLastcarrete;
 
-  carreteCard({Key? key, required this.carrete}) : super(key: key);
+  carreteCard({Key? key, required this.carrete, required this.ismyLastcarrete}) : super(key: key);
 
   @override
   State<carreteCard> createState() => _carreteCardState();
@@ -35,6 +36,10 @@ class _carreteCardState extends State<carreteCard> {
               if (snapshot.hasData) {
                 String token = snapshot.data!;
                 return Card(
+                  color: Colors.grey[900],
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5),
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -44,11 +49,12 @@ class _carreteCardState extends State<carreteCard> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                               "Carrete actual " + widget.carrete.num_fotos.toString() + "/9",
-                                style: TextStyle(color: Colors.white, fontSize: 15),
-                            ),
+                              widget.ismyLastcarrete ? "Carrete actual " + widget.carrete.num_fotos.toString() + "/9" : widget.carrete.ano_mes ,
+                              style: TextStyle(color: Colors.white, fontSize: 15),
+                            )
+                            ,
                             Text(
-                              widget.carrete.ano_mes,
+                              widget.ismyLastcarrete ? widget.carrete.ano_mes : widget.carrete.num_fotos.toString() + "/9",
                               style: TextStyle(color: Colors.white, fontSize: 15),
                             )
                           ],

@@ -20,11 +20,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Authentication Demo',
+      title: 'Memento',
       theme: ThemeData(
         primarySwatch: Colors.orange,
         brightness: Brightness.dark,
         accentColor: Colors.grey[700],
+        scaffoldBackgroundColor:  Colors.black,
       ),
       home: FutureBuilder(
           future: jwtOrEmpty,

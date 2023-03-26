@@ -122,10 +122,10 @@ class _LoginViewState extends State<LoginView> {
               Padding(
                 padding: EdgeInsets.all(10),
                 child: Container(
-                  height: 30,
+                  height: 40,
                   width: double.infinity,
                   decoration: BoxDecoration(
-                      color: Colors.grey, borderRadius: BorderRadius.circular(10)),
+                      color: Colors.grey[700], borderRadius: BorderRadius.circular(10)),
                   child: TextButton(
                     onPressed: () {
                       Navigator.push(

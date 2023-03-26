@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:memento_flutter_client/Model/carrete.dart';
-import 'package:memento_flutter_client/myCarretesEspecific.dart';
 import 'package:memento_flutter_client/repository/AccountRepository.dart';
 import 'package:memento_flutter_client/repository/CarreteRepository.dart';
 
@@ -42,7 +41,7 @@ class _myCarretesState extends State<myCarretes> {
                       return SizedBox(
                       height: 200,
                       width: double.infinity,
-                      child: myCarretesEspecific(carrete: carrete),
+                      child: carreteCard(carrete: carrete, ismyLastcarrete: false),
                     );
                   });
             } else if (snapshot.hasError) {

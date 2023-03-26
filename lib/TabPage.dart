@@ -62,7 +62,11 @@ class _TabPageState extends State<TabPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Memento'),
+        title: const Text(
+            'Memento',
+          style: TextStyle(fontSize: 26),
+        ),
+        backgroundColor: Colors.black,
       ),
       body: IndexedStack(
         index: _selectedIndex,
@@ -73,6 +77,7 @@ class _TabPageState extends State<TabPage> {
         selectedItemColor: Colors.orange,
         showSelectedLabels: false,
         showUnselectedLabels: false,
+        backgroundColor: Colors.black,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),

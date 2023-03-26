@@ -38,7 +38,7 @@ class _ProfileViewState extends State<ProfileView> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         CircleAvatar(
-                          radius: 30, // Image radius
+                          radius: 40, // Image radius
                           backgroundImage:
                           NetworkImage("$SERVER_IP/api/users/rafa/image"),
                         ),
@@ -67,6 +67,7 @@ class _ProfileViewState extends State<ProfileView> {
                             child: Text(
                               'Cerrar sesion',
                               style: TextStyle(color: Colors.white, fontSize: 15),
+                              textAlign: TextAlign.center,
                             ),
                           ),
                         ),
@@ -79,7 +80,7 @@ class _ProfileViewState extends State<ProfileView> {
                       height: 35,
                       width: double.infinity,
                       decoration: BoxDecoration(
-                          color: Colors.grey[700],
+                          color: Colors.grey[800],
                           borderRadius: BorderRadius.circular(10)),
                       child: TextButton(
                         onPressed: () {},
@@ -96,7 +97,7 @@ class _ProfileViewState extends State<ProfileView> {
                       height: 35,
                       width: double.infinity,
                       decoration: BoxDecoration(
-                          color: Colors.grey[700],
+                          color: Colors.grey[800],
                           borderRadius: BorderRadius.circular(10)),
                       child: TextButton(
                         onPressed: () {},
@@ -115,7 +116,7 @@ class _ProfileViewState extends State<ProfileView> {
                         builder: (context, snapshot) {
                           if (snapshot.hasData) {
                             //return CarreteCard(carrete: snapshot.data!);
-                            return carreteCard(carrete: snapshot.data!);
+                            return carreteCard(carrete: snapshot.data!, ismyLastcarrete: true);
                           } else if (snapshot.hasError) {
                             return Text('${snapshot.error}');
                           }
