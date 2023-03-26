@@ -33,7 +33,7 @@ class _myCarretesState extends State<myCarretes> {
               //return CarreteCard(carrete: snapshot.data!);
               List<Carrete> carretes = snapshot.data!;
               return ListView.builder(
-                  scrollDirection: Axis.vertical,
+                  physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemCount: carretes.length,
                   itemBuilder: (context, index) {

@@ -60,4 +60,9 @@ class CarreteRepository {
       throw Exception('Error al obtener los carretes');
     }
   }
+
+  //Esto lo hago porque por defecto el mes en castellano viene con la priemra letra en minuscula
+  String toUpperCaseFirstLetter(String text) {
+    return text.substring(0, 1).toUpperCase() + text.substring(1);
+  }
 }

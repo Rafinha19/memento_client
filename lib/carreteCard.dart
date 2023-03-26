@@ -1,7 +1,11 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:memento_flutter_client/Model/carrete.dart';
 import 'package:memento_flutter_client/repository/AccountRepository.dart';
+import 'package:memento_flutter_client/repository/CarreteRepository.dart';
 
 import 'Config/Properties.dart';
 
@@ -49,12 +53,12 @@ class _carreteCardState extends State<carreteCard> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              widget.ismyLastcarrete ? "Carrete actual " + widget.carrete.num_fotos.toString() + "/9" : widget.carrete.mes + " " + widget.carrete.ano.toString() ,
+                              widget.ismyLastcarrete ? "Carrete actual " + widget.carrete.num_fotos.toString() + "/9" : CarreteRepository().toUpperCaseFirstLetter(DateFormat('MMMM',Localizations.localeOf(context).languageCode).format(DateTime(widget.carrete.ano,widget.carrete.mes))) + " " + widget.carrete.ano.toString() ,
                               style: TextStyle(color: Colors.white, fontSize: 15),
                             )
                             ,
                             Text(
-                              widget.ismyLastcarrete ? widget.carrete.mes + " " + widget.carrete.ano.toString() : widget.carrete.num_fotos.toString() + "/9",
+                              widget.ismyLastcarrete ?  CarreteRepository().toUpperCaseFirstLetter(DateFormat('MMMM',Localizations.localeOf(context).languageCode).format(DateTime(widget.carrete.ano,widget.carrete.mes))) + " " + widget.carrete.ano.toString() : widget.carrete.num_fotos.toString() + "/9",
                               style: TextStyle(color: Colors.white, fontSize: 15),
                             )
                           ],

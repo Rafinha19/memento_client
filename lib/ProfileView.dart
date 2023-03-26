@@ -8,6 +8,7 @@ import 'dart:convert';
 import 'Model/carrete.dart';
 import 'package:memento_flutter_client/Config/Properties.dart';
 import 'package:memento_flutter_client/repository/CarreteRepository.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'loginView.dart';
 
@@ -85,7 +86,7 @@ class _ProfileViewState extends State<ProfileView> {
                       child: TextButton(
                         onPressed: () {},
                         child: Text(
-                          'Editar perfil',
+                          AppLocalizations.of(context)!.editProfile,
                           style: TextStyle(color: Colors.white, fontSize: 15),
                         ),
                       ),
