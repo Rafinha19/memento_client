@@ -49,12 +49,12 @@ class _carreteCardState extends State<carreteCard> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              widget.ismyLastcarrete ? "Carrete actual " + widget.carrete.num_fotos.toString() + "/9" : widget.carrete.ano_mes ,
+                              widget.ismyLastcarrete ? "Carrete actual " + widget.carrete.num_fotos.toString() + "/9" : widget.carrete.mes + " " + widget.carrete.ano.toString() ,
                               style: TextStyle(color: Colors.white, fontSize: 15),
                             )
                             ,
                             Text(
-                              widget.ismyLastcarrete ? widget.carrete.ano_mes : widget.carrete.num_fotos.toString() + "/9",
+                              widget.ismyLastcarrete ? widget.carrete.mes + " " + widget.carrete.ano.toString() : widget.carrete.num_fotos.toString() + "/9",
                               style: TextStyle(color: Colors.white, fontSize: 15),
                             )
                           ],
