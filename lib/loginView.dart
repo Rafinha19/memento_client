@@ -6,6 +6,9 @@ import 'package:memento_flutter_client/signUpView.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:memento_flutter_client/repository/AccountRepository.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+
 
 final storage = FlutterSecureStorage();
 
@@ -47,7 +50,7 @@ class _LoginViewState extends State<LoginView> {
               Padding(
                 padding: EdgeInsets.all(20),
                 child: Text(
-                  'Memento',
+                  AppLocalizations.of(context)!.memento,
                   textAlign: TextAlign.center,
                   textScaleFactor: 4.0,
                   overflow: TextOverflow.ellipsis,
@@ -90,7 +93,15 @@ class _LoginViewState extends State<LoginView> {
                       var username = usernameController.text;
                       var password = passwordController.text;
                       var jwt = await AccountRepository().attemptLogIn(username, password);
-                      if(jwt != null) {
+                      if(jwt == "400"){
+                        displayDialog(context, "Error", "Password and username must be at least 4 characters long");
+                      } else if (jwt=="401"){
+                        displayDialog(context, "Error", "We haven't found any account with that password or username");
+                      } else if(jwt=="CONN_ERR"){
+                        displayDialog(context, "Connection error", "There was a problem with the internet connection. Try again later");
+                      }else if(jwt =="SERV_ERR"){
+                        displayDialog(context, AppLocalizations.of(context)!.server_error, "There was a problem with the server. Try again later");
+                      } else if(jwt != null) {
                         storage.write(key: "jwt", value: jwt);
                         Navigator.push(
                             context,

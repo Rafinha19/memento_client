@@ -2,5 +2,17 @@
   "editProfile": "Edit profile",
   "@editProfile": {
     "description": "Edit profile "
-  }
+  },
+  "memento": "Memento",
+  "server_error": "Server error",
+  "error": "Errror",
+  "login_pass_user_mustbe_4long": "Password must be 4 characters long.",
+  "login_user_havent_found": "We haven't found any account with that combination of username and password.",
+  "connection_error": "There was a problem with the internet connection.",
+  "server_error_description": "There was a problem with the server, please try again later.",
+  "username": "Username",
+  "password": "Password",
+  "login": "Login",
+  "dont_have_an_account": "Dont have an account?",
+  "signup": "Sign up",
 }
