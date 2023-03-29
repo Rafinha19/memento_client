@@ -106,7 +106,7 @@ class _LoginViewState extends State<LoginView> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => TabPage.fromBase64(jwt)
+                                builder: (context) => TabPage()
                             )
                         );
                       } else {

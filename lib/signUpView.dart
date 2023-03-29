@@ -149,7 +149,7 @@ class _signUpViewState extends State<signUpView> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => TabPage.fromBase64(jwt)
+                                    builder: (context) => TabPage()
                                 )
                             );
                           } else {

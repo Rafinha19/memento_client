@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
               } else {
                 var payload = json.decode(ascii.decode(base64.decode(base64.normalize(jwt[1]))));
                 if(DateTime.fromMillisecondsSinceEpoch(payload["exp"]*1000).isAfter(DateTime.now())) {
-                  return TabPage(str, payload);
+                  return TabPage();
                 } else {
                   return LoginView();
                 }

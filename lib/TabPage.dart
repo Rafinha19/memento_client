@@ -5,18 +5,12 @@ import 'package:memento_flutter_client/ProfileView.dart';
 import 'package:memento_flutter_client/carreteCard.dart';
 import 'package:memento_flutter_client/myCarretes.dart';
 import 'Config/Properties.dart';
-import 'dummycarreteCard.dart';
 
 class TabPage extends StatefulWidget {
-  TabPage(this.jwt, this.payload);
+  TabPage();
 
-  factory TabPage.fromBase64(String jwt) => TabPage(
-      jwt,
-      json.decode(
-          ascii.decode(base64.decode(base64.normalize(jwt.split(".")[1])))));
 
-  final String jwt;
-  final Map<String, dynamic> payload;
+
 
   @override
   _TabPageState createState() => _TabPageState();
@@ -32,7 +26,7 @@ class _TabPageState extends State<TabPage> {
         children: [
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 15.0),
-            child: DummyCarreteCard(),
+            child: Text("hola"),
           ),
         ],
       ),
