@@ -3,17 +3,23 @@
   "memento": "Memento",
   "server_error": "Error en el servidor",
   "error": "Errror",
-  "login_pass_user_mustbe_4long": "La contraseña debe ser de 4 letras minimo.",
+  "login_error": "Error al hacer login",
+  "login_pass_mustbe_4long": "La contraseña debe ser de 4 caracteres minimo.",
   "login_user_havent_found": "No hemos encontrado ninguna cuenta con esa combinacion de usuario y contraseña.",
-  "connection_error": "Hubo un problema con la conexión a internet.",
+  "connection_error": "Connection error.",
+  "connection_error_description": "Hubo un problema con la conexión a internet.",
   "server_error_description": "Hubo un problema con el servidor, por  favor vuelve a intentarlo más tarde.",
   "username": "Nombre de usuario",
+  "username_hint": "Introduce tu nombre de usuario",
   "password": "Contraseña",
+  "password_hint": "Longitud minima de 4 caracteres",
   "login": "Login",
   "dont_have_an_account": "¿No tienes una cuenta?",
-  "signup": "Sign up"
-
-
-
+  "signup": "Crear una cuenta",
+  "create_an_account": "Crear una cuenta",
+  "repeat_password": "Repite tu contraseña",
+  "repeat_password_hint": "Repite tu contraseña",
+  "email": "Email",
+  "email_hint": "Introduce tu email"
 
 }

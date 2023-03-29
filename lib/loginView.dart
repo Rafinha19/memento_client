@@ -63,8 +63,8 @@ class _LoginViewState extends State<LoginView> {
                   controller: usernameController,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      labelText: 'Username',
-                      hintText: 'Enter your username'
+                      labelText: AppLocalizations.of(context)!.username,
+                      hintText: AppLocalizations.of(context)!.username_hint
                   ),
 
                 ),
@@ -76,8 +76,8 @@ class _LoginViewState extends State<LoginView> {
                   controller: passwordController,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      labelText: 'Password',
-                      hintText: 'Enter your secure password'
+                      labelText: AppLocalizations.of(context)!.password,
+                      hintText: AppLocalizations.of(context)!.password_hint
                   ),
                 ),
               ),
@@ -94,13 +94,13 @@ class _LoginViewState extends State<LoginView> {
                       var password = passwordController.text;
                       var jwt = await AccountRepository().attemptLogIn(username, password);
                       if(jwt == "400"){
-                        displayDialog(context, "Error", "Password and username must be at least 4 characters long");
+                        displayDialog(context, AppLocalizations.of(context)!.error, AppLocalizations.of(context)!.login_pass_mustbe_4long);
                       } else if (jwt=="401"){
-                        displayDialog(context, "Error", "We haven't found any account with that password or username");
+                        displayDialog(context, AppLocalizations.of(context)!.error, AppLocalizations.of(context)!.login_error);
                       } else if(jwt=="CONN_ERR"){
-                        displayDialog(context, "Connection error", "There was a problem with the internet connection. Try again later");
+                        displayDialog(context, AppLocalizations.of(context)!.connection_error, AppLocalizations.of(context)!.connection_error_description);
                       }else if(jwt =="SERV_ERR"){
-                        displayDialog(context, AppLocalizations.of(context)!.server_error, "There was a problem with the server. Try again later");
+                        displayDialog(context, AppLocalizations.of(context)!.server_error,  AppLocalizations.of(context)!.server_error_description);
                       } else if(jwt != null) {
                         storage.write(key: "jwt", value: jwt);
                         Navigator.push(
@@ -110,12 +110,11 @@ class _LoginViewState extends State<LoginView> {
                             )
                         );
                       } else {
-                        //OJO AQUI VA A QUEDAR ARREGLAR EL CASO DE QUE NO HAYA CONEXION A INTERNET
-                        displayDialog(context, "An Error Occurred", "No account was found matching that username and password");
+                        displayDialog(context,  AppLocalizations.of(context)!.error,  AppLocalizations.of(context)!.error);
                       }
                     },
                     child: Text(
-                      'Login',
+                      AppLocalizations.of(context)!.login,
                       style: TextStyle(color: Colors.white, fontSize: 25),
                     ),
                   ),
@@ -124,7 +123,7 @@ class _LoginViewState extends State<LoginView> {
               Padding(
                 padding: EdgeInsets.all(20),
                 child: Text(
-                  'Dont have an account?',
+                  AppLocalizations.of(context)!.dont_have_an_account,
                   textAlign: TextAlign.center,
                   textScaleFactor: 1.4,
                   overflow: TextOverflow.ellipsis,
@@ -136,7 +135,7 @@ class _LoginViewState extends State<LoginView> {
                   height: 40,
                   width: double.infinity,
                   decoration: BoxDecoration(
-                      color: Colors.grey[700], borderRadius: BorderRadius.circular(10)),
+                      color: Colors.grey[800], borderRadius: BorderRadius.circular(10)),
                   child: TextButton(
                     onPressed: () {
                       Navigator.push(
@@ -147,7 +146,7 @@ class _LoginViewState extends State<LoginView> {
                       );
                     },
                     child: Text(
-                      'Sign up',
+                      AppLocalizations.of(context)!.signup,
                       style: TextStyle(color: Colors.white, fontSize: 20),
                     ),
                   ),

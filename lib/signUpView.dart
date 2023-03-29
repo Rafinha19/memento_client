@@ -5,6 +5,7 @@ import 'package:memento_flutter_client/TabPage.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:memento_flutter_client/Config/Properties.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 final storage = FlutterSecureStorage();
 
@@ -20,6 +21,7 @@ class _signUpViewState extends State<signUpView> {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController repeat_passwordController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
 
   //Funcion auxiliar para hacer un display de un dialogo
   void displayDialog(BuildContext context, String title, String text) =>
@@ -82,7 +84,7 @@ class _signUpViewState extends State<signUpView> {
               Padding(
                 padding: EdgeInsets.all(20),
                 child: Text(
-                  'Memento',
+                  AppLocalizations.of(context)!.memento,
                   textAlign: TextAlign.center,
                   textScaleFactor: 4.0,
                   overflow: TextOverflow.ellipsis,
@@ -92,7 +94,7 @@ class _signUpViewState extends State<signUpView> {
               Padding(
                 padding: EdgeInsets.all(20),
                 child: Text(
-                  'Create an account',
+                  AppLocalizations.of(context)!.create_an_account,
                   textAlign: TextAlign.center,
                   textScaleFactor: 1.4,
                   overflow: TextOverflow.ellipsis,
@@ -104,10 +106,22 @@ class _signUpViewState extends State<signUpView> {
                   controller: usernameController,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      labelText: 'Username',
-                      hintText: 'Enter your username'
+                      labelText: AppLocalizations.of(context)!.username,
+                      hintText: AppLocalizations.of(context)!.username_hint
                   ),
 
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(10),
+                child: TextField(
+                  obscureText: true,
+                  controller: emailController,
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: AppLocalizations.of(context)!.email,
+                      hintText: AppLocalizations.of(context)!.email_hint
+                  ),
                 ),
               ),
               Padding(
@@ -117,8 +131,8 @@ class _signUpViewState extends State<signUpView> {
                   controller: passwordController,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      labelText: 'Password',
-                      hintText: 'Enter your secure password'
+                      labelText: AppLocalizations.of(context)!.password,
+                      hintText: AppLocalizations.of(context)!.password_hint
                   ),
                 ),
               ),
@@ -129,8 +143,8 @@ class _signUpViewState extends State<signUpView> {
                   controller: repeat_passwordController,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      labelText: 'Repeat password',
-                      hintText: 'Repeat your password'
+                      labelText: AppLocalizations.of(context)!.repeat_password,
+                      hintText: AppLocalizations.of(context)!.repeat_password_hint
                   ),
                 ),
               ),
@@ -147,9 +161,7 @@ class _signUpViewState extends State<signUpView> {
                       var username = usernameController.text;
                       var password = passwordController.text;
                       var repeatPassword = repeat_passwordController.text;
-                      if(username.length < 4)
-                        displayDialog(context, "Invalid Username", "The username should be at least 4 characters long");
-                      else if(password.length < 4)
+                      if(password.length < 4)
                         displayDialog(context, "Invalid Password", "The password should be at least 4 characters long");
                       else if(password!= repeatPassword){
                         displayDialog(context,"Passwords dont match","Please rewrite the passwords");
