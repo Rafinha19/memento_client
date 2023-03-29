@@ -9,6 +9,7 @@
   },
   "server_error": "Server error",
   "error": "Errror",
+  "unexpected_error": "Unexpected error, please try again later.",
   "login_error": "Login error",
   "login_pass_mustbe_4long": "Password must be 4 characters long.",
   "login_user_havent_found": "We haven't found any account with that combination of username and password.",
@@ -26,5 +27,18 @@
   "repeat_password": "Repeat password",
   "repeat_password_hint": "Repeat your password",
   "email": "Email",
-  "email_hint": "Enter your email"
+  "email_hint": "Enter your email",
+  "fill_all_data": "Fill all the data",
+  "fill_add_data_description": "Please, fill all the data.",
+  "not_a_valid_email": "Not a valid email",
+  "not_a_valid_email_description": "Please enter a valid email.",
+  "not_a_valid_password": "Not a valid password",
+  "not_a_valid_password_description": "Your password should be at least 4 characters long.",
+  "passwords_dont_match": "Passwords don't match",
+  "passwords_dont_match_description": "Please rewrite the passwords.",
+  "username_already_registered": "That username is already registered",
+  "username_already_registered_description": "Please try to sign up using another username or log in if you already have an account.",
+  "email_already_in_use": "That email is already in use",
+  "email_already_in_use_description": "There is already an account registered with that email.",
+  "sign_out": "Sign out"
 }

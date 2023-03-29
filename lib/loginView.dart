@@ -110,7 +110,7 @@ class _LoginViewState extends State<LoginView> {
                             )
                         );
                       } else {
-                        displayDialog(context,  AppLocalizations.of(context)!.error,  AppLocalizations.of(context)!.error);
+                        displayDialog(context,  AppLocalizations.of(context)!.error,  AppLocalizations.of(context)!.unexpected_error);
                       }
                     },
                     child: Text(

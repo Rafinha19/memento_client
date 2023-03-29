@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
@@ -38,6 +39,42 @@ class AccountRepository {
     }
 
   }
+
+
+  Future<int> attemptSignUp(String username, String password, String email) async {
+
+    Map userDTO = {
+      'login': username,
+      'password': password,
+      'email': email
+    };
+    try {
+      var res = await http.post(
+          Uri.parse('$SERVER_IP/api/register') ,
+          headers: {"Content-Type": "application/json"},
+          body: json.encode(userDTO)
+      );
+
+      //Esto es un workaround para poder anotar que ya existe un usuario con ese correo
+      String jsonString = res.body;
+      Map<String, dynamic> jsonMap = json.decode(jsonString);
+      String message = jsonMap['message'];
+      if(message.compareTo("There is already a user with the email " + email) == 0){
+        return 3;
+      }else{
+        return res.statusCode;
+      }
+    }catch(e){
+      if(e is SocketException) {
+        //SERVER ERROR
+        return 1;
+      }else {
+        //CONECTION ERROR
+        return 2;
+      }
+    }
+  }
+
 
   Future<String> getJwtToken() async {
     var jsonString = await storage.read(key: "jwt");

@@ -66,7 +66,7 @@ class _ProfileViewState extends State<ProfileView> {
                                   MaterialPageRoute(builder: (context) => LoginView()));
                             },
                             child: Text(
-                              'Cerrar sesion',
+                              AppLocalizations.of(context)!.sign_out,
                               style: TextStyle(color: Colors.white, fontSize: 15),
                               textAlign: TextAlign.center,
                             ),

@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:memento_flutter_client/Config/Properties.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:memento_flutter_client/repository/AccountRepository.dart';
 
 final storage = FlutterSecureStorage();
 
@@ -30,47 +31,15 @@ class _signUpViewState extends State<signUpView> {
         builder: (context) =>
             AlertDialog(
                 shape: RoundedRectangleBorder( borderRadius: BorderRadius.all(Radius.circular(32.0))),
-                title: Text(title),
-                content: Text(text)
+                title: Text(title,style: TextStyle(color: Colors.orange),),
+                content: Text(text),
+                backgroundColor: Colors.grey[800],
             ),
       );
 
-  Future<String?> attemptLogIn(String username, String password) async {
-    Map loginDTO = {
-      'login': username,
-      'password': password
-    };
-    var res = await http.post(
-        Uri.parse("$SERVER_IP/api/authenticate") ,
-        headers: {"Content-Type": "application/json"},
-        body: json.encode(loginDTO)
-    );
-    if(res.statusCode == 200) {
-      return res.body;
-
-    }else {
-      return null;
-    }
+  bool isValidEmail(String email) {
+    return email.contains('@');
   }
-
-  //HABRA QUE CAMBIAR ESTA FUNCION SEGURO
-  //  me falta meterle el correo/telefono
-  Future<int> attemptSignUp(String username, String password) async {
-
-    Map userDTO = {
-      'login': username,
-      'password': password
-    };
-    var res = await http.post(
-        Uri.parse('$SERVER_IP/api/register') ,
-        headers: {"Content-Type": "application/json"},
-        body: json.encode(userDTO)
-    );
-    return res.statusCode;
-
-  }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -115,7 +84,6 @@ class _signUpViewState extends State<signUpView> {
               Padding(
                 padding: EdgeInsets.all(10),
                 child: TextField(
-                  obscureText: true,
                   controller: emailController,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(),
@@ -161,17 +129,21 @@ class _signUpViewState extends State<signUpView> {
                       var username = usernameController.text;
                       var password = passwordController.text;
                       var repeatPassword = repeat_passwordController.text;
-                      if(password.length < 4)
-                        displayDialog(context, "Invalid Password", "The password should be at least 4 characters long");
+                      var email= emailController.text;
+                      if(username=='' || password==''|| email==''||repeatPassword==''){
+                        displayDialog(context, AppLocalizations.of(context)!.fill_all_data,AppLocalizations.of(context)!.fill_add_data_description);
+                      }else if(!isValidEmail(email)){
+                        displayDialog(context, AppLocalizations.of(context)!.not_a_valid_email, AppLocalizations.of(context)!.not_a_valid_email_description);
+                      } else if(password.length < 4)
+                        displayDialog(context, AppLocalizations.of(context)!.not_a_valid_password, AppLocalizations.of(context)!.not_a_valid_password_description);
                       else if(password!= repeatPassword){
-                        displayDialog(context,"Passwords dont match","Please rewrite the passwords");
+                        displayDialog(context,AppLocalizations.of(context)!.passwords_dont_match,AppLocalizations.of(context)!.passwords_dont_match_description);
                       }else{
                         //Acontinuación creamos la cuenta y en caso de no haber problemas logeamos al usuario
-                        var res = await attemptSignUp(username, password);
+                        var res = await  AccountRepository().attemptSignUp(username, password, email);
                         //Seria más correcto cambiar el servidor para que devuelva un 201, pero en este caso devuelve un 200
                         if(res == 200){
-                          displayDialog(context, "Success", "The user was created.");
-                          var jwt = await attemptLogIn(username, password);
+                          var jwt = await AccountRepository().attemptLogIn(username, password);
                           if(jwt != null) {
                             storage.write(key: "jwt", value: jwt);
                             Navigator.push(
@@ -181,14 +153,23 @@ class _signUpViewState extends State<signUpView> {
                                 )
                             );
                           } else {
-                            displayDialog(context, "An Error Occurred", "No account was found matching that username and password");
+                            //Este error realmente no debia pasar nunca salvo que el servidor se quede colgado a medias
+                            displayDialog(context, AppLocalizations.of(context)!.error, AppLocalizations.of(context)!.unexpected_error);
                           }
-                        }
-                        else if(res == 409){
-                          displayDialog(context, "That username is already registered", "Please try to sign up using another username or log in if you already have an account.");
+                        } else if(res == 400){
+                          displayDialog(context, AppLocalizations.of(context)!.username_already_registered, AppLocalizations.of(context)!.username_already_registered_description);
+                        }else if(res==1){
+                          //Server error
+                          displayDialog(context, AppLocalizations.of(context)!.server_error,  AppLocalizations.of(context)!.server_error_description);
+                        }else if(res==2){
+                          //Connection error
+                          displayDialog(context, AppLocalizations.of(context)!.connection_error, AppLocalizations.of(context)!.connection_error_description);
+                        }else if(res==3){
+                          //Connection error
+                          displayDialog(context, AppLocalizations.of(context)!.email_already_in_use,AppLocalizations.of(context)!.email_already_in_use_description);
                         }
                         else {
-                          displayDialog(context, "Error", "An unknown error ocured");
+                          displayDialog(context, AppLocalizations.of(context)!.error, AppLocalizations.of(context)!.unexpected_error);
                         }
 
                       }
