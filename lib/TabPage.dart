@@ -1,13 +1,17 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:memento_flutter_client/InicioView.dart';
 import 'package:memento_flutter_client/ProfileView.dart';
 import 'package:memento_flutter_client/carreteCard.dart';
 import 'package:memento_flutter_client/myCarretes.dart';
+import 'package:memento_flutter_client/repository/AccountRepository.dart';
 import 'Config/Properties.dart';
+import 'package:memento_flutter_client/Model/usuario.dart';
 
 class TabPage extends StatefulWidget {
   TabPage();
+
 
 
 
@@ -16,20 +20,22 @@ class TabPage extends StatefulWidget {
   _TabPageState createState() => _TabPageState();
 }
 
+
 class _TabPageState extends State<TabPage> {
   int _selectedIndex = 0;
+  late final Future<Usuario> usuario;
+
+  @override
+  void initState() {
+    super.initState();
+    usuario=  AccountRepository().getAccount();
+  }
+
+
 
   static List<Widget> _pages = <Widget>[
     Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15.0),
-            child: Text("hola"),
-          ),
-        ],
-      ),
+      child: InicioView(),
     ),
     Center(
       child: Icon(
@@ -38,10 +44,7 @@ class _TabPageState extends State<TabPage> {
       ),
     ),
     Center(
-      child: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: ProfileView(),
-      ),
+      child: ProfileView(),
     ),
   ];
 

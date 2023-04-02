@@ -6,6 +6,7 @@ class Carrete {
   final int mes;
   final List<int> ids_fotos;
   final int num_fotos;
+  //final int num_megusta;
 
   const Carrete({required this.ano,required this.mes, required this.ids_fotos,required this.num_fotos});
 
