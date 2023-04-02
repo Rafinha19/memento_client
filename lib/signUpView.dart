@@ -126,10 +126,10 @@ class _signUpViewState extends State<signUpView> {
                   child: TextButton(
                     onPressed: () async {
                       //Primero hacemos las comprobaciones necesarias
-                      var username = usernameController.text;
-                      var password = passwordController.text;
-                      var repeatPassword = repeat_passwordController.text;
-                      var email= emailController.text;
+                      var username = usernameController.text.trim();
+                      var password = passwordController.text.trim();
+                      var repeatPassword = repeat_passwordController.text.trim();
+                      var email= emailController.text.trim();
                       if(username=='' || password==''|| email==''||repeatPassword==''){
                         displayDialog(context, AppLocalizations.of(context)!.fill_all_data,AppLocalizations.of(context)!.fill_add_data_description);
                       }else if(!isValidEmail(email)){

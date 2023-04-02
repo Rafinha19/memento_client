@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.pinkesh.flutter_bottom_navigation_bar">
    <application
-        android:label="flutter_bottom_navigation_bar"
+        android:label="Memento"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
