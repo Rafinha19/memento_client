@@ -1,15 +1,17 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:memento_flutter_client/Model/usuario.dart';
+import 'package:memento_flutter_client/Model/usuario_provider.dart';
 import 'package:memento_flutter_client/myCarretes.dart';
 import 'package:memento_flutter_client/repository/AccountRepository.dart';
 import 'package:memento_flutter_client/carreteCard.dart';
+import 'package:provider/provider.dart';
 import 'dart:convert';
 import 'Model/carrete.dart';
 import 'package:memento_flutter_client/Config/Properties.dart';
 import 'package:memento_flutter_client/repository/CarreteRepository.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 
 import 'loginView.dart';
 
@@ -19,16 +21,16 @@ class ProfileView extends StatefulWidget {
 }
 
 class _ProfileViewState extends State<ProfileView> {
-  late Future<Carrete> futureMyLastCarrete;
 
   @override
   void initState() {
     super.initState();
-    futureMyLastCarrete = CarreteRepository().getMyLastCarrete();
   }
 
   @override
   Widget build(BuildContext context) {
+    Usuario_provider usuario_provider = Provider.of<Usuario_provider>(context,listen: false);
+
     return Scaffold(
         body: Padding(
       padding: const EdgeInsets.all(12.0),
@@ -43,16 +45,20 @@ class _ProfileViewState extends State<ProfileView> {
                   children: [
                     CircleAvatar(
                       radius: 40, // Image radius
-                      backgroundImage:
-                          NetworkImage("$SERVER_IP/api/users/rafa/image"),
+                      backgroundImage: NetworkImage(
+                          "$SERVER_IP/api/users/rafa/image"),
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 15.0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Text("rafa", textAlign: TextAlign.left),
-                          Text("4 carretes", textAlign: TextAlign.left)
+                          Text("rafa",
+                              textAlign: TextAlign.left),
+                          Text(
+                              "4" +
+                                  " carretes",
+                              textAlign: TextAlign.left)
                         ],
                       ),
                     ),
@@ -113,24 +119,6 @@ class _ProfileViewState extends State<ProfileView> {
                     ),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 200,
-                width: double.infinity,
-                child: FutureBuilder<Carrete>(
-                    future: futureMyLastCarrete,
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        //return CarreteCard(carrete: snapshot.data!);
-                        return carreteCard(
-                            carrete: snapshot.data!, ismyLastcarrete: true);
-                      } else if (snapshot.hasError) {
-                        return Text('${snapshot.error}');
-                      }
-
-                      // By default, show a loading spinner.
-                      return const CircularProgressIndicator();
-                    }),
               ),
               myCarretes()
             ],

@@ -41,7 +41,7 @@ class _myCarretesState extends State<myCarretes> {
                   return SizedBox(
                     height: 200,
                     width: double.infinity,
-                    child: carreteCard(carrete: carrete, ismyLastcarrete: false),
+                    child: carreteCard(carrete: carrete, ismyLastcarrete: index==0? true:false),
                   );
                 });
           } else if (snapshot.hasError) {

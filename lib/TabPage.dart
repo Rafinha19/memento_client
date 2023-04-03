@@ -6,8 +6,12 @@ import 'package:memento_flutter_client/ProfileView.dart';
 import 'package:memento_flutter_client/carreteCard.dart';
 import 'package:memento_flutter_client/myCarretes.dart';
 import 'package:memento_flutter_client/repository/AccountRepository.dart';
+import 'package:memento_flutter_client/repository/UsersRepository.dart';
+import 'package:provider/provider.dart';
 import 'Config/Properties.dart';
-import 'package:memento_flutter_client/Model/usuario.dart';
+import 'package:memento_flutter_client/Model/usuario_provider.dart';
+
+import 'Model/usuario.dart';
 
 class TabPage extends StatefulWidget {
   TabPage();
@@ -23,12 +27,13 @@ class TabPage extends StatefulWidget {
 
 class _TabPageState extends State<TabPage> {
   int _selectedIndex = 0;
-  late final Future<Usuario> usuario;
+  late Future<Usuario> future_usuario;
+
 
   @override
   void initState() {
     super.initState();
-    usuario=  AccountRepository().getAccount();
+
   }
 
 
@@ -56,8 +61,10 @@ class _TabPageState extends State<TabPage> {
 
   @override
   Widget build(BuildContext context) {
-    //El willpopScope no permite al usuario salir a la pantalla de login dandole al boton de atras de su dispositivo
-    return new WillPopScope(
+    return ChangeNotifierProvider(
+        create: (_) => Usuario_provider()..setUsuario(),
+      child: WillPopScope(
+        //El willpopScope no permite al usuario salir a la pantalla de login dandole al boton de atras de su dispositivo
         onWillPop: () async => false,
         child: Scaffold(
           appBar: AppBar(
@@ -97,6 +104,7 @@ class _TabPageState extends State<TabPage> {
             onTap: _onItemTapped,
           ),
         ),
+      ),
     );
   }
 }

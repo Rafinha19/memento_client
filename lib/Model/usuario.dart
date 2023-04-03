@@ -1,5 +1,7 @@
+import 'package:memento_flutter_client/Config/Properties.dart';
+
 class Usuario{
-  final String id_usuario;
+  final int id_usuario;
   final String nombre_usuario;
   final String url_foto_perfil;
   final int num_carretes;
@@ -17,11 +19,12 @@ class Usuario{
     return Usuario(
       id_usuario: json['id_usuario'],
       nombre_usuario: json['nombre_usuario'],
-      url_foto_perfil: json['path_foto_perfil'],
+      url_foto_perfil:  "$SERVER_IP/api/users/" + json['nombre_usuario'] + "/image",
       num_carretes: json['num_carretes'],
       rol: json['rol']
     );
   }
+
 
 
 }
