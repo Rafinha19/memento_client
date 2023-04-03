@@ -62,7 +62,7 @@ class _TabPageState extends State<TabPage> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-        create: (_) => Usuario_provider()..setUsuario(),
+        create: (_) => Usuario_provider(),
       child: WillPopScope(
         //El willpopScope no permite al usuario salir a la pantalla de login dandole al boton de atras de su dispositivo
         onWillPop: () async => false,

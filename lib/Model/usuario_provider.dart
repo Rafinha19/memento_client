@@ -6,9 +6,14 @@ import 'package:provider/provider.dart';
 
 class Usuario_provider extends ChangeNotifier {
   late Usuario usuario;
+  bool isLoading = false;
+
 
   Future<void> setUsuario() async {
+    this.isLoading =true;
     this.usuario = await AccountRepository().getAccount();
+    this.isLoading = false;
+    notifyListeners();
   }
 
 

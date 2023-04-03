@@ -21,15 +21,18 @@ class ProfileView extends StatefulWidget {
 }
 
 class _ProfileViewState extends State<ProfileView> {
-
   @override
   void initState() {
     super.initState();
+    Usuario_provider usuario_provider =
+        Provider.of<Usuario_provider>(context, listen: false);
+    usuario_provider.setUsuario();
   }
 
   @override
   Widget build(BuildContext context) {
-    Usuario_provider usuario_provider = Provider.of<Usuario_provider>(context,listen: false);
+    Usuario_provider usuario_provider =
+        Provider.of<Usuario_provider>(context);
 
     return Scaffold(
         body: Padding(
@@ -43,22 +46,24 @@ class _ProfileViewState extends State<ProfileView> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    CircleAvatar(
-                      radius: 40, // Image radius
-                      backgroundImage: NetworkImage(
-                          "$SERVER_IP/api/users/rafa/image"),
-                    ),
+                    usuario_provider.isLoading
+                        ?
+                        //true
+                        const CircularProgressIndicator()
+                        : CircleAvatar(
+                            radius: 40, // Image radius
+                            backgroundImage:
+                                NetworkImage(usuario_provider.usuario.url_foto_perfil),
+                          ),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 15.0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Text("rafa",
-                              textAlign: TextAlign.left),
-                          Text(
-                              "4" +
-                                  " carretes",
-                              textAlign: TextAlign.left)
+                          Text(usuario_provider.usuario.nombre_usuario, textAlign: TextAlign.left),
+                          usuario_provider.usuario.num_carretes==1 ?
+                          Text(usuario_provider.usuario.num_carretes.toString() + " carrete", textAlign: TextAlign.left):
+                          Text(usuario_provider.usuario.num_carretes.toString() + " carretes", textAlign: TextAlign.left)
                         ],
                       ),
                     ),
