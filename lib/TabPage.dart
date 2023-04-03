@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:memento_flutter_client/InicioView.dart';
+import 'package:memento_flutter_client/Model/carrete_provider.dart';
 import 'package:memento_flutter_client/ProfileView.dart';
-import 'package:memento_flutter_client/carreteCard.dart';
-import 'package:memento_flutter_client/myCarretes.dart';
+import 'package:memento_flutter_client/components/carreteCard.dart';
 import 'package:memento_flutter_client/repository/AccountRepository.dart';
 import 'package:memento_flutter_client/repository/UsersRepository.dart';
 import 'package:provider/provider.dart';
@@ -27,7 +27,6 @@ class TabPage extends StatefulWidget {
 
 class _TabPageState extends State<TabPage> {
   int _selectedIndex = 0;
-  late Future<Usuario> future_usuario;
 
 
   @override
@@ -61,8 +60,11 @@ class _TabPageState extends State<TabPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-        create: (_) => Usuario_provider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider( create: (_) => Usuario_provider()),
+        ChangeNotifierProvider(create:(_) => Carrete_provider())
+      ],
       child: WillPopScope(
         //El willpopScope no permite al usuario salir a la pantalla de login dandole al boton de atras de su dispositivo
         onWillPop: () async => false,

@@ -1,11 +1,12 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:memento_flutter_client/Model/carrete_provider.dart';
 import 'package:memento_flutter_client/Model/usuario.dart';
 import 'package:memento_flutter_client/Model/usuario_provider.dart';
-import 'package:memento_flutter_client/myCarretes.dart';
+import 'package:memento_flutter_client/components/myCarretes.dart';
 import 'package:memento_flutter_client/repository/AccountRepository.dart';
-import 'package:memento_flutter_client/carreteCard.dart';
+import 'package:memento_flutter_client/components/carreteCard.dart';
 import 'package:provider/provider.dart';
 import 'dart:convert';
 import 'Model/carrete.dart';
@@ -24,10 +25,12 @@ class _ProfileViewState extends State<ProfileView> {
   @override
   void initState() {
     super.initState();
-    Usuario_provider usuario_provider =
-        Provider.of<Usuario_provider>(context, listen: false);
-    usuario_provider.setUsuario();
+    Usuario_provider usuario_provider =Provider.of<Usuario_provider>(context, listen: false);
+    usuario_provider.loadUserData();
+    Carrete_provider carrete_provider = Provider.of<Carrete_provider>(context, listen: false);
+    carrete_provider.getMyCarretes();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -57,9 +60,15 @@ class _ProfileViewState extends State<ProfileView> {
                           ),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 15.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
+                      child:
+                          usuario_provider.isLoading
+                          ?
+                          //true
+                          const CircularProgressIndicator()
+                          :
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
                           Text(usuario_provider.usuario.nombre_usuario, textAlign: TextAlign.left),
                           usuario_provider.usuario.num_carretes==1 ?
                           Text(usuario_provider.usuario.num_carretes.toString() + " carrete", textAlign: TextAlign.left):
@@ -125,6 +134,7 @@ class _ProfileViewState extends State<ProfileView> {
                   ),
                 ),
               ),
+
               myCarretes()
             ],
           ),

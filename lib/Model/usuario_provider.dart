@@ -9,7 +9,7 @@ class Usuario_provider extends ChangeNotifier {
   bool isLoading = false;
 
 
-  Future<void> setUsuario() async {
+  Future<void> loadUserData() async {
     this.isLoading =true;
     this.usuario = await AccountRepository().getAccount();
     this.isLoading = false;

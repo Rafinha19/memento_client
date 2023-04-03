@@ -7,7 +7,7 @@ import 'package:memento_flutter_client/Model/carrete.dart';
 import 'package:memento_flutter_client/repository/AccountRepository.dart';
 import 'package:memento_flutter_client/repository/CarreteRepository.dart';
 
-import 'Config/Properties.dart';
+import '../Config/Properties.dart';
 
 class carreteCard extends StatefulWidget {
 
