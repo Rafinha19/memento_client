@@ -87,7 +87,24 @@ class _LoginViewState extends State<LoginView> {
                 ),
                 Padding(
                   padding: EdgeInsets.all(10),
-                  child: Container(
+                  child:
+                  _isLoading?
+                  Container(
+                      height: 50,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          color: Colors.orange, borderRadius: BorderRadius.circular(10)),
+                      child:
+                      Padding(
+                        padding: EdgeInsets.all(6),
+                        child: FittedBox(
+                          child: const CircularProgressIndicator(color: Colors.white),
+                        ),
+                      )
+
+                  )
+                      :
+                  Container(
                     height: 50,
                     width: double.infinity,
                     decoration: BoxDecoration(
@@ -98,6 +115,10 @@ class _LoginViewState extends State<LoginView> {
                         setState(() => _isLoading = true);
                         var username = usernameController.text.trim();
                         var password = passwordController.text.trim();
+                        if(username=='' || password==''){
+                          displayDialog(context, AppLocalizations.of(context)!.fill_all_data,AppLocalizations.of(context)!.fill_add_data_description);
+                          setState(() => _isLoading = false);
+                        }
                         var jwt = await AccountRepository().attemptLogIn(username, password);
                         setState(() => _isLoading = false);
                         if(jwt == "400"){
@@ -120,11 +141,7 @@ class _LoginViewState extends State<LoginView> {
                           displayDialog(context,  AppLocalizations.of(context)!.error,  AppLocalizations.of(context)!.unexpected_error);
                         }
                       },
-                      child:
-                      _isLoading?
-                          const CircularProgressIndicator(color: Colors.white)
-                      :
-                      Text(
+                      child:Text(
                         AppLocalizations.of(context)!.login,
                         style: TextStyle(color: Colors.white, fontSize: 25),
                       ),
