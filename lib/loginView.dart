@@ -23,6 +23,7 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  bool _isLoading = false;
 
   //Funcion auxiliar para hacer un display de un dialogo
   void displayDialog(BuildContext context, String title, String text) =>
@@ -31,7 +32,7 @@ class _LoginViewState extends State<LoginView> {
         builder: (context) =>
             AlertDialog(
                 shape: RoundedRectangleBorder( borderRadius: BorderRadius.all(Radius.circular(32.0))),
-                title: Text(title),
+                title: Text(title,style: TextStyle(color: Colors.orange),),
                 content: Text(text)
             ),
       );
@@ -40,6 +41,7 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
+
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
@@ -90,11 +92,14 @@ class _LoginViewState extends State<LoginView> {
                     width: double.infinity,
                     decoration: BoxDecoration(
                         color: Colors.orange, borderRadius: BorderRadius.circular(10)),
-                    child: TextButton(
+                    child:
+                    TextButton(
                       onPressed: () async {
+                        setState(() => _isLoading = true);
                         var username = usernameController.text.trim();
                         var password = passwordController.text.trim();
                         var jwt = await AccountRepository().attemptLogIn(username, password);
+                        setState(() => _isLoading = false);
                         if(jwt == "400"){
                           displayDialog(context, AppLocalizations.of(context)!.error, AppLocalizations.of(context)!.login_pass_mustbe_4long);
                         } else if (jwt=="401"){
@@ -115,7 +120,11 @@ class _LoginViewState extends State<LoginView> {
                           displayDialog(context,  AppLocalizations.of(context)!.error,  AppLocalizations.of(context)!.unexpected_error);
                         }
                       },
-                      child: Text(
+                      child:
+                      _isLoading?
+                          const CircularProgressIndicator(color: Colors.white)
+                      :
+                      Text(
                         AppLocalizations.of(context)!.login,
                         style: TextStyle(color: Colors.white, fontSize: 25),
                       ),

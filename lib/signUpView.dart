@@ -23,6 +23,7 @@ class _signUpViewState extends State<signUpView> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController repeat_passwordController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
+  bool _isLoading = false;
 
   //Funcion auxiliar para hacer un display de un dialogo
   void displayDialog(BuildContext context, String title, String text) =>
@@ -44,6 +45,9 @@ class _signUpViewState extends State<signUpView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+          backgroundColor: Colors.black,
+      ),
       body: Center(
         child: Padding (
           padding: EdgeInsets.symmetric(horizontal: 15.0),
@@ -125,6 +129,7 @@ class _signUpViewState extends State<signUpView> {
                       color: Colors.orange, borderRadius: BorderRadius.circular(10)),
                   child: TextButton(
                     onPressed: () async {
+                      setState(() => _isLoading = true);
                       //Primero hacemos las comprobaciones necesarias
                       var username = usernameController.text.trim();
                       var password = passwordController.text.trim();
@@ -132,15 +137,23 @@ class _signUpViewState extends State<signUpView> {
                       var email= emailController.text.trim();
                       if(username=='' || password==''|| email==''||repeatPassword==''){
                         displayDialog(context, AppLocalizations.of(context)!.fill_all_data,AppLocalizations.of(context)!.fill_add_data_description);
+                        setState(() => _isLoading = false);
                       }else if(!isValidEmail(email)){
                         displayDialog(context, AppLocalizations.of(context)!.not_a_valid_email, AppLocalizations.of(context)!.not_a_valid_email_description);
-                      } else if(password.length < 4)
-                        displayDialog(context, AppLocalizations.of(context)!.not_a_valid_password, AppLocalizations.of(context)!.not_a_valid_password_description);
+                        setState(() => _isLoading = false);
+                      } else if(password.length < 4) {
+                        displayDialog(context, AppLocalizations.of(context)!
+                            .not_a_valid_password, AppLocalizations.of(context)!
+                            .not_a_valid_password_description);
+                        setState(() => _isLoading = false);
+                      }
                       else if(password!= repeatPassword){
                         displayDialog(context,AppLocalizations.of(context)!.passwords_dont_match,AppLocalizations.of(context)!.passwords_dont_match_description);
+                        setState(() => _isLoading = false);
                       }else{
                         //Acontinuación creamos la cuenta y en caso de no haber problemas logeamos al usuario
                         var res = await  AccountRepository().attemptSignUp(username, password, email);
+                        setState(() => _isLoading = false);
                         //Seria más correcto cambiar el servidor para que devuelva un 201, pero en este caso devuelve un 200
                         if(res == 200){
                           var jwt = await AccountRepository().attemptLogIn(username, password);
@@ -174,7 +187,11 @@ class _signUpViewState extends State<signUpView> {
 
                       }
                     },
-                    child: Text(
+                    child:
+                        _isLoading ?
+                            const CircularProgressIndicator(color: Colors.white)
+                            :
+                    Text(
                       'Sign up',
                       style: TextStyle(color: Colors.white, fontSize: 25),
                     ),
