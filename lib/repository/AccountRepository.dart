@@ -104,4 +104,8 @@ class AccountRepository {
     }
   }
 
+  String getProfileImageUrl(String username){
+    return  "$SERVER_IP/api/users/" + username + "/image";
+  }
+
 }

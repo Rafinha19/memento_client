@@ -34,5 +34,6 @@
   "username_already_registered_description": "Por favor, intenta usar otro nombre de usuario o haz login si ya tienes una cuenta.",
   "email_already_in_use": "Ese correo ya esta en uso",
   "email_already_in_use_description": "Ya existe una cuenta registrada con ese correo.",
-  "sign_out": "Cerrar sesion"
+  "sign_out": "Cerrar sesion",
+  "friends_list": "Lista de amigos"
 }

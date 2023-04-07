@@ -14,6 +14,7 @@ import 'package:memento_flutter_client/Config/Properties.dart';
 import 'package:memento_flutter_client/repository/CarreteRepository.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import 'components/loading_overlay.dart';
 import 'loginView.dart';
 
 class ProfileView extends StatefulWidget {
@@ -88,7 +89,9 @@ class _ProfileViewState extends State<ProfileView> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => LoginView()));
+                                  builder: (context) =>
+                                      LoadingOverlay(child: LoginView())
+                              ));
                         },
                         child: Text(
                           AppLocalizations.of(context)!.sign_out,
@@ -128,7 +131,7 @@ class _ProfileViewState extends State<ProfileView> {
                   child: TextButton(
                     onPressed: () {},
                     child: Text(
-                      'Lista de amigos',
+                      AppLocalizations.of(context)!.friends_list,
                       style: TextStyle(color: Colors.white, fontSize: 15),
                     ),
                   ),

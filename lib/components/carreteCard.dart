@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:memento_flutter_client/Model/carrete.dart';
+import 'package:memento_flutter_client/components/carreteDetail.dart';
 import 'package:memento_flutter_client/repository/AccountRepository.dart';
 import 'package:memento_flutter_client/repository/CarreteRepository.dart';
 
@@ -39,65 +40,76 @@ class _carreteCardState extends State<carreteCard> {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 String token = snapshot.data!;
-                return Card(
-                  color: Colors.grey[900],
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              widget.ismyLastcarrete ? "Carrete actual " + widget.carrete.num_fotos.toString() + "/9" : CarreteRepository().toUpperCaseFirstLetter(DateFormat('MMMM',Localizations.localeOf(context).languageCode).format(DateTime(widget.carrete.ano,widget.carrete.mes))) + " " + widget.carrete.ano.toString() ,
-                              style: TextStyle(color: Colors.white, fontSize: 15),
-                            )
-                            ,
-                            Text(
-                              widget.ismyLastcarrete ?  CarreteRepository().toUpperCaseFirstLetter(DateFormat('MMMM',Localizations.localeOf(context).languageCode).format(DateTime(widget.carrete.ano,widget.carrete.mes))) + " " + widget.carrete.ano.toString() : widget.carrete.num_fotos.toString() + "/9",
-                              style: TextStyle(color: Colors.white, fontSize: 15),
-                            )
-                          ],
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => carreteDetail(carrete: widget.carrete)
+                        )
+                    );
+                  },
+                  onDoubleTap: (){
+                    print("liked");
+                  },
+                  child: Card(
+                    color: Colors.grey[900],
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                widget.ismyLastcarrete ? "Carrete actual " + widget.carrete.num_fotos.toString() + "/9" : CarreteRepository().toUpperCaseFirstLetter(DateFormat('MMMM',Localizations.localeOf(context).languageCode).format(DateTime(widget.carrete.ano,widget.carrete.mes))) + " " + widget.carrete.ano.toString() ,
+                                style: TextStyle(color: Colors.white, fontSize: 15),
+                              )
+                              ,
+                              Text(
+                                widget.ismyLastcarrete ?  CarreteRepository().toUpperCaseFirstLetter(DateFormat('MMMM',Localizations.localeOf(context).languageCode).format(DateTime(widget.carrete.ano,widget.carrete.mes))) + " " + widget.carrete.ano.toString() : widget.carrete.num_fotos.toString() + "/9",
+                                style: TextStyle(color: Colors.white, fontSize: 15),
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 150.0,
-                        child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: widget.carrete.ids_fotos.length,
-                          shrinkWrap: true,
-                          itemBuilder: (BuildContext context, int index) {
-                            if (index > 8) {
-                              // Only display up to 9 images
-                              return SizedBox.shrink();
-                            }
-                            return Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                width: 150.0,
-                                height: 150.0,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(4.0),
-                                  image: DecorationImage(
-                                    image: NetworkImage(
-                                      "$SERVER_IP/api/fotos/"+widget.carrete.ids_fotos[index].toString(),
-                                      headers: {
-                                        'Authorization': 'Bearer $token', //'beare
-                                      }
+                        SizedBox(
+                          height: 150.0,
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: widget.carrete.ids_fotos.length,
+                            shrinkWrap: true,
+                            itemBuilder: (BuildContext context, int index) {
+                              if (index > 8) {
+                                // Only display up to 9 images
+                                return SizedBox.shrink();
+                              }
+                              return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(4.0),
+                                    image: DecorationImage(
+                                      image: NetworkImage(
+                                        "$SERVER_IP/api/fotos/"+widget.carrete.ids_fotos[index].toString(),
+                                        headers: {
+                                          'Authorization': 'Bearer $token', //'beare
+                                        }
+                                      ),
+                                      fit: BoxFit.cover,
                                     ),
-                                    fit: BoxFit.cover,
                                   ),
                                 ),
-                              ),
-                            );
-                          },
+                              );
+                            },
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 );
 
