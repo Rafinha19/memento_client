@@ -2,6 +2,7 @@ import 'dart:convert' show json, base64, ascii;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:memento_flutter_client/Model/usuario_provider.dart';
+import 'package:memento_flutter_client/components/loading_overlay.dart';
 import 'package:memento_flutter_client/loginView.dart';
 import 'package:memento_flutter_client/TabPage.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -41,29 +42,31 @@ class MyApp extends StatelessWidget {
         accentColor: Colors.grey[700],
         scaffoldBackgroundColor:  Colors.black,
       ),
-      home: FutureBuilder(
-          future: jwtOrEmpty,
-          builder: (context, snapshot) {
-            if(!snapshot.hasData) return CircularProgressIndicator();
-            if(snapshot.data != "") {
-              var str = snapshot.data.toString();
-              var jwt = str.split(".");
+      home: LoadingOverlay(
+        child: FutureBuilder(
+            future: jwtOrEmpty,
+            builder: (context, snapshot) {
+              if(!snapshot.hasData) return CircularProgressIndicator();
+              if(snapshot.data != "") {
+                var str = snapshot.data.toString();
+                var jwt = str.split(".");
 
 
-              if(jwt.length !=3) {
-                return LoginView();
-              } else {
-                var payload = json.decode(ascii.decode(base64.decode(base64.normalize(jwt[1]))));
-                if(DateTime.fromMillisecondsSinceEpoch(payload["exp"]*1000).isAfter(DateTime.now())) {
-                  return TabPage();
-                } else {
+                if(jwt.length !=3) {
                   return LoginView();
+                } else {
+                  var payload = json.decode(ascii.decode(base64.decode(base64.normalize(jwt[1]))));
+                  if(DateTime.fromMillisecondsSinceEpoch(payload["exp"]*1000).isAfter(DateTime.now())) {
+                    return TabPage();
+                  } else {
+                    return LoginView();
+                  }
                 }
+              } else {
+                return LoginView();
               }
-            } else {
-              return LoginView();
             }
-          }
+        ),
       ),
     );
   }
