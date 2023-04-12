@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -80,24 +78,23 @@ class _carreteCardState extends State<carreteCard> {
                         SizedBox(
                           height: 150.0,
                           child: ListView.builder(
+                            physics: BouncingScrollPhysics(),
                             scrollDirection: Axis.horizontal,
                             itemCount: widget.carrete.ids_fotos.length,
                             shrinkWrap: true,
                             itemBuilder: (BuildContext context, int index) {
-                              if (index > 8) {
-                                // Only display up to 9 images
-                                return SizedBox.shrink();
-                              }
                               return Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Container(
+                                  height: 150,
+                                  width: 150,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(4.0),
                                     image: DecorationImage(
                                       image: NetworkImage(
                                         "$SERVER_IP/api/fotos/"+widget.carrete.ids_fotos[index].toString(),
                                         headers: {
-                                          'Authorization': 'Bearer $token', //'beare
+                                          'Authorization': 'Bearer $token',
                                         }
                                       ),
                                       fit: BoxFit.cover,
