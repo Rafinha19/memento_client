@@ -39,7 +39,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.orange,
         brightness: Brightness.dark,
-        accentColor: Colors.grey[700],
+        accentColor: Colors.grey[800],
+        focusColor: Colors.blue,
         scaffoldBackgroundColor:  Colors.black,
       ),
       home: LoadingOverlay(

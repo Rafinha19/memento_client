@@ -134,7 +134,7 @@ class _carreteDetailState extends State<carreteDetail> {
                     children: [
                       Flexible(
                         child: Text(
-                          "Abril ha sido un gran mes, he ido a la playa, tomado el sol y desarollado mucho mi tfg.",
+                          widget.carrete.descripcion,
                           textAlign: TextAlign.left,
                           softWrap: true,
                         ),
