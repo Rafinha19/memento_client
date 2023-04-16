@@ -102,7 +102,7 @@ class _carreteDetailState extends State<carreteDetail> {
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 10),
                     child: SizedBox(
-                      height: 350, // card height
+                      height: 400, // card height
                       child: Swiper(
                         itemBuilder: (BuildContext context, int _index) {
                           return Image.network(
@@ -116,7 +116,7 @@ class _carreteDetailState extends State<carreteDetail> {
                         },
                         duration: 100,
                         itemCount: widget.carrete.num_fotos,
-                        viewportFraction: 0.9,
+                        viewportFraction: 1,
                         scale: 0.9,
                         loop: false,
                         pagination: SwiperPagination(
