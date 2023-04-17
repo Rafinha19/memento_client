@@ -53,7 +53,7 @@ class _zoomableImageState extends State<zoomableImage> with SingleTickerProvider
       animation = Matrix4Tween(
         begin: controller.value,
         end: Matrix4.identity(),
-      ).animate(CurvedAnimation(parent: animationController, curve: Curves.easeIn));
+      ).animate(CurvedAnimation(parent: animationController, curve: Curves.decelerate));
 
       animationController.forward(from:0);
     }

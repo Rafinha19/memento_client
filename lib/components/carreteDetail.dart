@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:memento_flutter_client/Model/carrete.dart';
 import 'package:memento_flutter_client/components/zoomableImage.dart';
+import 'package:memento_flutter_client/editCarreteDescriptionView.dart';
 import 'package:memento_flutter_client/repository/AccountRepository.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -30,7 +31,6 @@ class _carreteDetailState extends State<carreteDetail> {
 
   @override
   Widget build(BuildContext context) {
-    String username = "rafa";
     int _index = widget.carrete.num_fotos;
 
     return Scaffold(
@@ -60,11 +60,11 @@ class _carreteDetailState extends State<carreteDetail> {
                             CircleAvatar(
                               radius: 25, // Image radius
                               backgroundImage: NetworkImage(AccountRepository()
-                                  .getProfileImageUrl(username)),
+                                  .getProfileImageUrl(widget.carrete.propietario)),
                             ),
                             Container(
                                 margin: EdgeInsets.symmetric(horizontal: 10),
-                                child: Text(username)),
+                                child: Text(widget.carrete.propietario)),
                           ],
                         ),
                         Container(
@@ -176,9 +176,18 @@ class _carreteDetailState extends State<carreteDetail> {
                             )
                           ],
                         ),
-                        Icon(
-                          Icons.create_rounded,
-                          size: 30,
+                        IconButton(
+                          icon: Icon(
+                            Icons.create_rounded,
+                            size: 30,
+                          ), onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      editcarreteDescriptionView(carrete: widget.carrete)
+                              ));
+                        },
                         ),
                       ],
                     ),
