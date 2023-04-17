@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:memento_flutter_client/Model/carrete.dart';
+import 'package:memento_flutter_client/components/zoomableImage.dart';
 import 'package:memento_flutter_client/repository/AccountRepository.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -105,14 +106,7 @@ class _carreteDetailState extends State<carreteDetail> {
                       height: 400, // card height
                       child: Swiper(
                         itemBuilder: (BuildContext context, int _index) {
-                          return Image.network(
-                            "$SERVER_IP/api/fotos/" +
-                                widget.carrete.ids_fotos[_index].toString(),
-                            fit: BoxFit.cover,
-                            headers: {
-                              'Authorization': 'Bearer $token', //'beare
-                            },
-                          );
+                          return zoomableImage(imageUrl: "$SERVER_IP/api/fotos/" + widget.carrete.ids_fotos[_index].toString(), token: token);
                         },
                         duration: 100,
                         itemCount: widget.carrete.num_fotos,
