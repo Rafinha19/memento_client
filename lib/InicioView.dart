@@ -29,7 +29,7 @@ class _InicioViewState extends State<InicioView> {
 
     return Scaffold(
         body: Padding(
-      padding: const EdgeInsets.all(12.0),
+      padding: const EdgeInsets.only(left: 12.0, top: 12.0, right: 12.0),
       child: SingleChildScrollView(
         child: Center(
           child: Column(

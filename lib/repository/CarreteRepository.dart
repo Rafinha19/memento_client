@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import '../Model/carrete.dart';
@@ -41,5 +42,40 @@ class CarreteRepository {
   //Esto lo hago porque por defecto el mes en castellano viene con la priemra letra en minuscula
   String toUpperCaseFirstLetter(String text) {
     return text.substring(0, 1).toUpperCase() + text.substring(1);
+  }
+
+
+
+  Future<Carrete> edtiCarreteDescription (int id_carrete, String description) async{
+    var jsonString = await storage.read(key: "jwt");
+    Map<String, dynamic> jsonData = jsonDecode(jsonString!);
+    String token = jsonData['token'];
+    final Map<String, dynamic> editCarreteDescription = {
+      'id_carrete': id_carrete,
+      'descripcion': description,
+    };
+
+    try {
+      var res = await http.put(
+        Uri.parse("$SERVER_IP/api/carretes/description/$id_carrete"),
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': 'Bearer $token', //'bearer token'
+        },
+        body: jsonEncode(editCarreteDescription)
+      );
+      if (res.statusCode == 200) {
+        dynamic carretesJson = jsonDecode(res.body);
+        Carrete carrete =Carrete.fromJson(carretesJson);
+        return carrete;
+      } else {
+        throw Exception('Error al obtener los carretes');
+      }
+    } catch (e) {
+      //return "Connection Error";
+      throw Exception('Error al obtener los carretes');
+    }
+
+
   }
 }

@@ -8,6 +8,10 @@ class Usuario_provider extends ChangeNotifier {
   late Usuario usuario;
   bool isLoading = false;
 
+  Usuario_provider(){
+    this.loadUserData();
+  }
+
 
   Future<void> loadUserData() async {
     this.isLoading =true;

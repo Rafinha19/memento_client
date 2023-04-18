@@ -11,6 +11,9 @@ class Carrete_provider extends ChangeNotifier {
   //Por defecto lo dejamos como si estuviera cargando
   bool isLoading = true;
 
+  Carrete_provider(){
+    this.getMyCarretes();
+  }
 
   Future<void> getMyCarretes() async {
     this.isLoading =true;

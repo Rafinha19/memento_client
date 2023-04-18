@@ -10,6 +10,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../Config/Properties.dart';
 import '../Model/usuario_provider.dart';
 import '../repository/CarreteRepository.dart';
+import 'Model/carrete_provider.dart';
+import 'components/carreteDetail.dart';
+import 'components/loading_overlay.dart';
 
 class editcarreteDescriptionView extends StatefulWidget {
   final Carrete carrete;
@@ -82,9 +85,34 @@ class _editcarreteDescriptionViewState
                     keyboardType: TextInputType.multiline,
                     controller: descriptionController,
                     decoration: InputDecoration(
+                        enabledBorder: const OutlineInputBorder(
+                          // width: 0.0 produces a thin "hairline" border
+                          borderSide: const BorderSide(color: Colors.orange, width: 1.0),
+                        ),
                         border: OutlineInputBorder(),
                         labelText: "Descripcion",
                         hintText: "Descripcion"),
+                  ),
+                ),
+              ),
+              Container(
+                height: 100,
+                width: 150,
+                decoration: BoxDecoration(
+                    color: Colors.orange,
+                    borderRadius: BorderRadius.circular(10)),
+                child: TextButton(
+                  onPressed: () async {
+                    LoadingOverlay.of(context).show();
+                    Carrete updatedCarrete = await CarreteRepository().edtiCarreteDescription(widget.carrete.id_carrete, descriptionController.text);
+                    widget.carrete.setDescripcion(updatedCarrete.descripcion);
+                    LoadingOverlay.of(context).hide();
+                    Navigator.pop(context);
+                  },
+                  child: Text(
+                    "Guardar\ncambios",
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                    textAlign: TextAlign.center,
                   ),
                 ),
               ),

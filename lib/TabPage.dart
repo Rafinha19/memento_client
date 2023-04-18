@@ -65,48 +65,65 @@ class _TabPageState extends State<TabPage> {
         ChangeNotifierProvider( create: (_) => Usuario_provider()),
         ChangeNotifierProvider(create:(_) => Carrete_provider())
       ],
-      child: WillPopScope(
-        //El willpopScope no permite al usuario salir a la pantalla de login dandole al boton de atras de su dispositivo
-        onWillPop: () async => false,
-        child: Scaffold(
-          appBar: AppBar(
-              centerTitle: true,
-              title: const Text(
-                'Memento',
-                style: TextStyle(fontSize: 26),
+      builder : (context,child){
+        Usuario_provider usuario_provider = Provider.of<Usuario_provider>(context, listen: true);
+
+        return WillPopScope(
+          //El willpopScope no permite al usuario salir a la pantalla de login dandole al boton de atras de su dispositivo
+          onWillPop: () async => false,
+          child: Scaffold(
+            appBar: AppBar(
+                centerTitle: true,
+                title: const Text(
+                  'Memento',
+                  style: TextStyle(fontSize: 26),
+                ),
+                backgroundColor: Colors.black,
+                automaticallyImplyLeading: false
+            ),
+            body: IndexedStack(
+              index: _selectedIndex,
+              children: _pages,
+            ),
+            bottomNavigationBar: Container(
+              decoration: BoxDecoration(
+                border: Border(top: BorderSide(color: Colors.grey.shade900,width: 0.5)),
               ),
-              backgroundColor: Colors.black,
-              automaticallyImplyLeading: false
+              child: BottomNavigationBar(
+                iconSize: 30,
+                selectedItemColor: Colors.orange,
+                showSelectedLabels: false,
+                showUnselectedLabels: false,
+                backgroundColor: Colors.black,
+                items: <BottomNavigationBarItem>[
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.home),
+                    label: "home",
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.camera_alt_rounded),
+                    label: "camera",
+                  ),
+                  BottomNavigationBarItem(
+                    icon: 
+                    usuario_provider.isLoading?
+                     CircularProgressIndicator()
+                        :
+                    CircleAvatar(
+                      radius: 15,
+                      backgroundImage: NetworkImage(usuario_provider.usuario.url_foto_perfil),
+                    ),
+                    label: "profile",
+                  ),
+                ],
+                currentIndex: _selectedIndex,
+                onTap: _onItemTapped,
+              ),
+            ),
           ),
-          body: IndexedStack(
-            index: _selectedIndex,
-            children: _pages,
-          ),
-          bottomNavigationBar: BottomNavigationBar(
-            iconSize: 30,
-            selectedItemColor: Colors.orange,
-            showSelectedLabels: false,
-            showUnselectedLabels: false,
-            backgroundColor: Colors.black,
-            items: <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                label: "home",
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.camera_alt_rounded),
-                label: "camera",
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.person),
-                label: "my profile",
-              ),
-            ],
-            currentIndex: _selectedIndex,
-            onTap: _onItemTapped,
-          ),
-        ),
-      ),
+        );
+      }
+
     );
   }
 }
