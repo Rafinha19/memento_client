@@ -8,6 +8,7 @@ import 'package:memento_flutter_client/Config/Properties.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:memento_flutter_client/repository/AccountRepository.dart';
 
+import 'components/displayDialog.dart';
 import 'components/loading_overlay.dart';
 
 final storage = FlutterSecureStorage();
@@ -27,18 +28,7 @@ class _signUpViewState extends State<signUpView> {
   final TextEditingController emailController = TextEditingController();
 
 
-  //Funcion auxiliar para hacer un display de un dialogo
-  void displayDialog(BuildContext context, String title, String text) =>
-      showDialog(
-        context: context,
-        builder: (context) =>
-            AlertDialog(
-                shape: RoundedRectangleBorder( borderRadius: BorderRadius.all(Radius.circular(32.0))),
-                title: Text(title,style: TextStyle(color: Colors.orange),),
-                content: Text(text),
-                backgroundColor: Colors.grey[800],
-            ),
-      );
+
 
   bool isValidEmail(String email) {
     return email.contains('@');

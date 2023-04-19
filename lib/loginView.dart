@@ -9,6 +9,8 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:memento_flutter_client/repository/AccountRepository.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import 'components/displayDialog.dart';
+
 final storage = FlutterSecureStorage();
 
 class LoginView extends StatefulWidget {
@@ -22,19 +24,7 @@ class _LoginViewState extends State<LoginView> {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  //Funcion auxiliar para hacer un display de un dialogo
-  void displayDialog(BuildContext context, String title, String text) =>
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(32.0))),
-            title: Text(
-              title,
-              style: TextStyle(color: Colors.orange),
-            ),
-            content: Text(text)),
-      );
+
 
   @override
   Widget build(BuildContext context) {

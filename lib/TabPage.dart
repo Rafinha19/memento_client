@@ -90,7 +90,7 @@ class _TabPageState extends State<TabPage> {
                 border: Border(top: BorderSide(color: Colors.grey.shade900,width: 0.5)),
               ),
               child: BottomNavigationBar(
-                iconSize: 30,
+                iconSize: 25,
                 selectedItemColor: Colors.orange,
                 showSelectedLabels: false,
                 showUnselectedLabels: false,
@@ -110,7 +110,7 @@ class _TabPageState extends State<TabPage> {
                      CircularProgressIndicator()
                         :
                     CircleAvatar(
-                      radius: 15,
+                      radius: 12,
                       backgroundImage: NetworkImage(usuario_provider.usuario.url_foto_perfil),
                     ),
                     label: "profile",

@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:memento_flutter_client/Model/carrete.dart';
+import 'package:memento_flutter_client/components/displayDialog.dart';
 import 'package:memento_flutter_client/components/zoomableImage.dart';
 import 'package:memento_flutter_client/repository/AccountRepository.dart';
 import 'package:provider/provider.dart';
@@ -104,10 +105,14 @@ class _editcarreteDescriptionViewState
                 child: TextButton(
                   onPressed: () async {
                     LoadingOverlay.of(context).show();
-                    Carrete updatedCarrete = await CarreteRepository().edtiCarreteDescription(widget.carrete.id_carrete, descriptionController.text);
-                    widget.carrete.setDescripcion(updatedCarrete.descripcion);
-                    LoadingOverlay.of(context).hide();
-                    Navigator.pop(context);
+                    try{
+                      Carrete updatedCarrete = await CarreteRepository().edtiCarreteDescription(widget.carrete.id_carrete, descriptionController.text);
+                      LoadingOverlay.of(context).hide();
+                      Navigator.pop(context,updatedCarrete.descripcion);
+                    }catch(e){
+                      LoadingOverlay.of(context).hide();
+                      displayDialog(context, "There was a problem with the connection", "Please check your connection and try again.");
+                    }
                   },
                   child: Text(
                     "Guardar\ncambios",

@@ -184,13 +184,7 @@ class _carreteDetailState extends State<carreteDetail> {
                               size: 30,
                               color: Colors.orange,
                             ), onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        LoadingOverlay(child: editcarreteDescriptionView(carrete: widget.carrete))
-
-                                ));
+                            _renewEditedReel(context);
                           },
                           ),
                         ],
@@ -209,5 +203,24 @@ class _carreteDetailState extends State<carreteDetail> {
         },
       ),
     );
+  }
+
+
+  Future<void> _renewEditedReel(BuildContext context) async {
+    // Navigator.push returns a Future that completes after calling
+    // Navigator.pop on the Selection Screen.
+    final descripcion = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) =>  LoadingOverlay(child: editcarreteDescriptionView(carrete: widget.carrete))),
+    );
+
+    // When a BuildContext is used from a StatefulWidget, the mounted property
+    // must be checked after an asynchronous gap.
+    if (!mounted) return;
+
+    // Actualizamos la descripcion.
+    setState(() {
+      widget.carrete.setDescripcion(descripcion);
+    });
   }
 }
