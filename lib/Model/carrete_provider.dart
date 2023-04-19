@@ -10,6 +10,7 @@ class Carrete_provider extends ChangeNotifier {
   late List<Carrete> carretes;
   //Por defecto lo dejamos como si estuviera cargando
   bool isLoading = true;
+  bool hasErrors = false;
 
   Carrete_provider(){
     this.getMyCarretes();
@@ -22,7 +23,8 @@ class Carrete_provider extends ChangeNotifier {
       this.isLoading = false;
       notifyListeners();
     }catch(e){
-      throw Exception('Error al obtener los carretes');
+      this.hasErrors=true;
+      notifyListeners();
     }
   }
 
