@@ -16,11 +16,16 @@ class Carrete_provider extends ChangeNotifier {
   }
 
   Future<void> getMyCarretes() async {
-    this.isLoading =true;
-    this.carretes = await CarreteRepository().getMyCarretes();
-    this.isLoading = false;
-    notifyListeners();
+    try{
+      this.isLoading =true;
+      this.carretes = await CarreteRepository().getMyCarretes();
+      this.isLoading = false;
+      notifyListeners();
+    }catch(e){
+      throw Exception('Error al obtener los carretes');
+    }
   }
+
 
 
 }
