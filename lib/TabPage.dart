@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:memento_flutter_client/InicioView.dart';
 import 'package:memento_flutter_client/Model/carrete_provider.dart';
 import 'package:memento_flutter_client/ProfileView.dart';
+import 'package:memento_flutter_client/cameraView.dart';
 import 'package:memento_flutter_client/components/carreteCard.dart';
 import 'package:memento_flutter_client/repository/AccountRepository.dart';
 import 'package:memento_flutter_client/repository/UsersRepository.dart';
@@ -62,8 +63,8 @@ class _TabPageState extends State<TabPage> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider( create: (_) => Usuario_provider()),
-        ChangeNotifierProvider(create:(_) => Carrete_provider())
+        ChangeNotifierProvider(create:(_) => Carrete_provider()),
+        ChangeNotifierProvider( create: (_) => Usuario_provider())
       ],
       builder : (context,child){
         Usuario_provider usuario_provider = Provider.of<Usuario_provider>(context, listen: true);

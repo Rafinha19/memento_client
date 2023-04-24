@@ -172,7 +172,7 @@ class _signUpViewState extends State<signUpView> {
                             //Connection error
                             displayDialog(context, AppLocalizations.of(context)!.connection_error, AppLocalizations.of(context)!.connection_error_description);
                           }else if(res==3){
-                            //Connection error
+                            //Email ya se esta usando
                             displayDialog(context, AppLocalizations.of(context)!.email_already_in_use,AppLocalizations.of(context)!.email_already_in_use_description);
                           }
                           else {
