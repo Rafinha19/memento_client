@@ -75,7 +75,37 @@ class CarreteRepository {
       //return "Connection Error";
       throw Exception('Error al obtener los carretes');
     }
-
-
   }
+
+
+  Future<int> uploadPhoto(File image) async {
+    var jsonString = await storage.read(key: "jwt");
+    Map<String, dynamic> jsonData = jsonDecode(jsonString!);
+    String token = jsonData['token'];
+    try {
+
+      var url = Uri.parse("$SERVER_IP/api/carretes/lastcarrete/images");
+      var request = http.MultipartRequest('POST', url);
+
+      var archivo = await http.MultipartFile.fromPath('file', image.path);
+      request.files.add(archivo);
+
+      request.headers.addAll({
+        'Authorization': 'Bearer $token'
+      });
+
+      var res = await request.send();
+
+      if(res.statusCode == 200){
+        return 0;
+      }else{
+        return 1;
+      }
+    } catch (e) {
+      //return "Connection Error";
+      throw Exception('Error al obtener los carretes');
+    }
+  }
+
+
 }

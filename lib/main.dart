@@ -1,7 +1,7 @@
 import 'dart:convert' show json, base64, ascii;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:memento_flutter_client/Model/usuario_provider.dart';
+import 'package:memento_flutter_client/Controller/usuario_provider.dart';
 import 'package:memento_flutter_client/components/loading_overlay.dart';
 import 'package:memento_flutter_client/loginView.dart';
 import 'package:memento_flutter_client/TabPage.dart';
@@ -12,6 +12,8 @@ import 'package:provider/provider.dart';
 final storage = FlutterSecureStorage();
 
 void main() {
+
+
   runApp(MyApp());
 }
 

@@ -9,7 +9,6 @@ import 'package:memento_flutter_client/repository/AccountRepository.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../Config/Properties.dart';
-import '../Model/usuario_provider.dart';
 import '../repository/CarreteRepository.dart';
 import 'loading_overlay.dart';
 

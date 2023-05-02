@@ -100,7 +100,7 @@ class AccountRepository {
     if (res.statusCode == 200) {
       return Usuario.fromJson(jsonDecode(res.body));
     } else {
-      throw Exception('Error al obtener los datos del usuario');
+      throw Exception('Error al subir la foto');
     }
   }
 

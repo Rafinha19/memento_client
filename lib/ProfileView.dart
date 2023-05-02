@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:memento_flutter_client/Model/carrete_provider.dart';
+import 'package:memento_flutter_client/Controller/carrete_provider.dart';
 import 'package:memento_flutter_client/Model/usuario.dart';
-import 'package:memento_flutter_client/Model/usuario_provider.dart';
+import 'package:memento_flutter_client/Controller/usuario_provider.dart';
 import 'package:memento_flutter_client/components/myCarretes.dart';
 import 'package:memento_flutter_client/repository/AccountRepository.dart';
 import 'package:memento_flutter_client/components/carreteCard.dart';

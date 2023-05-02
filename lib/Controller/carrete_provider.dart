@@ -29,5 +29,9 @@ class Carrete_provider extends ChangeNotifier {
   }
 
 
+  Carrete getLastCarrete(){
+    return this.carretes.first;
+  }
+
 
 }

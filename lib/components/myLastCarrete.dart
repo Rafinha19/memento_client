@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 
 
 import '../Config/Properties.dart';
-import '../Model/carrete_provider.dart';
+import '../Controller/carrete_provider.dart';
 import 'carreteCard.dart';
 
 class myLastCarrete extends StatefulWidget {

@@ -2,21 +2,17 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:memento_flutter_client/InicioView.dart';
-import 'package:memento_flutter_client/Model/carrete_provider.dart';
+import 'package:memento_flutter_client/Controller/carrete_provider.dart';
 import 'package:memento_flutter_client/ProfileView.dart';
-import 'package:memento_flutter_client/cameraView.dart';
-import 'package:memento_flutter_client/components/carreteCard.dart';
-import 'package:memento_flutter_client/repository/AccountRepository.dart';
-import 'package:memento_flutter_client/repository/UsersRepository.dart';
+import 'package:memento_flutter_client/uploadImageView.dart';
 import 'package:provider/provider.dart';
 import 'Config/Properties.dart';
-import 'package:memento_flutter_client/Model/usuario_provider.dart';
+import 'package:memento_flutter_client/Controller/usuario_provider.dart';
 
 import 'Model/usuario.dart';
 
 class TabPage extends StatefulWidget {
   TabPage();
-
 
 
 
@@ -30,11 +26,12 @@ class _TabPageState extends State<TabPage> {
   int _selectedIndex = 0;
 
 
+
   @override
   void initState() {
     super.initState();
-
   }
+
 
 
 
@@ -43,10 +40,7 @@ class _TabPageState extends State<TabPage> {
       child: InicioView(),
     ),
     Center(
-      child: Icon(
-        Icons.camera,
-        size: 150,
-      ),
+      child: UploadImageView(),
     ),
     Center(
       child: ProfileView(),
