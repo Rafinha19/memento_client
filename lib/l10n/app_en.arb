@@ -41,5 +41,16 @@
   "email_already_in_use": "That email is already in use",
   "email_already_in_use_description": "There is already an account registered with that email.",
   "sign_out": "Sign out",
-  "friends_list": "Friends list"
+  "currentReel": "Current reel ",
+  "reel_singular": " reel",
+  "reel_plural": " reels",
+  "friends_list": "Friends list",
+  "of9photos": " of 9 photos",
+  "noImageSelectedYet": "You haven't selected a photo yet",
+  "currentReelIsFull": "The current reel is already full",
+  "or": "OR",
+  "selectAnImage": "Select a photo",
+  "uploadPhotoReel": "Upload photo to reel",
+  "browseGalery": "Browse galery",
+  "takeAPicture": "Take a picture"
 }

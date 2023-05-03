@@ -35,5 +35,16 @@
   "email_already_in_use": "Ese correo ya esta en uso",
   "email_already_in_use_description": "Ya existe una cuenta registrada con ese correo.",
   "sign_out": "Cerrar sesion",
-  "friends_list": "Lista de amigos"
+  "currentReel": "Carrete actual ",
+  "reel_singular": " carrete",
+  "reel_plural":" carretes",
+  "friends_list": "Lista de amigos",
+  "of9photos": " de 9 fotos",
+  "noImageSelectedYet": "No has seleccionado una foto aún",
+  "currentReelIsFull": "El carrete actual está lleno",
+  "OR": "O",
+  "selectAnImage": "Selecciona una foto",
+  "uploadPhotoReel": "Subir foto al carrete",
+  "browseGalery": "Buscar en la galería",
+  "takeAPicture": "Sacar una foto"
 }

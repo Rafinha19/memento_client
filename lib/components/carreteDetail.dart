@@ -95,8 +95,7 @@ class _carreteDetailState extends State<carreteDetail> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(CarreteRepository().toUpperCaseFirstLetter(DateFormat('MMMM',Localizations.localeOf(context).languageCode).format(DateTime(widget.carrete.ano,widget.carrete.mes))) + " " + widget.carrete.ano.toString()),
-                          Text("Carrete " +
-                              widget.carrete.num_fotos.toString() +
+                          Text(widget.carrete.num_fotos.toString() +
                               "/9")
                         ],
                       ),

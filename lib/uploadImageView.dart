@@ -9,15 +9,11 @@ import 'package:memento_flutter_client/repository/CarreteRepository.dart';
 import 'package:provider/provider.dart';
 
 import 'Controller/carrete_provider.dart';
-import 'Model/carrete.dart';
 import 'components/carreteDetail.dart';
 import 'components/displayDialog.dart';
 import 'components/loading_overlay.dart';
 import 'components/select_photo_options_screen.dart';
-
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-
 
 // ignore: must_be_immutable
 class UploadImageView extends StatefulWidget {
@@ -84,17 +80,15 @@ class _UploadImageViewState extends State<UploadImageView> {
     );
   }
 
-  void _showLastCarreteIsFullDialog(BuildContext context){
-    displayDialog(
-        context,
-        "El carrete actual esta lleno",
+  void _showLastCarreteIsFullDialog(BuildContext context) {
+    displayDialog(context, "El carrete actual esta lleno",
         "Tendrás que esperar al mes que viene.");
   }
 
-
   @override
   Widget build(BuildContext context) {
-    Carrete_provider carrete_provider = Provider.of<Carrete_provider>(context, listen: true);
+    Carrete_provider carrete_provider =
+        Provider.of<Carrete_provider>(context, listen: true);
 
     return Scaffold(
       body: SafeArea(
@@ -109,55 +103,64 @@ class _UploadImageViewState extends State<UploadImageView> {
                 children: [
                   carrete_provider.isLoading
                       ? const CircularProgressIndicator()
-                      :
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Center(
-                          child: Text(
-                                  CarreteRepository().toUpperCaseFirstLetter(
-                                          DateFormat(
-                                                  'MMMM',
-                                                  Localizations.localeOf(
-                                                          context)
-                                                      .languageCode)
-                                              .format(DateTime(carrete_provider.getLastCarrete().ano,
-                                                  carrete_provider.getLastCarrete().mes))) +
-                                      " " +
-                                      carrete_provider.getLastCarrete().ano.toString(),
+                      : Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Center(
+                                child: Text(
+                              CarreteRepository().toUpperCaseFirstLetter(
+                                      DateFormat(
+                                              'MMMM',
+                                              Localizations.localeOf(context)
+                                                  .languageCode)
+                                          .format(DateTime(
+                                              carrete_provider
+                                                  .getLastCarrete()
+                                                  .ano,
+                                              carrete_provider
+                                                  .getLastCarrete()
+                                                  .mes))) +
+                                  " " +
+                                  carrete_provider
+                                      .getLastCarrete()
+                                      .ano
+                                      .toString(),
+                              textAlign: TextAlign.center,
+                              textScaleFactor: 2.5,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.orange),
+                            )),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 12.0, top: 12.0, right: 12.0),
+                              child: Center(
+                                child: Text(
+                                  carrete_provider
+                                          .getLastCarrete()
+                                          .num_fotos
+                                          .toString() +
+                                      AppLocalizations.of(context)!.of9photos,
                                   textAlign: TextAlign.center,
-                                  textScaleFactor: 2.5,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.orange),
-                                )),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            left: 12.0, top: 12.0, right: 12.0),
-                        child: Center(
-                          child: Text(
-                           carrete_provider.getLastCarrete().num_fotos.toString() + " de 9 fotos",
-                            textAlign: TextAlign.center,
-                            textScaleFactor: 1.4,
-                          ),
+                                  textScaleFactor: 1.4,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                    ],
-                  ),
                 ],
               ),
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Center(
-                  child:
-                  GestureDetector(
+                  child: GestureDetector(
                     behavior: HitTestBehavior.translucent,
                     onTap: () {
                       //Solo permitimos escoger si el ultimo carrete NO esta lleno
-                      if (!carrete_provider.LastCarreteIsFull()){
+                      if (!carrete_provider.LastCarreteIsFull()) {
                         _showSelectPhotoOptions(context);
-                      }else{
+                      } else {
                         _showLastCarreteIsFullDialog(context);
                       }
                     },
@@ -166,31 +169,30 @@ class _UploadImageViewState extends State<UploadImageView> {
                           height: 350.0,
                           width: 350,
                           decoration: BoxDecoration(
-                            color: Colors.grey[850],
-                            borderRadius: BorderRadius.circular(10),
-                              border: Border.all(color: Colors.grey.shade800)
-                          ),
+                              color: Colors.grey[850],
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(color: Colors.grey.shade800)),
                           child: Center(
-                              child:
-                              carrete_provider.LastCarreteIsFull()?
-                              Text(
-                                'El carrete actual ya está lleno',
-                                style: TextStyle(fontSize: 20),
-                              )
-                                  :
-                              _image == null
-                                  ?
-                              const Text(
-                                      'Selecciona una imagen',
+                              child: carrete_provider.LastCarreteIsFull()
+                                  ? Text(
+                                AppLocalizations.of(context)!
+                                    .currentReelIsFull,
                                       style: TextStyle(fontSize: 20),
                                     )
-                                  : ClipRRect(
-                                      borderRadius: BorderRadius.circular(10),
-                                      child: Image(
-                                        image: FileImage(_image!),
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ))),
+                                  : _image == null
+                                      ? Text(
+                                          AppLocalizations.of(context)!
+                                              .noImageSelectedYet,
+                                          style: TextStyle(fontSize: 20),
+                                        )
+                                      : ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          child: Image(
+                                            image: FileImage(_image!),
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ))),
                     ),
                   ),
                 ),
@@ -206,15 +208,20 @@ class _UploadImageViewState extends State<UploadImageView> {
                         borderRadius: BorderRadius.circular(10)),
                     child: TextButton(
                       onPressed: () {
-                        if(!carrete_provider.LastCarreteIsFull()){
+                        if (!carrete_provider.LastCarreteIsFull()) {
                           _showSelectPhotoOptions(context);
-                        }else{
+                        } else {
                           _showLastCarreteIsFullDialog(context);
                         }
                       },
                       child: Text(
-                        "Seleccionar foto",
-                        style: TextStyle(color: carrete_provider.LastCarreteIsFull()? Colors.white38 : Colors.white, fontSize: 18),
+                        AppLocalizations.of(context)!
+                            .selectAnImage,
+                        style: TextStyle(
+                            color: carrete_provider.LastCarreteIsFull()
+                                ? Colors.white38
+                                : Colors.white,
+                            fontSize: 18),
                       ),
                     ),
                   ),
@@ -225,20 +232,22 @@ class _UploadImageViewState extends State<UploadImageView> {
                     height: 55,
                     width: double.infinity,
                     decoration: BoxDecoration(
-                        color: _image != null? Colors.orange : Colors.grey.shade800,
+                        color: _image != null
+                            ? Colors.orange
+                            : Colors.grey.shade800,
                         borderRadius: BorderRadius.circular(10)),
                     child: TextButton(
                       onPressed: () async {
-                        if(carrete_provider.LastCarreteIsFull()){
+                        if (carrete_provider.LastCarreteIsFull()) {
                           return;
                         }
                         LoadingOverlay.of(context).show();
 
-                        if(_image != null){
+                        if (_image != null) {
+                          var res =
+                              await CarreteRepository().uploadPhoto(_image!);
 
-                          var res = await CarreteRepository().uploadPhoto(_image!);
-
-                          if(res== 0){
+                          if (res == 0) {
                             // ha funcionado bien - reseteamos la foto y lo llevamos al carrete en cuestión a parte de decir que se traiga de nuevo los datos
                             //ESTO SERÍA MEJOR QUE SOLO ACTUALIZASE EL ÚLTIMO CARRETE
                             await carrete_provider.getMyCarretes();
@@ -250,31 +259,33 @@ class _UploadImageViewState extends State<UploadImageView> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => carreteDetail(carrete: carrete_provider.getLastCarrete())
-                                )
-                            );
-
-                          }else if(res == 1){
+                                    builder: (context) => carreteDetail(
+                                        carrete: carrete_provider
+                                            .getLastCarrete())));
+                          } else if (res == 1) {
                             LoadingOverlay.of(context).hide();
                             displayDialog(
                                 context,
                                 AppLocalizations.of(context)!.error,
                                 "Tu carrete esta lleno");
-                          }else{
+                          } else {
                             LoadingOverlay.of(context).hide();
                             displayDialog(
                                 context,
                                 AppLocalizations.of(context)!.error,
                                 AppLocalizations.of(context)!.unexpected_error);
                           }
-
-
+                        }else{
+                          LoadingOverlay.of(context).hide();
                         }
-
                       },
                       child: Text(
-                        "Subir foto al carrete",
-                        style: TextStyle(color: _image != null? Colors.white : Colors.white38, fontSize: 18),
+                        AppLocalizations.of(context)!
+                            .uploadPhotoReel,
+                        style: TextStyle(
+                            color:
+                                _image != null ? Colors.white : Colors.white38,
+                            fontSize: 18),
                       ),
                     ),
                   ),

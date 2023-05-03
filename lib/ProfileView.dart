@@ -80,12 +80,12 @@ class _ProfileViewState extends State<ProfileView> {
                                           ? Text(
                                               usuario_provider.usuario.num_carretes
                                                       .toString() +
-                                                  " carrete",
+                                                  AppLocalizations.of(context)!.reel_singular,
                                               textAlign: TextAlign.left)
                                           : Text(
                                               usuario_provider.usuario.num_carretes
                                                       .toString() +
-                                                  " carretes",
+                                                  AppLocalizations.of(context)!.reel_plural,
                                               textAlign: TextAlign.left)
                                     ],
                                   ),
