@@ -116,7 +116,7 @@ class _ProfileViewState extends State<ProfileView> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.all(10),
+                      padding:EdgeInsets.only(top: 12.0, bottom: 12.0, left:4 ,right: 4),
                       child: Container(
                         height: 35,
                         width: double.infinity,
@@ -133,7 +133,7 @@ class _ProfileViewState extends State<ProfileView> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.all(10),
+                      padding: EdgeInsets.only(top: 12.0, bottom: 12.0, left: 4,right: 4),
                       child: Container(
                         height: 35,
                         width: double.infinity,

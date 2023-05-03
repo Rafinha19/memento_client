@@ -51,7 +51,8 @@ class _carreteCardState extends State<carreteCard> {
                     print("liked");
                   },
                   child: Card(
-                    color: Colors.grey[900],
+                    color: Colors.grey[850],
+                    elevation: 10,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5),
                     ),

@@ -10,7 +10,14 @@ import 'package:provider/provider.dart';
 
 import 'Controller/carrete_provider.dart';
 import 'Model/carrete.dart';
+import 'components/carreteDetail.dart';
+import 'components/displayDialog.dart';
+import 'components/loading_overlay.dart';
 import 'components/select_photo_options_screen.dart';
+
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+
 
 // ignore: must_be_immutable
 class UploadImageView extends StatefulWidget {
@@ -77,9 +84,17 @@ class _UploadImageViewState extends State<UploadImageView> {
     );
   }
 
+  void _showLastCarreteIsFullDialog(BuildContext context){
+    displayDialog(
+        context,
+        "El carrete actual esta lleno",
+        "Tendrás que esperar al mes que viene.");
+  }
+
+
   @override
   Widget build(BuildContext context) {
-    Carrete_provider carrete_provider = Provider.of<Carrete_provider>(context);
+    Carrete_provider carrete_provider = Provider.of<Carrete_provider>(context, listen: true);
 
     return Scaffold(
       body: SafeArea(
@@ -135,23 +150,37 @@ class _UploadImageViewState extends State<UploadImageView> {
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Center(
-                  child: GestureDetector(
+                  child:
+                  GestureDetector(
                     behavior: HitTestBehavior.translucent,
                     onTap: () {
-                      _showSelectPhotoOptions(context);
+                      //Solo permitimos escoger si el ultimo carrete NO esta lleno
+                      if (!carrete_provider.LastCarreteIsFull()){
+                        _showSelectPhotoOptions(context);
+                      }else{
+                        _showLastCarreteIsFullDialog(context);
+                      }
                     },
                     child: Center(
                       child: Container(
                           height: 350.0,
                           width: 350,
                           decoration: BoxDecoration(
-                            color: Colors.grey.shade800,
+                            color: Colors.grey[850],
                             borderRadius: BorderRadius.circular(10),
-                              border: Border.all(color: Colors.grey.shade700)
+                              border: Border.all(color: Colors.grey.shade800)
                           ),
                           child: Center(
-                              child: _image == null
-                                  ? const Text(
+                              child:
+                              carrete_provider.LastCarreteIsFull()?
+                              Text(
+                                'El carrete actual ya está lleno',
+                                style: TextStyle(fontSize: 20),
+                              )
+                                  :
+                              _image == null
+                                  ?
+                              const Text(
                                       'Selecciona una imagen',
                                       style: TextStyle(fontSize: 20),
                                     )
@@ -173,15 +202,19 @@ class _UploadImageViewState extends State<UploadImageView> {
                     height: 55,
                     width: double.infinity,
                     decoration: BoxDecoration(
-                        color: Colors.grey.shade700,
+                        color: Colors.grey.shade800,
                         borderRadius: BorderRadius.circular(10)),
                     child: TextButton(
                       onPressed: () {
-                        _showSelectPhotoOptions(context);
+                        if(!carrete_provider.LastCarreteIsFull()){
+                          _showSelectPhotoOptions(context);
+                        }else{
+                          _showLastCarreteIsFullDialog(context);
+                        }
                       },
                       child: Text(
                         "Seleccionar foto",
-                        style: TextStyle(color: Colors.white, fontSize: 18),
+                        style: TextStyle(color: carrete_provider.LastCarreteIsFull()? Colors.white38 : Colors.white, fontSize: 18),
                       ),
                     ),
                   ),
@@ -192,17 +225,56 @@ class _UploadImageViewState extends State<UploadImageView> {
                     height: 55,
                     width: double.infinity,
                     decoration: BoxDecoration(
-                        color: Colors.orange,
+                        color: _image != null? Colors.orange : Colors.grey.shade800,
                         borderRadius: BorderRadius.circular(10)),
                     child: TextButton(
                       onPressed: () async {
-                        var res = await CarreteRepository().uploadPhoto(_image!);
+                        if(carrete_provider.LastCarreteIsFull()){
+                          return;
+                        }
+                        LoadingOverlay.of(context).show();
 
+                        if(_image != null){
+
+                          var res = await CarreteRepository().uploadPhoto(_image!);
+
+                          if(res== 0){
+                            // ha funcionado bien - reseteamos la foto y lo llevamos al carrete en cuestión a parte de decir que se traiga de nuevo los datos
+                            //ESTO SERÍA MEJOR QUE SOLO ACTUALIZASE EL ÚLTIMO CARRETE
+                            await carrete_provider.getMyCarretes();
+                            setState(() {
+                              _image = null;
+                            });
+
+                            LoadingOverlay.of(context).hide();
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => carreteDetail(carrete: carrete_provider.getLastCarrete())
+                                )
+                            );
+
+                          }else if(res == 1){
+                            LoadingOverlay.of(context).hide();
+                            displayDialog(
+                                context,
+                                AppLocalizations.of(context)!.error,
+                                "Tu carrete esta lleno");
+                          }else{
+                            LoadingOverlay.of(context).hide();
+                            displayDialog(
+                                context,
+                                AppLocalizations.of(context)!.error,
+                                AppLocalizations.of(context)!.unexpected_error);
+                          }
+
+
+                        }
 
                       },
                       child: Text(
                         "Subir foto al carrete",
-                        style: TextStyle(color: Colors.white, fontSize: 18),
+                        style: TextStyle(color: _image != null? Colors.white : Colors.white38, fontSize: 18),
                       ),
                     ),
                   ),

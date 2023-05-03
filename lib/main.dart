@@ -8,6 +8,7 @@ import 'package:memento_flutter_client/TabPage.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:memento_flutter_client/Config/Properties.dart';
 
 final storage = FlutterSecureStorage();
 
@@ -43,7 +44,7 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
         accentColor: Colors.grey[800],
         focusColor: Colors.blue,
-        scaffoldBackgroundColor:  Colors.black,
+        scaffoldBackgroundColor:  AppbackgroundColor,
       ),
       home: LoadingOverlay(
         child: FutureBuilder(

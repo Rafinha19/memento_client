@@ -38,7 +38,7 @@ class _signUpViewState extends State<signUpView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Colors.black,
+          backgroundColor: Colors.grey.shade900,
       ),
       body: Center(
         child: SingleChildScrollView(

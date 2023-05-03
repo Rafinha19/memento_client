@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/cupertino.dart';
 import 'package:memento_flutter_client/Model/carrete.dart';
 import 'package:memento_flutter_client/Model/usuario.dart';
@@ -29,8 +31,14 @@ class Carrete_provider extends ChangeNotifier {
   }
 
 
+
+
   Carrete getLastCarrete(){
     return this.carretes.first;
+  }
+
+  bool LastCarreteIsFull(){
+    return this.getLastCarrete().num_fotos == 9;
   }
 
 

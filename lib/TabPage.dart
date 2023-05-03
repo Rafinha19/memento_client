@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:memento_flutter_client/InicioView.dart';
 import 'package:memento_flutter_client/Controller/carrete_provider.dart';
 import 'package:memento_flutter_client/ProfileView.dart';
+import 'package:memento_flutter_client/components/loading_overlay.dart';
 import 'package:memento_flutter_client/uploadImageView.dart';
 import 'package:provider/provider.dart';
 import 'Config/Properties.dart';
@@ -40,7 +41,7 @@ class _TabPageState extends State<TabPage> {
       child: InicioView(),
     ),
     Center(
-      child: UploadImageView(),
+      child: LoadingOverlay(child: UploadImageView()),
     ),
     Center(
       child: ProfileView(),
@@ -73,7 +74,7 @@ class _TabPageState extends State<TabPage> {
                   'Memento',
                   style: TextStyle(fontSize: 26),
                 ),
-                backgroundColor: Colors.black,
+                backgroundColor: AppbackgroundColor,
                 automaticallyImplyLeading: false
             ),
             body: IndexedStack(
@@ -82,14 +83,14 @@ class _TabPageState extends State<TabPage> {
             ),
             bottomNavigationBar: Container(
               decoration: BoxDecoration(
-                border: Border(top: BorderSide(color: Colors.grey.shade900,width: 0.5)),
+                border: Border(top: BorderSide(color: Colors.grey.shade800,width: 0.5)),
               ),
               child: BottomNavigationBar(
                 iconSize: 25,
                 selectedItemColor: Colors.orange,
                 showSelectedLabels: false,
                 showUnselectedLabels: false,
-                backgroundColor: Colors.black,
+                backgroundColor: AppbackgroundColor,
                 items: <BottomNavigationBarItem>[
                   BottomNavigationBarItem(
                     icon: Icon(Icons.home),

@@ -40,7 +40,7 @@ class _carreteDetailState extends State<carreteDetail> {
             'Memento',
             style: TextStyle(fontSize: 26),
           ),
-          backgroundColor: Colors.black),
+          backgroundColor: AppbackgroundColor),
       body: FutureBuilder<String>(
         future: futureToken,
         builder: (context, snapshot) {
