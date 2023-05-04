@@ -173,10 +173,14 @@ class _UploadImageViewState extends State<UploadImageView> {
                               borderRadius: BorderRadius.circular(10),
                               border: Border.all(color: Colors.grey.shade800)),
                           child: Center(
-                              child: carrete_provider.LastCarreteIsFull()
+                              child:
+                              carrete_provider.isLoading?
+                              const CircularProgressIndicator()
+                                  :
+                              carrete_provider.LastCarreteIsFull()
                                   ? Text(
-                                AppLocalizations.of(context)!
-                                    .currentReelIsFull,
+                                      AppLocalizations.of(context)!
+                                          .currentReelIsFull,
                                       style: TextStyle(fontSize: 20),
                                     )
                                   : _image == null
@@ -215,10 +219,13 @@ class _UploadImageViewState extends State<UploadImageView> {
                         }
                       },
                       child: Text(
-                        AppLocalizations.of(context)!
-                            .selectAnImage,
+                        AppLocalizations.of(context)!.selectAnImage,
                         style: TextStyle(
-                            color: carrete_provider.LastCarreteIsFull()
+                            color:
+                            carrete_provider.isLoading?
+                            Colors.white
+                                :
+                            carrete_provider.LastCarreteIsFull()
                                 ? Colors.white38
                                 : Colors.white,
                             fontSize: 18),
@@ -232,7 +239,11 @@ class _UploadImageViewState extends State<UploadImageView> {
                     height: 55,
                     width: double.infinity,
                     decoration: BoxDecoration(
-                        color: _image != null
+                        color:
+                        carrete_provider.isLoading?
+                        Colors.white
+                            :
+                        _image != null
                             ? Colors.orange
                             : Colors.grey.shade800,
                         borderRadius: BorderRadius.circular(10)),
@@ -268,6 +279,13 @@ class _UploadImageViewState extends State<UploadImageView> {
                                 context,
                                 AppLocalizations.of(context)!.error,
                                 "Tu carrete esta lleno");
+                          } else if (res == 2) {
+                            LoadingOverlay.of(context).hide();
+                            displayDialog(
+                                context,
+                                AppLocalizations.of(context)!.connection_error,
+                                AppLocalizations.of(context)!
+                                    .connection_error_description);
                           } else {
                             LoadingOverlay.of(context).hide();
                             displayDialog(
@@ -275,13 +293,12 @@ class _UploadImageViewState extends State<UploadImageView> {
                                 AppLocalizations.of(context)!.error,
                                 AppLocalizations.of(context)!.unexpected_error);
                           }
-                        }else{
+                        } else {
                           LoadingOverlay.of(context).hide();
                         }
                       },
                       child: Text(
-                        AppLocalizations.of(context)!
-                            .uploadPhotoReel,
+                        AppLocalizations.of(context)!.uploadPhotoReel,
                         style: TextStyle(
                             color:
                                 _image != null ? Colors.white : Colors.white38,

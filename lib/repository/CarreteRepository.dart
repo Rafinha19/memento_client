@@ -103,7 +103,7 @@ class CarreteRepository {
       }
     } catch (e) {
       //return "Connection Error";
-      throw Exception('Error al obtener los carretes');
+      return 2;
     }
   }
 
