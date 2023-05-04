@@ -81,8 +81,10 @@ class _UploadImageViewState extends State<UploadImageView> {
   }
 
   void _showLastCarreteIsFullDialog(BuildContext context) {
-    displayDialog(context, "El carrete actual esta lleno",
-        "Tendrás que esperar al mes que viene.");
+    displayDialog(context, AppLocalizations.of(context)!
+        .error,
+        AppLocalizations.of(context)!
+            .currentReelIsFull);
   }
 
   @override
@@ -278,7 +280,7 @@ class _UploadImageViewState extends State<UploadImageView> {
                             displayDialog(
                                 context,
                                 AppLocalizations.of(context)!.error,
-                                "Tu carrete esta lleno");
+                                AppLocalizations.of(context)!.currentReelIsFull);
                           } else if (res == 2) {
                             LoadingOverlay.of(context).hide();
                             displayDialog(
