@@ -36,7 +36,7 @@ class _myAmigosState extends State<myAmigos> {
             return SizedBox(
               height: 90,
               width: double.infinity,
-              child: userCard(username: amigo.nombre_usuario),
+              child: userCard(usuario: amigo, ismyAmigo: true,),
             );
           }
       )

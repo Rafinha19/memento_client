@@ -3,15 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:memento_flutter_client/Model/carrete.dart';
 import 'package:memento_flutter_client/components/carreteDetail.dart';
+import 'package:memento_flutter_client/components/displayDialog.dart';
 import 'package:memento_flutter_client/repository/AccountRepository.dart';
 import 'package:memento_flutter_client/repository/CarreteRepository.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../Config/Properties.dart';
+import '../Model/amigo.dart';
+import '../Model/usuario.dart';
+import '../repository/AmigoRepository.dart';
 
 class userCard extends StatefulWidget {
-  final String username;
-  userCard({Key? key,required this.username}) : super(key: key);
+  final Amigo usuario;
+  final bool ismyAmigo;
+  userCard({Key? key,required this.usuario, required this.ismyAmigo}) : super(key: key);
 
 
   @override
@@ -58,16 +63,17 @@ class _userCardState extends State<userCard> {
                                 CircleAvatar(
                                   radius: 30, // Image radius
                                   backgroundImage: NetworkImage(
-                                      "$SERVER_IP/api/users/" + widget.username + "/image"),
+                                      "$SERVER_IP/api/users/" + widget.usuario.nombre_usuario + "/image"),
                                 ),
                                 Container(
                                     margin: EdgeInsets.symmetric(horizontal: 15),
-                                    child: Text(widget.username,
+                                    child: Text(widget.usuario.nombre_usuario,
                                         style: TextStyle(
                                             color: Colors.white, fontSize: 18),
                                         textAlign: TextAlign.center))
                               ],
                             ),
+                            widget.ismyAmigo?
                             IconButton(
                               icon: Icon(
                                 Icons.highlight_remove,
@@ -75,6 +81,23 @@ class _userCardState extends State<userCard> {
                                 color: Colors.orange,
                               ), onPressed: () {
                               print("hola");
+                            },
+                            )
+                                :
+                            IconButton(
+                              icon: Icon(
+                                Icons.add_circle_outline,
+                                size: 35,
+                                color: Colors.orange,
+                              ), onPressed: () async {
+                                int res = await AmigoRepository().crearSolicitudAmistad(widget.usuario.id_usuario);
+                                if (res == 0){
+                                  displayDialog(context, "Solicitud creada", "Se ha creado la solicitud de amistad con el usuario " + widget.usuario.nombre_usuario );
+                                }else if( res == 1){
+                                  displayDialog(context, "Solicitud pendiente", "Ya hay una solicitud pendiente con el usuario " + widget.usuario.nombre_usuario );
+                                }else if( res == 2){
+                                  displayDialog(context, "Solicitud pendiente", "Ya tienes una solicitud pendiente del usuario " + widget.usuario.nombre_usuario );
+                                }
                             },
                             )
 
