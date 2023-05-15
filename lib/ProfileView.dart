@@ -16,6 +16,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'components/displayDialog.dart';
 import 'components/loading_overlay.dart';
+import 'friendsListView.dart';
 import 'loginView.dart';
 
 class ProfileView extends StatefulWidget {
@@ -141,7 +142,14 @@ class _ProfileViewState extends State<ProfileView> {
                             color: Colors.grey[800],
                             borderRadius: BorderRadius.circular(10)),
                         child: TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        LoadingOverlay(child: friendsListView())));
+
+                          },
                           child: Text(
                             AppLocalizations.of(context)!.friends_list,
                             style: TextStyle(color: Colors.white, fontSize: 15),

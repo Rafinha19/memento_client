@@ -47,84 +47,84 @@ class _carreteDetailState extends State<carreteDetail> {
           if (snapshot.hasData) {
             String token = snapshot.data!;
             return SingleChildScrollView(
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              CircleAvatar(
-                                radius: 25, // Image radius
-                                backgroundImage: NetworkImage(AccountRepository()
-                                    .getProfileImageUrl(widget.carrete.propietario)),
-                              ),
-                              Container(
-                                  margin: EdgeInsets.symmetric(horizontal: 10),
-                                  child: Text(widget.carrete.propietario)),
-                            ],
-                          ),
-                          Container(
-                            height: 35,
-                            width: 150,
-                            decoration: BoxDecoration(
-                                color: Colors.orange,
-                                borderRadius: BorderRadius.circular(10)),
-                            child: TextButton(
-                              onPressed: () {
-                                print("Hola");
-                              },
-                              child: Text(
-                                "Generar Memento",
-                                style:
-                                    TextStyle(color: Colors.white, fontSize: 15),
-                                textAlign: TextAlign.center,
-                              ),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            CircleAvatar(
+                              radius: 25, // Image radius
+                              backgroundImage: NetworkImage(AccountRepository()
+                                  .getProfileImageUrl(widget.carrete.propietario)),
+                            ),
+                            Container(
+                                margin: EdgeInsets.symmetric(horizontal: 10),
+                                child: Text(widget.carrete.propietario)),
+                          ],
+                        ),
+                        Container(
+                          height: 35,
+                          width: 150,
+                          decoration: BoxDecoration(
+                              color: Colors.orange,
+                              borderRadius: BorderRadius.circular(10)),
+                          child: TextButton(
+                            onPressed: () {
+                              print("Hola");
+                            },
+                            child: Text(
+                              "Generar Memento",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 15),
+                              textAlign: TextAlign.center,
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(CarreteRepository().toUpperCaseFirstLetter(DateFormat('MMMM',Localizations.localeOf(context).languageCode).format(DateTime(widget.carrete.ano,widget.carrete.mes))) + " " + widget.carrete.ano.toString()),
-                          Text(widget.carrete.num_fotos.toString() +
-                              "/9")
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 10),
-                      child: SizedBox(
-                        height: 400, // card height
-                        child: Swiper(
-                          itemBuilder: (BuildContext context, int _index) {
-                            return zoomableImage(imageUrl: "$SERVER_IP/api/fotos/" + widget.carrete.ids_fotos[_index].toString(), token: token);
-                          },
-                          duration: 100,
-                          itemCount: widget.carrete.num_fotos,
-                          viewportFraction: 1,
-                          scale: 0.9,
-                          loop: false,
-                          pagination: SwiperPagination(
-                              alignment: Alignment.bottomCenter,
-                              builder: DotSwiperPaginationBuilder(
-                                  color: Colors.grey[700],
-                                  activeColor: Colors.orange,
-                                  activeSize: 12,
-                                  size: 8,
-                                  space: 4)),
                         ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(CarreteRepository().toUpperCaseFirstLetter(DateFormat('MMMM',Localizations.localeOf(context).languageCode).format(DateTime(widget.carrete.ano,widget.carrete.mes))) + " " + widget.carrete.ano.toString()),
+                        Text(widget.carrete.num_fotos.toString() +
+                            "/9")
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10),
+                    child: SizedBox(
+                      height: 400, // card height
+                      child: Swiper(
+                        itemBuilder: (BuildContext context, int _index) {
+                          return zoomableImage(imageUrl: "$SERVER_IP/api/fotos/" + widget.carrete.ids_fotos[_index].toString(), token: token);
+                        },
+                        duration: 100,
+                        itemCount: widget.carrete.num_fotos,
+                        viewportFraction: 1,
+                        scale: 0.9,
+                        loop: false,
+                        pagination: SwiperPagination(
+                            alignment: Alignment.bottomCenter,
+                            builder: DotSwiperPaginationBuilder(
+                                color: Colors.grey[700],
+                                activeColor: Colors.orange,
+                                activeSize: 12,
+                                size: 8,
+                                space: 4)),
                       ),
                     ),
-                    Row(
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 15),
+                    child: Row(
                       children: [
                         Flexible(
                           child: Text(
@@ -135,61 +135,61 @@ class _carreteDetailState extends State<carreteDetail> {
                         ),
                       ],
                     ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Text(
-                                "12",
-                                style: TextStyle(
-                                  fontSize:
-                                      15.0, // Cambia el tamaño de la fuente aquí
-                                ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              "12",
+                              style: TextStyle(
+                                fontSize:
+                                    15.0, // Cambia el tamaño de la fuente aquí
                               ),
-                              SizedBox(
-                                width: 3,
-                              ),
-                              Icon(
-                                Icons.favorite,
-                                color: Colors.orange,
-                                size: 30,
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                "3",
-                                style: TextStyle(
-                                  fontSize:
-                                      15.0, // Cambia el tamaño de la fuente aquí
-                                ),
-                              ),
-                              SizedBox(
-                                width: 3,
-                              ),
-                              Icon(
-                                Icons.mode_comment_outlined,
-                                size: 30,
-                              )
-                            ],
-                          ),
-                          IconButton(
-                            icon: Icon(
-                              Icons.create_rounded,
-                              size: 30,
+                            ),
+                            SizedBox(
+                              width: 3,
+                            ),
+                            Icon(
+                              Icons.favorite,
                               color: Colors.orange,
-                            ), onPressed: () {
-                            _renewEditedReel(context);
-                          },
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
+                              size: 30,
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              "3",
+                              style: TextStyle(
+                                fontSize:
+                                    15.0, // Cambia el tamaño de la fuente aquí
+                              ),
+                            ),
+                            SizedBox(
+                              width: 3,
+                            ),
+                            Icon(
+                              Icons.mode_comment_outlined,
+                              size: 30,
+                            )
+                          ],
+                        ),
+                        IconButton(
+                          icon: Icon(
+                            Icons.create_rounded,
+                            size: 30,
+                            color: Colors.orange,
+                          ), onPressed: () {
+                          _renewEditedReel(context);
+                        },
+                        ),
+                      ],
+                    ),
+                  )
+                ],
               ),
             );
           } else if (snapshot.hasError) {
