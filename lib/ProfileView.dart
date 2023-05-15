@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:memento_flutter_client/Controller/amigo_provider.dart';
 import 'package:memento_flutter_client/Controller/carrete_provider.dart';
 import 'package:memento_flutter_client/Model/usuario.dart';
 import 'package:memento_flutter_client/Controller/usuario_provider.dart';
@@ -16,7 +17,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'components/displayDialog.dart';
 import 'components/loading_overlay.dart';
-import 'friendsListView.dart';
+import 'friendsView.dart';
 import 'loginView.dart';
 
 class ProfileView extends StatefulWidget {
@@ -34,6 +35,7 @@ class _ProfileViewState extends State<ProfileView> {
   Widget build(BuildContext context) {
     Usuario_provider usuario_provider = Provider.of<Usuario_provider>(context);
     Carrete_provider carrete_provider = Provider.of<Carrete_provider>(context);
+    Amigo_provider amigo_provider = Provider.of<Amigo_provider>(context);
 
     Future refresh() async {
         carrete_provider.getMyCarretes();
@@ -143,12 +145,11 @@ class _ProfileViewState extends State<ProfileView> {
                             borderRadius: BorderRadius.circular(10)),
                         child: TextButton(
                           onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        LoadingOverlay(child: friendsListView())));
-
+                            Navigator.of(context).push(
+                              MaterialPageRoute(builder: (context){
+                                return ChangeNotifierProvider.value(value: amigo_provider, child: friendsView());
+                              }),
+                            );
                           },
                           child: Text(
                             AppLocalizations.of(context)!.friends_list,

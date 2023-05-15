@@ -2,11 +2,11 @@ import 'dart:convert';
 import 'dart:ffi';
 import 'dart:io';
 import 'package:http/http.dart' as http;
+import 'package:memento_flutter_client/Model/amigo.dart';
 import '../Model/carrete.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import 'package:memento_flutter_client/Config/Properties.dart';
-import 'dart:developer' as developer;
 
 class CarreteRepository {
 
@@ -31,11 +31,11 @@ class CarreteRepository {
         //developer.log(carretes[0].ano_mes);
         return carretes;
       } else {
-        throw Exception('Error al obtener los carretes');
+        throw Exception('Error al obtener los amigos');
       }
     } catch (e) {
       //return "Connection Error";
-      throw Exception('Error al obtener los carretes');
+      throw Exception('Error al obtener los amigos');
     }
   }
 

@@ -4,11 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:memento_flutter_client/Controller/carrete_provider.dart';
 import 'package:memento_flutter_client/Model/usuario.dart';
 import 'package:memento_flutter_client/Controller/usuario_provider.dart';
+import 'package:memento_flutter_client/components/myAmigos.dart';
 import 'package:memento_flutter_client/components/myCarretes.dart';
+import 'package:memento_flutter_client/components/userCard.dart';
 import 'package:memento_flutter_client/repository/AccountRepository.dart';
 import 'package:memento_flutter_client/components/carreteCard.dart';
 import 'package:provider/provider.dart';
 import 'dart:convert';
+import 'Controller/amigo_provider.dart';
 import 'Model/carrete.dart';
 import 'package:memento_flutter_client/Config/Properties.dart';
 import 'package:memento_flutter_client/repository/CarreteRepository.dart';
@@ -18,12 +21,12 @@ import 'components/displayDialog.dart';
 import 'components/loading_overlay.dart';
 import 'loginView.dart';
 
-class friendsListView extends StatefulWidget {
+class friendsView extends StatefulWidget {
   @override
-  _friendsListViewState createState() => _friendsListViewState();
+  _friendsViewState createState() => _friendsViewState();
 }
 
-class _friendsListViewState extends State<friendsListView> {
+class _friendsViewState extends State<friendsView> {
   @override
   void initState() {
     super.initState();
@@ -49,7 +52,8 @@ class _friendsListViewState extends State<friendsListView> {
             child: Center(
               child: Column(
                 children: [
-                  Text("Friends List")
+                  Text("Friends List"),
+                  myAmigos()
                 ],
               ),
             ),
