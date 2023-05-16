@@ -33,6 +33,9 @@ class _myFriendsCarretesState extends State<myFriendsCarretes> {
       //true
       const CircularProgressIndicator()
           :
+      friendsCarretes_provider.carretesAmigos.length==0?
+      Text("Vaya, parece que no has agregado a ningún usuario de momento")
+          :    
       ListView.builder(
           physics: NeverScrollableScrollPhysics(),
           shrinkWrap: true,

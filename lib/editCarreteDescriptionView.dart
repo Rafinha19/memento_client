@@ -44,7 +44,7 @@ class _editcarreteDescriptionViewState
             'Memento',
             style: TextStyle(fontSize: 26),
           ),
-          backgroundColor: Colors.black),
+          backgroundColor: AppbackgroundColor),
       body: WillPopScope(
         onWillPop: () async {
           Navigator.pop(context,widget.carrete.descripcion);

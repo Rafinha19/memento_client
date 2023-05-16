@@ -48,7 +48,7 @@ class _InicioViewState extends State<InicioView> {
           child: Column(
             children: [
               mycarrete_provider.isLoading?
-                  const CircularProgressIndicator()
+                  Container()
               :
               Padding(
                 padding: EdgeInsets.only(left: 10.0,bottom: 5.0),

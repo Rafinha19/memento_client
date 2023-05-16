@@ -31,7 +31,7 @@ class _myLastCarreteState extends State<myLastCarrete> {
     return
       carrete_provider.isLoading?
       //true
-      const CircularProgressIndicator()
+      Container() //Esto se hace para no mostrar un monton de circular progess indicator
           :
       SizedBox(
         height: 200,
