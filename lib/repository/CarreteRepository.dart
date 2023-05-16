@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:ffi';
 import 'dart:io';
 import 'package:http/http.dart' as http;
-import 'package:memento_flutter_client/Model/amigo.dart';
+import 'package:memento_flutter_client/Model/usuario.dart';
 import '../Model/carrete.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 

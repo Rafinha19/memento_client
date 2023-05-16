@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:memento_flutter_client/Controller/amigo_provider.dart';
 import 'package:memento_flutter_client/Controller/carrete_provider.dart';
 import 'package:memento_flutter_client/Controller/solicitudAmistad_provider.dart';
-import 'package:memento_flutter_client/Model/usuario.dart';
-import 'package:memento_flutter_client/Controller/usuario_provider.dart';
+import 'package:memento_flutter_client/Controller/usuarioList_provider.dart';
+import 'package:memento_flutter_client/Model/currentUsuarioData.dart';
+import 'package:memento_flutter_client/Controller/currentUsuario_provider.dart';
 import 'package:memento_flutter_client/components/myCarretes.dart';
 import 'package:memento_flutter_client/repository/AccountRepository.dart';
 import 'package:memento_flutter_client/components/carreteCard.dart';
@@ -34,10 +35,11 @@ class _ProfileViewState extends State<ProfileView> {
 
   @override
   Widget build(BuildContext context) {
-    Usuario_provider usuario_provider = Provider.of<Usuario_provider>(context);
+    CurrentUsuario_provider currentUsuario_provider = Provider.of<CurrentUsuario_provider>(context);
     Carrete_provider carrete_provider = Provider.of<Carrete_provider>(context);
     Amigo_provider amigo_provider = Provider.of<Amigo_provider>(context);
     SolicitudAmistad_provider solicitudAmistad_provider = Provider.of<SolicitudAmistad_provider>(context);
+    UsuarioList_provider usuarioList_provider = Provider.of<UsuarioList_provider>(context);
 
     Future refresh() async {
         carrete_provider.getMyCarretes();
@@ -61,34 +63,34 @@ class _ProfileViewState extends State<ProfileView> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          usuario_provider.isLoading
+                          currentUsuario_provider.isLoading
                               ?
                               //true
                               const CircularProgressIndicator()
                               : CircleAvatar(
                                   radius: 40, // Image radius
                                   backgroundImage: NetworkImage(
-                                      usuario_provider.usuario.url_foto_perfil),
+                                      currentUsuario_provider.usuario.url_foto_perfil),
                                 ),
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 15.0),
-                            child: usuario_provider.isLoading
+                            child: currentUsuario_provider.isLoading
                                 ?
                                 //true
                                 const CircularProgressIndicator()
                                 : Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
-                                      Text(usuario_provider.usuario.nombre_usuario,
+                                      Text(currentUsuario_provider.usuario.nombre_usuario,
                                           textAlign: TextAlign.left),
-                                      usuario_provider.usuario.num_carretes == 1
+                                      currentUsuario_provider.usuario.num_carretes == 1
                                           ? Text(
-                                              usuario_provider.usuario.num_carretes
+                                              currentUsuario_provider.usuario.num_carretes
                                                       .toString() +
                                                   AppLocalizations.of(context)!.reel_singular,
                                               textAlign: TextAlign.left)
                                           : Text(
-                                              usuario_provider.usuario.num_carretes
+                                              currentUsuario_provider.usuario.num_carretes
                                                       .toString() +
                                                   AppLocalizations.of(context)!.reel_plural,
                                               textAlign: TextAlign.left)
@@ -149,7 +151,7 @@ class _ProfileViewState extends State<ProfileView> {
                           onPressed: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(builder: (context){
-                                return ChangeNotifierProvider.value(value: amigo_provider, child: ChangeNotifierProvider.value(value: solicitudAmistad_provider, child: friendsView()));
+                                return ChangeNotifierProvider.value(value: amigo_provider, child: ChangeNotifierProvider.value(value: solicitudAmistad_provider, child: ChangeNotifierProvider.value(value: usuarioList_provider, child: friendsView())));
                               }),
                             );
                           },

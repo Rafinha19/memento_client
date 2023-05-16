@@ -7,14 +7,18 @@ import 'package:memento_flutter_client/components/displayDialog.dart';
 import 'package:memento_flutter_client/repository/AccountRepository.dart';
 import 'package:memento_flutter_client/repository/CarreteRepository.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 import '../Config/Properties.dart';
-import '../Model/amigo.dart';
+import '../Controller/amigo_provider.dart';
+import '../Controller/solicitudAmistad_provider.dart';
+import '../Controller/usuarioList_provider.dart';
 import '../Model/usuario.dart';
+import '../Model/currentUsuarioData.dart';
 import '../repository/AmigoRepository.dart';
 
 class userCard extends StatefulWidget {
-  final Amigo usuario;
+  final Usuario usuario;
   final bool ismyAmigo;
   userCard({Key? key,required this.usuario, required this.ismyAmigo}) : super(key: key);
 
@@ -34,6 +38,10 @@ class _userCardState extends State<userCard> {
 
   @override
   Widget build(BuildContext context) {
+    Amigo_provider amigo_provider = Provider.of<Amigo_provider>(context, listen: true);
+    SolicitudAmistad_provider solicitudAmistad_provider = Provider.of<SolicitudAmistad_provider>(context, listen: true);
+    UsuarioList_provider usuarioList_provider= Provider.of<UsuarioList_provider>(context, listen: true);
+
     return Scaffold(
       body: Center(
         child: FutureBuilder<String>(
@@ -79,8 +87,15 @@ class _userCardState extends State<userCard> {
                                 Icons.delete_outline,
                                 size: 35,
                                 color: Colors.orange,
-                              ), onPressed: () {
-                              print("hola");
+                              ), onPressed: () async {
+                              int res = await AmigoRepository().borrarAmigo(widget.usuario.id_usuario);
+                              if (res == 0){
+                                displayDialog(context, "Amistad borrada", "Ya no eres amigo del usuario " + widget.usuario.nombre_usuario );
+                                amigo_provider.getMyAmigos();
+                                usuarioList_provider.getUsuariosNoAmigos();
+                              }else if( res == 1){
+                                displayDialog(context, "Error", "Ha ocurrido un error" );
+                              }
                             },
                             )
                                 :
@@ -93,6 +108,7 @@ class _userCardState extends State<userCard> {
                                 int res = await AmigoRepository().crearSolicitudAmistad(widget.usuario.id_usuario);
                                 if (res == 0){
                                   displayDialog(context, "Solicitud creada", "Se ha creado la solicitud de amistad con el usuario " + widget.usuario.nombre_usuario );
+                                  solicitudAmistad_provider.getMySolicitudesAmistad();
                                 }else if( res == 1){
                                   displayDialog(context, "Solicitud pendiente", "Ya hay una solicitud pendiente con el usuario " + widget.usuario.nombre_usuario );
                                 }else if( res == 2){

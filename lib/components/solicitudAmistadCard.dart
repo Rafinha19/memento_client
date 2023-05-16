@@ -13,8 +13,9 @@ import 'package:provider/provider.dart';
 import '../Config/Properties.dart';
 import '../Controller/amigo_provider.dart';
 import '../Controller/solicitudAmistad_provider.dart';
-import '../Model/amigo.dart';
+import '../Controller/usuarioList_provider.dart';
 import '../Model/usuario.dart';
+import '../Model/currentUsuarioData.dart';
 import '../repository/AmigoRepository.dart';
 
 class solicitudAmistadCard extends StatefulWidget {
@@ -39,6 +40,7 @@ class _solicitudAmistadCardState extends State<solicitudAmistadCard> {
   Widget build(BuildContext context) {
     Amigo_provider amigo_provider = Provider.of<Amigo_provider>(context, listen: true);
     SolicitudAmistad_provider solicitudAmistad_provider = Provider.of<SolicitudAmistad_provider>(context, listen: true);
+    UsuarioList_provider usuarioList_provider= Provider.of<UsuarioList_provider>(context, listen: true);
 
     return Scaffold(
       body: Center(
@@ -93,6 +95,7 @@ class _solicitudAmistadCardState extends State<solicitudAmistadCard> {
                                     //Mandamos a los provider recargarse
                                     amigo_provider.getMyAmigos();
                                     solicitudAmistad_provider.getMySolicitudesAmistad();
+                                    usuarioList_provider.getUsuariosNoAmigos();
                                   }else if( res == 1){
                                     displayDialog(context, "Error inesperado", "Ha ocurrido un error inesperado" );
                                   }

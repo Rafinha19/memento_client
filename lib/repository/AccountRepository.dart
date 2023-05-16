@@ -6,7 +6,7 @@ import 'package:memento_flutter_client/Config/Properties.dart';
 import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-import '../Model/usuario.dart';
+import '../Model/currentUsuarioData.dart';
 
 class AccountRepository {
   final storage = FlutterSecureStorage();
@@ -86,7 +86,7 @@ class AccountRepository {
 
 
 
-  Future <Usuario> getAccount() async{
+  Future <CurrentUsuarioData> getAccount() async{
     var jsonString = await storage.read(key: "jwt");
     Map<String, dynamic> jsonData = jsonDecode(jsonString!);
     String token = jsonData['token'];
@@ -98,7 +98,7 @@ class AccountRepository {
       },
     );
     if (res.statusCode == 200) {
-      return Usuario.fromJson(jsonDecode(res.body));
+      return CurrentUsuarioData.fromJson(jsonDecode(res.body));
     } else {
       throw Exception('Error al subir la foto');
     }

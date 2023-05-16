@@ -1,4 +1,4 @@
-import 'package:memento_flutter_client/Model/amigo.dart';
+import 'package:memento_flutter_client/Model/usuario.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'dart:convert';
 import 'dart:ffi';
@@ -13,7 +13,7 @@ class AmigoRepository{
 
   final storage = FlutterSecureStorage();
 
-  Future<List<Amigo>> getMyAmigos() async {
+  Future<List<Usuario>> getMyAmigos() async {
     var jsonString = await storage.read(key: "jwt");
     Map<String, dynamic> jsonData = jsonDecode(jsonString!);
     String token = jsonData['token'];
@@ -27,7 +27,7 @@ class AmigoRepository{
       );
       if (res.statusCode == 200) {
         List<dynamic> amigosJson = jsonDecode(res.body);
-        List<Amigo> amigos = amigosJson.map((c) => Amigo.fromJson(c)).toList();
+        List<Usuario> amigos = amigosJson.map((c) => Usuario.fromJson(c)).toList();
         return amigos;
       } else {
         throw Exception('Error al obtener los amigos');
@@ -140,4 +140,28 @@ class AmigoRepository{
       throw Exception('Error al obtener los amigos');
     }
   }
+
+  Future<int> borrarAmigo(int id_usuario) async {
+    var jsonString = await storage.read(key: "jwt");
+    Map<String, dynamic> jsonData = jsonDecode(jsonString!);
+    String token = jsonData['token'];
+    try {
+      var res = await http.put(
+        Uri.parse("$SERVER_IP/api/friends/deletefriend/"+ id_usuario.toString()),
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': 'Bearer $token', //'bearer token'
+        },
+      );
+      if (res.statusCode == 200) {
+        return 0;
+      } else {
+        return 1;
+      }
+    } catch (e) {
+      //return "Connection Error";
+      throw Exception('Error al obtener los amigos');
+    }
+  }
+
 }

@@ -33,12 +33,15 @@ class _mySolicitudesAmistadState extends State<mySolicitudesAmistad> {
       children: [
         Padding(
           padding: EdgeInsets.only(top: 20.0, bottom: 5.0),
-          child: Text("Solicitudes list",style: TextStyle(color: Colors.white, fontSize: 18),),
+          child: Text("Solicitudes list",style: TextStyle(color: Colors.white, fontSize: 20),),
         ),
         solicitudAmistad_provider.isLoading?
     //true
     const CircularProgressIndicator()
             :
+        solicitudAmistad_provider.solicitudes_amistad.length==0?
+        Text("No hay nuevas solicitudes")
+        :
         ListView.builder(
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,

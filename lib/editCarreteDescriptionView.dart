@@ -9,7 +9,7 @@ import 'package:memento_flutter_client/repository/AccountRepository.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../Config/Properties.dart';
-import '../Controller/usuario_provider.dart';
+import '../Controller/currentUsuario_provider.dart';
 import '../repository/CarreteRepository.dart';
 import 'Controller/carrete_provider.dart';
 import 'components/carreteDetail.dart';

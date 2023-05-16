@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:memento_flutter_client/Controller/amigo_provider.dart';
 import 'package:memento_flutter_client/Controller/solicitudAmistad_provider.dart';
+import 'package:memento_flutter_client/Controller/usuarioList_provider.dart';
 import 'package:memento_flutter_client/InicioView.dart';
 import 'package:memento_flutter_client/Controller/carrete_provider.dart';
 import 'package:memento_flutter_client/ProfileView.dart';
@@ -10,9 +11,9 @@ import 'package:memento_flutter_client/components/loading_overlay.dart';
 import 'package:memento_flutter_client/uploadImageView.dart';
 import 'package:provider/provider.dart';
 import 'Config/Properties.dart';
-import 'package:memento_flutter_client/Controller/usuario_provider.dart';
+import 'package:memento_flutter_client/Controller/currentUsuario_provider.dart';
 
-import 'Model/usuario.dart';
+import 'Model/currentUsuarioData.dart';
 
 class TabPage extends StatefulWidget {
   TabPage();
@@ -61,12 +62,13 @@ class _TabPageState extends State<TabPage> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create:(_) => Carrete_provider()),
-        ChangeNotifierProvider( create: (_) => Usuario_provider()),
+        ChangeNotifierProvider( create: (_) => CurrentUsuario_provider()),
         ChangeNotifierProvider( create: (_) => Amigo_provider()),
-        ChangeNotifierProvider( create: (_) => SolicitudAmistad_provider())
+        ChangeNotifierProvider( create: (_) => SolicitudAmistad_provider()),
+        ChangeNotifierProvider( create: (_) => UsuarioList_provider())
       ],
       builder : (context,child){
-        Usuario_provider usuario_provider = Provider.of<Usuario_provider>(context, listen: true);
+        CurrentUsuario_provider usuario_provider = Provider.of<CurrentUsuario_provider>(context, listen: true);
 
         return WillPopScope(
           //El willpopScope no permite al usuario salir a la pantalla de login dandole al boton de atras de su dispositivo
