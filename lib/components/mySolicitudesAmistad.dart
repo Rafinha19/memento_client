@@ -1,13 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:memento_flutter_client/Controller/amigo_provider.dart';
 import 'package:memento_flutter_client/Controller/solicitudAmistad_provider.dart';
 import 'package:memento_flutter_client/components/solicitudAmistadCard.dart';
-import 'package:memento_flutter_client/components/userCard.dart';
 import 'package:provider/provider.dart';
-
-import '../Model/solicitud_amistad.dart';
-import '../repository/AmigoRepository.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class mySolicitudesAmistad extends StatefulWidget {
   mySolicitudesAmistad({Key? key}) : super(key: key);
@@ -33,14 +29,14 @@ class _mySolicitudesAmistadState extends State<mySolicitudesAmistad> {
       children: [
         Padding(
           padding: EdgeInsets.only(top: 20.0, bottom: 5.0),
-          child: Text("Solicitudes list",style: TextStyle(color: Colors.white, fontSize: 20),),
+          child: Text(AppLocalizations.of(context)!.friendRequests,style: TextStyle(color: Colors.white, fontSize: 20),),
         ),
         solicitudAmistad_provider.isLoading?
     //true
     const CircularProgressIndicator()
             :
         solicitudAmistad_provider.solicitudes_amistad.length==0?
-        Text("No hay nuevas solicitudes")
+        Text(AppLocalizations.of(context)!.noNewFriendRequests)
         :
         ListView.builder(
             physics: NeverScrollableScrollPhysics(),

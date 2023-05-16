@@ -3,14 +3,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:memento_flutter_client/Controller/friendsCarretes_provider.dart';
-import 'package:memento_flutter_client/components/carreteCard.dart';
 import 'package:memento_flutter_client/components/myFriendsCarretes.dart';
 import 'package:memento_flutter_client/components/myLastCarrete.dart';
 import 'package:memento_flutter_client/repository/CarreteRepository.dart';
 import 'package:provider/provider.dart';
-import 'dart:convert';
-import 'Model/carrete.dart';
-import 'package:memento_flutter_client/TabPage.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'Controller/myCarretes_provider.dart';
 
@@ -76,7 +73,7 @@ class _InicioViewState extends State<InicioView> {
                 padding:  EdgeInsets.only(left: 10.0, top: 5.0, bottom: 5.0),
                 child: Align(
                   alignment: Alignment.centerLeft,
-                  child: Text("Amigos",
+                  child: Text(AppLocalizations.of(context)!.friends,
                     textScaleFactor: 1.5,
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),

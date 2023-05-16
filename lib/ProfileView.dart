@@ -10,15 +10,9 @@ import 'package:memento_flutter_client/Model/currentUsuarioData.dart';
 import 'package:memento_flutter_client/Controller/currentUsuario_provider.dart';
 import 'package:memento_flutter_client/components/myCarretes.dart';
 import 'package:memento_flutter_client/repository/AccountRepository.dart';
-import 'package:memento_flutter_client/components/carreteCard.dart';
 import 'package:provider/provider.dart';
-import 'dart:convert';
-import 'Model/carrete.dart';
-import 'package:memento_flutter_client/Config/Properties.dart';
-import 'package:memento_flutter_client/repository/CarreteRepository.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'components/displayDialog.dart';
 import 'components/loading_overlay.dart';
 import 'friendsView.dart';
 import 'loginView.dart';

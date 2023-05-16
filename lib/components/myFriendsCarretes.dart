@@ -1,14 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:memento_flutter_client/Controller/friendsCarretes_provider.dart';
-import 'package:memento_flutter_client/Model/carrete.dart';
-import 'package:memento_flutter_client/repository/AccountRepository.dart';
-import 'package:memento_flutter_client/repository/CarreteRepository.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
-
-
-import '../Config/Properties.dart';
-import '../Controller/myCarretes_provider.dart';
 import 'carreteCard.dart';
 
 class myFriendsCarretes extends StatefulWidget {
@@ -34,7 +28,7 @@ class _myFriendsCarretesState extends State<myFriendsCarretes> {
       const CircularProgressIndicator()
           :
       friendsCarretes_provider.carretesAmigos.length==0?
-      Text("Vaya, parece que no has agregado a ningún usuario de momento")
+      Text(AppLocalizations.of(context)!.youHaventAddedUsers)
           :    
       ListView.builder(
           physics: NeverScrollableScrollPhysics(),

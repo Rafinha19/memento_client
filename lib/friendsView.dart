@@ -4,13 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:memento_flutter_client/Controller/friendsCarretes_provider.dart';
 import 'package:memento_flutter_client/Controller/solicitudAmistad_provider.dart';
 import 'package:memento_flutter_client/Controller/usuarioList_provider.dart';
-import 'package:memento_flutter_client/Model/solicitud_amistad.dart';
 import 'package:memento_flutter_client/components/myAmigos.dart';
 import 'package:memento_flutter_client/Config/Properties.dart';
 import 'package:memento_flutter_client/components/mySolicitudesAmistad.dart';
 import 'package:memento_flutter_client/components/userList.dart';
-import 'package:memento_flutter_client/repository/AmigoRepository.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'Controller/amigo_provider.dart';
 
@@ -84,7 +83,7 @@ class _friendsViewState extends State<friendsView> {
                         );
                       },
                       child: Text(
-                        "Añadir amigos",
+                        AppLocalizations.of(context)!.addFriends,
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
                     ),
@@ -93,8 +92,8 @@ class _friendsViewState extends State<friendsView> {
                   Padding(
                     padding: EdgeInsets.only(top: 20.0, bottom: 5.0),
                     child: Text(
-                      "Friends List " +
-                          "(" +
+                      AppLocalizations.of(context)!.friends_list +
+                          " (" +
                           amigo_provider.amigos.length.toString() +
                           ")",
                       style: TextStyle(color: Colors.white, fontSize: 20),

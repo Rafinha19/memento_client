@@ -1,12 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:memento_flutter_client/Model/carrete.dart';
-import 'package:memento_flutter_client/components/carreteDetail.dart';
 import 'package:memento_flutter_client/components/displayDialog.dart';
 import 'package:memento_flutter_client/repository/AccountRepository.dart';
-import 'package:memento_flutter_client/repository/CarreteRepository.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../Config/Properties.dart';
@@ -15,7 +10,7 @@ import '../Controller/friendsCarretes_provider.dart';
 import '../Controller/solicitudAmistad_provider.dart';
 import '../Controller/usuarioList_provider.dart';
 import '../Model/usuario.dart';
-import '../Model/currentUsuarioData.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../repository/AmigoRepository.dart';
 
 class userCard extends StatefulWidget {
@@ -92,12 +87,12 @@ class _userCardState extends State<userCard> {
                               ), onPressed: () async {
                               int res = await AmigoRepository().borrarAmigo(widget.usuario.id_usuario);
                               if (res == 0){
-                                displayDialog(context, "Amistad borrada", "Ya no eres amigo del usuario " + widget.usuario.nombre_usuario );
+                                displayDialog(context, AppLocalizations.of(context)!.friendshipDeleted, AppLocalizations.of(context)!.friendshipDeletedDESC + widget.usuario.nombre_usuario );
                                 amigo_provider.getMyAmigos();
                                 usuarioList_provider.getUsuariosNoAmigos();
                                 friendsCarretes_provider.getMyFriendsCarretes();
                               }else if( res == 1){
-                                displayDialog(context, "Error", "Ha ocurrido un error" );
+                                displayDialog(context, AppLocalizations.of(context)!.error, AppLocalizations.of(context)!.unexpected_error );
                               }
                             },
                             )
@@ -110,12 +105,14 @@ class _userCardState extends State<userCard> {
                               ), onPressed: () async {
                                 int res = await AmigoRepository().crearSolicitudAmistad(widget.usuario.id_usuario);
                                 if (res == 0){
-                                  displayDialog(context, "Solicitud creada", "Se ha creado la solicitud de amistad con el usuario " + widget.usuario.nombre_usuario );
+                                  displayDialog(context, AppLocalizations.of(context)!.friendRequestCREATED, AppLocalizations.of(context)!.friendRequestCREATED_DESC + widget.usuario.nombre_usuario );
                                   solicitudAmistad_provider.getMySolicitudesAmistad();
                                 }else if( res == 1){
-                                  displayDialog(context, "Solicitud pendiente", "Ya hay una solicitud pendiente con el usuario " + widget.usuario.nombre_usuario );
+                                  displayDialog(context, AppLocalizations.of(context)!.friendRequestPENDING, AppLocalizations.of(context)!.pendingFriendRequestWITHUser + widget.usuario.nombre_usuario );
                                 }else if( res == 2){
-                                  displayDialog(context, "Solicitud pendiente", "Ya tienes una solicitud pendiente del usuario " + widget.usuario.nombre_usuario );
+                                  displayDialog(context, AppLocalizations.of(context)!.friendRequestPENDING, AppLocalizations.of(context)!.pendingFriendRequestFROMUser + widget.usuario.nombre_usuario );
+                                }else {
+                                  displayDialog(context, AppLocalizations.of(context)!.error, AppLocalizations.of(context)!.unexpected_error );
                                 }
                             },
                             )

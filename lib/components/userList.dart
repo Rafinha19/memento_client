@@ -1,16 +1,12 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:memento_flutter_client/Model/currentUsuarioData.dart';
-import 'package:memento_flutter_client/components/myAmigos.dart';
 import 'package:memento_flutter_client/Config/Properties.dart';
 import 'package:memento_flutter_client/components/userCard.dart';
-import 'package:memento_flutter_client/repository/UsersRepository.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../Controller/usuarioList_provider.dart';
-import '../Model/usuario.dart';
-import '../Model/carrete.dart';
 
 class userList extends StatefulWidget {
   @override
@@ -39,7 +35,7 @@ class _userListState extends State<userList> {
         appBar: AppBar(
           centerTitle: true,
           title: const Text(
-            'Memento',
+            "Memento",
             style: TextStyle(fontSize: 26),
           ),
           backgroundColor: AppbackgroundColor,
@@ -56,13 +52,13 @@ class _userListState extends State<userList> {
                   children: [
                     Padding(
                       padding: EdgeInsets.only(top: 10.0, bottom: 5.0),
-                      child: Text("User list",style: TextStyle(color: Colors.white, fontSize: 20),),
+                      child: Text(AppLocalizations.of(context)!.user_list,style: TextStyle(color: Colors.white, fontSize: 20),),
                     ),
                     usuarioList_provider.isLoading?
                         const CircularProgressIndicator()
                         :
                     usuarioList_provider.usuariosNoamigos.length==0?
-                    Text("Eres amigo de todos los usuarios actuales")
+                    Text(AppLocalizations.of(context)!.friendswitheveryone)
                         :
                     ListView.builder(
                         physics: NeverScrollableScrollPhysics(),

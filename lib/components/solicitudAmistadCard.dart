@@ -1,22 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:memento_flutter_client/Model/carrete.dart';
 import 'package:memento_flutter_client/Model/solicitud_amistad.dart';
-import 'package:memento_flutter_client/components/carreteDetail.dart';
 import 'package:memento_flutter_client/components/displayDialog.dart';
 import 'package:memento_flutter_client/repository/AccountRepository.dart';
-import 'package:memento_flutter_client/repository/CarreteRepository.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
-
-import '../Config/Properties.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../Controller/amigo_provider.dart';
 import '../Controller/friendsCarretes_provider.dart';
 import '../Controller/solicitudAmistad_provider.dart';
 import '../Controller/usuarioList_provider.dart';
-import '../Model/usuario.dart';
-import '../Model/currentUsuarioData.dart';
 import '../repository/AmigoRepository.dart';
 
 class solicitudAmistadCard extends StatefulWidget {
@@ -93,14 +85,14 @@ class _solicitudAmistadCardState extends State<solicitudAmistadCard> {
                                   ), onPressed: () async {
                                   int res = await AmigoRepository().aceptarSolicitud(widget.solicitud_amistad.id_solicitud_amistad);
                                   if (res == 0){
-                                    displayDialog(context, "Solicitud aceptada", "Se ha aceptado la solicitud de amistad del usuario" + widget.solicitud_amistad.username_actor );
+                                    displayDialog(context, AppLocalizations.of(context)!.friendRequestACEPTED, AppLocalizations.of(context)!.friendRequestACEPTED_DESC + widget.solicitud_amistad.username_actor );
                                     //Mandamos a los provider recargarse
                                     amigo_provider.getMyAmigos();
                                     solicitudAmistad_provider.getMySolicitudesAmistad();
                                     usuarioList_provider.getUsuariosNoAmigos();
                                     friendsCarretes_provider.getMyFriendsCarretes();
                                   }else if( res == 1){
-                                    displayDialog(context, "Error inesperado", "Ha ocurrido un error inesperado" );
+                                    displayDialog(context, AppLocalizations.of(context)!.error, AppLocalizations.of(context)!.unexpected_error );
                                   }
                                 },
                                 ),
@@ -112,11 +104,11 @@ class _solicitudAmistadCardState extends State<solicitudAmistadCard> {
                                   ), onPressed: () async {
                                   int res = await AmigoRepository().denegarSolicitud(widget.solicitud_amistad.id_solicitud_amistad);
                                   if (res == 0){
-                                    displayDialog(context, "Solicitud denegada", "Se ha denegado la solicitud de amistad del usuario " + widget.solicitud_amistad.username_actor );
+                                    displayDialog(context, AppLocalizations.of(context)!.friendRequestDENIED,  AppLocalizations.of(context)!.friendRequestDENIED_DESC + widget.solicitud_amistad.username_actor );
                                     //Aqui solo recargo el provider de solicitudes, pues la lista de amigos no varía
                                     solicitudAmistad_provider.getMySolicitudesAmistad();
                                   }else if( res == 1){
-                                    displayDialog(context, "Error inesperado", "Ha ocurrido un error inesperado" );
+                                    displayDialog(context,  AppLocalizations.of(context)!.error, AppLocalizations.of(context)!.unexpected_error );
                                   }
                                 },
                                 )
