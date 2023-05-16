@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 
 
 import '../Config/Properties.dart';
-import '../Controller/carrete_provider.dart';
+import '../Controller/myCarretes_provider.dart';
 import 'carreteCard.dart';
 
 class myCarretes extends StatefulWidget {
@@ -26,7 +26,7 @@ class _myCarretesState extends State<myCarretes> {
 
   @override
   Widget build(BuildContext context) {
-    Carrete_provider carrete_provider = Provider.of<Carrete_provider>(context, listen: true);
+    MyCarretes_provider carrete_provider = Provider.of<MyCarretes_provider>(context, listen: true);
 
     return
       carrete_provider.isLoading?
@@ -42,7 +42,7 @@ class _myCarretesState extends State<myCarretes> {
           return SizedBox(
             height: 200,
             width: double.infinity,
-            child: carreteCard(carrete: carrete, ismyLastcarrete: index==0? true:false),
+            child: carreteCard(carrete: carrete, ismyLastcarrete: index==0? true:false, isInicioCarrete: false, isMycarrete: true,),
           );
         }
         )

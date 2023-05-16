@@ -12,6 +12,7 @@ import 'package:provider/provider.dart';
 
 import '../Config/Properties.dart';
 import '../Controller/amigo_provider.dart';
+import '../Controller/friendsCarretes_provider.dart';
 import '../Controller/solicitudAmistad_provider.dart';
 import '../Controller/usuarioList_provider.dart';
 import '../Model/usuario.dart';
@@ -41,6 +42,7 @@ class _solicitudAmistadCardState extends State<solicitudAmistadCard> {
     Amigo_provider amigo_provider = Provider.of<Amigo_provider>(context, listen: true);
     SolicitudAmistad_provider solicitudAmistad_provider = Provider.of<SolicitudAmistad_provider>(context, listen: true);
     UsuarioList_provider usuarioList_provider= Provider.of<UsuarioList_provider>(context, listen: true);
+    FriendsCarretes_provider friendsCarretes_provider = Provider.of<FriendsCarretes_provider>(context);
 
     return Scaffold(
       body: Center(
@@ -96,6 +98,7 @@ class _solicitudAmistadCardState extends State<solicitudAmistadCard> {
                                     amigo_provider.getMyAmigos();
                                     solicitudAmistad_provider.getMySolicitudesAmistad();
                                     usuarioList_provider.getUsuariosNoAmigos();
+                                    friendsCarretes_provider.getMyFriendsCarretes();
                                   }else if( res == 1){
                                     displayDialog(context, "Error inesperado", "Ha ocurrido un error inesperado" );
                                   }

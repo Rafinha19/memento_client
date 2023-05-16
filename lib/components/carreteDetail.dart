@@ -14,7 +14,8 @@ import 'loading_overlay.dart';
 
 class carreteDetail extends StatefulWidget {
   final Carrete carrete;
-  carreteDetail({Key? key, required this.carrete}) : super(key: key);
+  final bool isMyCarrete;
+  carreteDetail({Key? key, required this.carrete, required this.isMyCarrete}) : super(key: key);
 
   @override
   State<carreteDetail> createState() => _carreteDetailState();
@@ -66,6 +67,7 @@ class _carreteDetailState extends State<carreteDetail> {
                                 child: Text(widget.carrete.propietario)),
                           ],
                         ),
+                        widget.isMyCarrete?
                         Container(
                           height: 35,
                           width: 150,
@@ -83,7 +85,9 @@ class _carreteDetailState extends State<carreteDetail> {
                               textAlign: TextAlign.center,
                             ),
                           ),
-                        ),
+                        )
+                        :
+                        Container(),
                       ],
                     ),
                   ),
@@ -177,6 +181,7 @@ class _carreteDetailState extends State<carreteDetail> {
                             )
                           ],
                         ),
+                        widget.isMyCarrete?
                         IconButton(
                           icon: Icon(
                             Icons.create_rounded,
@@ -185,7 +190,9 @@ class _carreteDetailState extends State<carreteDetail> {
                           ), onPressed: () {
                           _renewEditedReel(context);
                         },
-                        ),
+                        )
+                        :
+                        Container(),
                       ],
                     ),
                   )

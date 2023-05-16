@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 
 import '../Config/Properties.dart';
 import '../Controller/amigo_provider.dart';
+import '../Controller/friendsCarretes_provider.dart';
 import '../Controller/solicitudAmistad_provider.dart';
 import '../Controller/usuarioList_provider.dart';
 import '../Model/usuario.dart';
@@ -41,6 +42,7 @@ class _userCardState extends State<userCard> {
     Amigo_provider amigo_provider = Provider.of<Amigo_provider>(context, listen: true);
     SolicitudAmistad_provider solicitudAmistad_provider = Provider.of<SolicitudAmistad_provider>(context, listen: true);
     UsuarioList_provider usuarioList_provider= Provider.of<UsuarioList_provider>(context, listen: true);
+    FriendsCarretes_provider friendsCarretes_provider = Provider.of<FriendsCarretes_provider>(context);
 
     return Scaffold(
       body: Center(
@@ -93,6 +95,7 @@ class _userCardState extends State<userCard> {
                                 displayDialog(context, "Amistad borrada", "Ya no eres amigo del usuario " + widget.usuario.nombre_usuario );
                                 amigo_provider.getMyAmigos();
                                 usuarioList_provider.getUsuariosNoAmigos();
+                                friendsCarretes_provider.getMyFriendsCarretes();
                               }else if( res == 1){
                                 displayDialog(context, "Error", "Ha ocurrido un error" );
                               }

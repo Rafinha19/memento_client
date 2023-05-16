@@ -11,7 +11,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../Config/Properties.dart';
 import '../Controller/currentUsuario_provider.dart';
 import '../repository/CarreteRepository.dart';
-import 'Controller/carrete_provider.dart';
+import 'Controller/myCarretes_provider.dart';
 import 'components/carreteDetail.dart';
 import 'components/loading_overlay.dart';
 

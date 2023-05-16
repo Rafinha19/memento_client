@@ -8,7 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:memento_flutter_client/repository/CarreteRepository.dart';
 import 'package:provider/provider.dart';
 
-import 'Controller/carrete_provider.dart';
+import 'Controller/myCarretes_provider.dart';
 import 'components/carreteDetail.dart';
 import 'components/displayDialog.dart';
 import 'components/loading_overlay.dart';
@@ -89,8 +89,8 @@ class _UploadImageViewState extends State<UploadImageView> {
 
   @override
   Widget build(BuildContext context) {
-    Carrete_provider carrete_provider =
-        Provider.of<Carrete_provider>(context, listen: true);
+    MyCarretes_provider carrete_provider =
+        Provider.of<MyCarretes_provider>(context, listen: true);
 
     return Scaffold(
       body: SafeArea(
@@ -274,7 +274,7 @@ class _UploadImageViewState extends State<UploadImageView> {
                                 MaterialPageRoute(
                                     builder: (context) => carreteDetail(
                                         carrete: carrete_provider
-                                            .getLastCarrete())));
+                                            .getLastCarrete(), isMyCarrete: true,)));
                           } else if (res == 1) {
                             LoadingOverlay.of(context).hide();
                             displayDialog(

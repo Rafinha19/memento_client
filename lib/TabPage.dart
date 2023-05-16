@@ -5,7 +5,7 @@ import 'package:memento_flutter_client/Controller/amigo_provider.dart';
 import 'package:memento_flutter_client/Controller/solicitudAmistad_provider.dart';
 import 'package:memento_flutter_client/Controller/usuarioList_provider.dart';
 import 'package:memento_flutter_client/InicioView.dart';
-import 'package:memento_flutter_client/Controller/carrete_provider.dart';
+import 'package:memento_flutter_client/Controller/myCarretes_provider.dart';
 import 'package:memento_flutter_client/ProfileView.dart';
 import 'package:memento_flutter_client/components/loading_overlay.dart';
 import 'package:memento_flutter_client/uploadImageView.dart';
@@ -13,6 +13,7 @@ import 'package:provider/provider.dart';
 import 'Config/Properties.dart';
 import 'package:memento_flutter_client/Controller/currentUsuario_provider.dart';
 
+import 'Controller/friendsCarretes_provider.dart';
 import 'Model/currentUsuarioData.dart';
 
 class TabPage extends StatefulWidget {
@@ -61,11 +62,12 @@ class _TabPageState extends State<TabPage> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create:(_) => Carrete_provider()),
+        ChangeNotifierProvider(create:(_) => MyCarretes_provider()),
         ChangeNotifierProvider( create: (_) => CurrentUsuario_provider()),
         ChangeNotifierProvider( create: (_) => Amigo_provider()),
         ChangeNotifierProvider( create: (_) => SolicitudAmistad_provider()),
-        ChangeNotifierProvider( create: (_) => UsuarioList_provider())
+        ChangeNotifierProvider( create: (_) => UsuarioList_provider()),
+        ChangeNotifierProvider( create: (_) => FriendsCarretes_provider())
       ],
       builder : (context,child){
         CurrentUsuario_provider usuario_provider = Provider.of<CurrentUsuario_provider>(context, listen: true);

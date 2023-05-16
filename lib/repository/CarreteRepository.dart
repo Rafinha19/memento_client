@@ -31,11 +31,11 @@ class CarreteRepository {
         //developer.log(carretes[0].ano_mes);
         return carretes;
       } else {
-        throw Exception('Error al obtener los amigos');
+        throw Exception('Error al obtener los carretes');
       }
     } catch (e) {
       //return "Connection Error";
-      throw Exception('Error al obtener los amigos');
+      throw Exception('Error al obtener los carretes');
     }
   }
 
@@ -107,5 +107,29 @@ class CarreteRepository {
     }
   }
 
+  Future<List<Carrete>> getMyFriendsCarretes() async {
+    var jsonString = await storage.read(key: "jwt");
+    Map<String, dynamic> jsonData = jsonDecode(jsonString!);
+    String token = jsonData['token'];
+    try {
+      var res = await http.get(
+        Uri.parse("$SERVER_IP/api/carretes/myfriends"),
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': 'Bearer $token', //'bearer token'
+        },
+      );
+      if (res.statusCode == 200) {
+        List<dynamic> carretesJson = jsonDecode(res.body);
+        List<Carrete> carretes = carretesJson.map((c) => Carrete.fromJson(c)).toList();
+        return carretes;
+      } else {
+        throw Exception('Error al obtener los amigos');
+      }
+    } catch (e) {
+      //return "Connection Error";
+      throw Exception('Error al obtener los amigos');
+    }
+  }
 
 }
