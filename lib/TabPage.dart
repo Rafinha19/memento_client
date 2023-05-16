@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:memento_flutter_client/Controller/amigo_provider.dart';
+import 'package:memento_flutter_client/Controller/solicitudAmistad_provider.dart';
 import 'package:memento_flutter_client/InicioView.dart';
 import 'package:memento_flutter_client/Controller/carrete_provider.dart';
 import 'package:memento_flutter_client/ProfileView.dart';
@@ -61,7 +62,8 @@ class _TabPageState extends State<TabPage> {
       providers: [
         ChangeNotifierProvider(create:(_) => Carrete_provider()),
         ChangeNotifierProvider( create: (_) => Usuario_provider()),
-        ChangeNotifierProvider( create: (_) => Amigo_provider())
+        ChangeNotifierProvider( create: (_) => Amigo_provider()),
+        ChangeNotifierProvider( create: (_) => SolicitudAmistad_provider())
       ],
       builder : (context,child){
         Usuario_provider usuario_provider = Provider.of<Usuario_provider>(context, listen: true);

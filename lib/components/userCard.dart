@@ -76,7 +76,7 @@ class _userCardState extends State<userCard> {
                             widget.ismyAmigo?
                             IconButton(
                               icon: Icon(
-                                Icons.highlight_remove,
+                                Icons.delete_outline,
                                 size: 35,
                                 color: Colors.orange,
                               ), onPressed: () {

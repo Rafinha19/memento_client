@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:memento_flutter_client/Controller/amigo_provider.dart';
 import 'package:memento_flutter_client/Controller/carrete_provider.dart';
+import 'package:memento_flutter_client/Controller/solicitudAmistad_provider.dart';
 import 'package:memento_flutter_client/Model/usuario.dart';
 import 'package:memento_flutter_client/Controller/usuario_provider.dart';
 import 'package:memento_flutter_client/components/myCarretes.dart';
@@ -36,6 +37,7 @@ class _ProfileViewState extends State<ProfileView> {
     Usuario_provider usuario_provider = Provider.of<Usuario_provider>(context);
     Carrete_provider carrete_provider = Provider.of<Carrete_provider>(context);
     Amigo_provider amigo_provider = Provider.of<Amigo_provider>(context);
+    SolicitudAmistad_provider solicitudAmistad_provider = Provider.of<SolicitudAmistad_provider>(context);
 
     Future refresh() async {
         carrete_provider.getMyCarretes();
@@ -147,7 +149,7 @@ class _ProfileViewState extends State<ProfileView> {
                           onPressed: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(builder: (context){
-                                return ChangeNotifierProvider.value(value: amigo_provider, child: friendsView());
+                                return ChangeNotifierProvider.value(value: amigo_provider, child: ChangeNotifierProvider.value(value: solicitudAmistad_provider, child: friendsView()));
                               }),
                             );
                           },

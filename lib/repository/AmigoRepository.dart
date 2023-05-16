@@ -4,6 +4,8 @@ import 'dart:convert';
 import 'dart:ffi';
 import 'dart:io';
 import 'package:http/http.dart' as http;
+import 'package:memento_flutter_client/Model/solicitud_amistad.dart';
+import 'package:memento_flutter_client/uploadImageView.dart';
 
 import '../Config/Properties.dart';
 
@@ -61,6 +63,77 @@ class AmigoRepository{
         }else{
           throw Exception('Error al crear la solicitud');
         }
+      }
+    } catch (e) {
+      //return "Connection Error";
+      throw Exception('Error al obtener los amigos');
+    }
+  }
+
+  Future<List<Solicitud_amistad>> getMySolicitudesAmistad() async {
+    var jsonString = await storage.read(key: "jwt");
+    Map<String, dynamic> jsonData = jsonDecode(jsonString!);
+    String token = jsonData['token'];
+    try {
+      var res = await http.get(
+        Uri.parse("$SERVER_IP/api/friendrequest"),
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': 'Bearer $token', //'bearer token'
+        },
+      );
+      if (res.statusCode == 200) {
+        List<dynamic> solicitudesJson = jsonDecode(res.body);
+        List<Solicitud_amistad> solicitudes = solicitudesJson.map((c) => Solicitud_amistad.fromJson(c)).toList();
+        return solicitudes;
+      } else {
+        throw Exception('Error al obtener los amigos');
+      }
+    } catch (e) {
+      //return "Connection Error";
+      throw Exception('Error al obtener los amigos');
+    }
+  }
+
+  Future<int> aceptarSolicitud(int id_solicitud) async {
+    var jsonString = await storage.read(key: "jwt");
+    Map<String, dynamic> jsonData = jsonDecode(jsonString!);
+    String token = jsonData['token'];
+    try {
+      var res = await http.post(
+        Uri.parse("$SERVER_IP/api/friendrequest/accept/"+ id_solicitud.toString()),
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': 'Bearer $token', //'bearer token'
+        },
+      );
+      if (res.statusCode == 200) {
+        return 0;
+      } else {
+        return 1;
+      }
+    } catch (e) {
+      //return "Connection Error";
+      throw Exception('Error al obtener los amigos');
+    }
+  }
+
+  Future<int> denegarSolicitud(int id_solicitud) async {
+    var jsonString = await storage.read(key: "jwt");
+    Map<String, dynamic> jsonData = jsonDecode(jsonString!);
+    String token = jsonData['token'];
+    try {
+      var res = await http.post(
+        Uri.parse("$SERVER_IP/api/friendrequest/deny/"+ id_solicitud.toString()),
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': 'Bearer $token', //'bearer token'
+        },
+      );
+      if (res.statusCode == 200) {
+        return 0;
+      } else {
+        return 1;
       }
     } catch (e) {
       //return "Connection Error";

@@ -16,12 +16,12 @@ class userList extends StatefulWidget {
 }
 
 class _userListState extends State<userList> {
-  late Future<List<Amigo>> futureToken;
+  late Future<List<Amigo>> futureUserList;
 
   @override
   void initState() {
     super.initState();
-    futureToken = UsersRepository().getUsuariosNoAmigos();
+    futureUserList = UsersRepository().getUsuariosNoAmigos();
   }
 
   @override
@@ -46,7 +46,7 @@ class _userListState extends State<userList> {
                     child: Text("User list",style: TextStyle(color: Colors.white, fontSize: 18),),
                   ),
                   FutureBuilder<List<Amigo>>(
-                    future: futureToken,
+                    future: futureUserList,
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
                         List<Amigo> usuarios = snapshot.data!;
