@@ -41,96 +41,83 @@ class _userCardState extends State<userCard> {
 
     return Scaffold(
       body: Center(
-        child: FutureBuilder<String>(
-          future: futureToken,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              String token = snapshot.data!;
-              return SizedBox(
-                width: double.infinity,
-                height: 90,
-                child: Card(
-                  color: Colors.grey[850],
-                  elevation: 10,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+        child: SizedBox(
+          width: double.infinity,
+          height: 90,
+          child: Card(
+            color: Colors.grey[850],
+            elevation: 10,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                CircleAvatar(
-                                  radius: 30, // Image radius
-                                  backgroundImage: NetworkImage(
-                                      "$SERVER_IP/api/users/" + widget.usuario.nombre_usuario + "/image"),
-                                ),
-                                Container(
-                                    margin: EdgeInsets.symmetric(horizontal: 15),
-                                    child: Text(widget.usuario.nombre_usuario,
-                                        style: TextStyle(
-                                            color: Colors.white, fontSize: 18),
-                                        textAlign: TextAlign.center))
-                              ],
-                            ),
-                            widget.ismyAmigo?
-                            IconButton(
-                              icon: Icon(
-                                Icons.delete_outline,
-                                size: 35,
-                                color: Colors.orange,
-                              ), onPressed: () async {
-                              int res = await AmigoRepository().borrarAmigo(widget.usuario.id_usuario);
-                              if (res == 0){
-                                displayDialog(context, AppLocalizations.of(context)!.friendshipDeleted, AppLocalizations.of(context)!.friendshipDeletedDESC + widget.usuario.nombre_usuario );
-                                amigo_provider.getMyAmigos();
-                                usuarioList_provider.getUsuariosNoAmigos();
-                                friendsCarretes_provider.getMyFriendsCarretes();
-                              }else if( res == 1){
-                                displayDialog(context, AppLocalizations.of(context)!.error, AppLocalizations.of(context)!.unexpected_error );
-                              }
-                            },
-                            )
-                                :
-                            IconButton(
-                              icon: Icon(
-                                Icons.add_circle_outline,
-                                size: 35,
-                                color: Colors.orange,
-                              ), onPressed: () async {
-                                int res = await AmigoRepository().crearSolicitudAmistad(widget.usuario.id_usuario);
-                                if (res == 0){
-                                  displayDialog(context, AppLocalizations.of(context)!.friendRequestCREATED, AppLocalizations.of(context)!.friendRequestCREATED_DESC + widget.usuario.nombre_usuario );
-                                  solicitudAmistad_provider.getMySolicitudesAmistad();
-                                }else if( res == 1){
-                                  displayDialog(context, AppLocalizations.of(context)!.friendRequestPENDING, AppLocalizations.of(context)!.pendingFriendRequestWITHUser + widget.usuario.nombre_usuario );
-                                }else if( res == 2){
-                                  displayDialog(context, AppLocalizations.of(context)!.friendRequestPENDING, AppLocalizations.of(context)!.pendingFriendRequestFROMUser + widget.usuario.nombre_usuario );
-                                }else {
-                                  displayDialog(context, AppLocalizations.of(context)!.error, AppLocalizations.of(context)!.unexpected_error );
-                                }
-                            },
-                            )
-
-                          ],
-                        ),
+                      Row(
+                        children: [
+                          CircleAvatar(
+                            radius: 30, // Image radius
+                            backgroundImage: NetworkImage(
+                                "$SERVER_IP/api/users/" + widget.usuario.nombre_usuario + "/image"),
+                          ),
+                          Container(
+                              margin: EdgeInsets.symmetric(horizontal: 15),
+                              child: Text(widget.usuario.nombre_usuario,
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 18),
+                                  textAlign: TextAlign.center))
+                        ],
                       ),
+                      widget.ismyAmigo?
+                      IconButton(
+                        icon: Icon(
+                          Icons.delete_outline,
+                          size: 35,
+                          color: Colors.orange,
+                        ), onPressed: () async {
+                        int res = await AmigoRepository().borrarAmigo(widget.usuario.id_usuario);
+                        if (res == 0){
+                          displayDialog(context, AppLocalizations.of(context)!.friendshipDeleted, AppLocalizations.of(context)!.friendshipDeletedDESC + widget.usuario.nombre_usuario );
+                          amigo_provider.getMyAmigos();
+                          usuarioList_provider.getUsuariosNoAmigos();
+                          friendsCarretes_provider.getMyFriendsCarretes();
+                        }else if( res == 1){
+                          displayDialog(context, AppLocalizations.of(context)!.error, AppLocalizations.of(context)!.unexpected_error );
+                        }
+                      },
+                      )
+                          :
+                      IconButton(
+                        icon: Icon(
+                          Icons.add_circle_outline,
+                          size: 35,
+                          color: Colors.orange,
+                        ), onPressed: () async {
+                        int res = await AmigoRepository().crearSolicitudAmistad(widget.usuario.id_usuario);
+                        if (res == 0){
+                          displayDialog(context, AppLocalizations.of(context)!.friendRequestCREATED, AppLocalizations.of(context)!.friendRequestCREATED_DESC + widget.usuario.nombre_usuario );
+                          solicitudAmistad_provider.getMySolicitudesAmistad();
+                        }else if( res == 1){
+                          displayDialog(context, AppLocalizations.of(context)!.friendRequestPENDING, AppLocalizations.of(context)!.pendingFriendRequestWITHUser + widget.usuario.nombre_usuario );
+                        }else if( res == 2){
+                          displayDialog(context, AppLocalizations.of(context)!.friendRequestPENDING, AppLocalizations.of(context)!.pendingFriendRequestFROMUser + widget.usuario.nombre_usuario );
+                        }else {
+                          displayDialog(context, AppLocalizations.of(context)!.error, AppLocalizations.of(context)!.unexpected_error );
+                        }
+                      },
+                      )
+
                     ],
                   ),
                 ),
-              );
-            } else if (snapshot.hasError) {
-              return Text('${snapshot.error}');
-            }
-
-            // By default, show a loading spinner.
-            return const CircularProgressIndicator();
-          },
+              ],
+            ),
+          ),
         ),
       ),
     );

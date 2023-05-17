@@ -38,97 +38,84 @@ class _solicitudAmistadCardState extends State<solicitudAmistadCard> {
 
     return Scaffold(
       body: Center(
-        child: FutureBuilder<String>(
-          future: futureToken,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              String token = snapshot.data!;
-              return SizedBox(
-                width: double.infinity,
-                height: 90,
-                child: Card(
-                  color: Colors.grey[850],
-                  elevation: 10,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+        child: SizedBox(
+          width: double.infinity,
+          height: 90,
+          child: Card(
+            color: Colors.grey[850],
+            elevation: 10,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                CircleAvatar(
-                                  radius: 30, // Image radius
-                                  backgroundImage: NetworkImage(
-                                      widget.solicitud_amistad.url_foto_perfil_actor),
-                                ),
-                                Container(
-                                    margin: EdgeInsets.symmetric(horizontal: 15),
-                                    child: Text(widget.solicitud_amistad.username_actor,
-                                        style: TextStyle(
-                                            color: Colors.white, fontSize: 18),
-                                        textAlign: TextAlign.center))
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                IconButton(
-                                  icon: Icon(
-                                    Icons.check_circle_outline,
-                                    size: 35,
-                                    color: Colors.orange,
-                                  ), onPressed: () async {
-                                  int res = await AmigoRepository().aceptarSolicitud(widget.solicitud_amistad.id_solicitud_amistad);
-                                  if (res == 0){
-                                    displayDialog(context, AppLocalizations.of(context)!.friendRequestACEPTED, AppLocalizations.of(context)!.friendRequestACEPTED_DESC + widget.solicitud_amistad.username_actor );
-                                    //Mandamos a los provider recargarse
-                                    amigo_provider.getMyAmigos();
-                                    solicitudAmistad_provider.getMySolicitudesAmistad();
-                                    usuarioList_provider.getUsuariosNoAmigos();
-                                    friendsCarretes_provider.getMyFriendsCarretes();
-                                  }else if( res == 1){
-                                    displayDialog(context, AppLocalizations.of(context)!.error, AppLocalizations.of(context)!.unexpected_error );
-                                  }
-                                },
-                                ),
-                                IconButton(
-                                  icon: Icon(
-                                    Icons.remove_circle_outline,
-                                    size: 35,
-                                    color: Colors.orange,
-                                  ), onPressed: () async {
-                                  int res = await AmigoRepository().denegarSolicitud(widget.solicitud_amistad.id_solicitud_amistad);
-                                  if (res == 0){
-                                    displayDialog(context, AppLocalizations.of(context)!.friendRequestDENIED,  AppLocalizations.of(context)!.friendRequestDENIED_DESC + widget.solicitud_amistad.username_actor );
-                                    //Aqui solo recargo el provider de solicitudes, pues la lista de amigos no varía
-                                    solicitudAmistad_provider.getMySolicitudesAmistad();
-                                  }else if( res == 1){
-                                    displayDialog(context,  AppLocalizations.of(context)!.error, AppLocalizations.of(context)!.unexpected_error );
-                                  }
-                                },
-                                )
-                              ],
-                            )
-
-                          ],
-                        ),
+                      Row(
+                        children: [
+                          CircleAvatar(
+                            radius: 30, // Image radius
+                            backgroundImage: NetworkImage(
+                                widget.solicitud_amistad.url_foto_perfil_actor),
+                          ),
+                          Container(
+                              margin: EdgeInsets.symmetric(horizontal: 15),
+                              child: Text(widget.solicitud_amistad.username_actor,
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 18),
+                                  textAlign: TextAlign.center))
+                        ],
                       ),
+                      Row(
+                        children: [
+                          IconButton(
+                            icon: Icon(
+                              Icons.check_circle_outline,
+                              size: 35,
+                              color: Colors.orange,
+                            ), onPressed: () async {
+                            int res = await AmigoRepository().aceptarSolicitud(widget.solicitud_amistad.id_solicitud_amistad);
+                            if (res == 0){
+                              displayDialog(context, AppLocalizations.of(context)!.friendRequestACEPTED, AppLocalizations.of(context)!.friendRequestACEPTED_DESC + widget.solicitud_amistad.username_actor );
+                              //Mandamos a los provider recargarse
+                              amigo_provider.getMyAmigos();
+                              solicitudAmistad_provider.getMySolicitudesAmistad();
+                              usuarioList_provider.getUsuariosNoAmigos();
+                              friendsCarretes_provider.getMyFriendsCarretes();
+                            }else if( res == 1){
+                              displayDialog(context, AppLocalizations.of(context)!.error, AppLocalizations.of(context)!.unexpected_error );
+                            }
+                          },
+                          ),
+                          IconButton(
+                            icon: Icon(
+                              Icons.remove_circle_outline,
+                              size: 35,
+                              color: Colors.orange,
+                            ), onPressed: () async {
+                            int res = await AmigoRepository().denegarSolicitud(widget.solicitud_amistad.id_solicitud_amistad);
+                            if (res == 0){
+                              displayDialog(context, AppLocalizations.of(context)!.friendRequestDENIED,  AppLocalizations.of(context)!.friendRequestDENIED_DESC + widget.solicitud_amistad.username_actor );
+                              //Aqui solo recargo el provider de solicitudes, pues la lista de amigos no varía
+                              solicitudAmistad_provider.getMySolicitudesAmistad();
+                            }else if( res == 1){
+                              displayDialog(context,  AppLocalizations.of(context)!.error, AppLocalizations.of(context)!.unexpected_error );
+                            }
+                          },
+                          )
+                        ],
+                      )
+
                     ],
                   ),
                 ),
-              );
-            } else if (snapshot.hasError) {
-              return Text('${snapshot.error}');
-            }
-
-            // By default, show a loading spinner.
-            return const CircularProgressIndicator();
-          },
+              ],
+            ),
+          ),
         ),
       ),
     );
