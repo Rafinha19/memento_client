@@ -8,6 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:memento_flutter_client/repository/CarreteRepository.dart';
 import 'package:provider/provider.dart';
 
+import 'Config/Properties.dart';
 import 'Controller/myCarretes_provider.dart';
 import 'components/carreteDetail.dart';
 import 'components/displayDialog.dart';
@@ -46,6 +47,15 @@ class _UploadImageViewState extends State<UploadImageView> {
 
   Future<File?> _cropImage({required File imageFile}) async {
     CroppedFile? croppedImage = await ImageCropper().cropImage(
+      uiSettings: [
+        AndroidUiSettings(
+          toolbarTitle: AppLocalizations.of(context)!.editPhoto,
+          toolbarColor: AppbackgroundColor,
+          statusBarColor: AppbackgroundColor,
+          toolbarWidgetColor: Colors.white,
+          backgroundColor: AppbackgroundColor,
+        ),
+      ],
       sourcePath: imageFile.path,
       aspectRatioPresets: [
         CropAspectRatioPreset.square,

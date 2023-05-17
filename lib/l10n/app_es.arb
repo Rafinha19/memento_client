@@ -64,5 +64,6 @@
   "friendRequestACEPTED_DESC": "Has aceptado la solicitud de amistad del usuario ",
   "friendRequestDENIED": "Solicitud de amistad denegada",
   "friendRequestDENIED_DESC": "Has denegado la solicitud de amistad del usuario ",
-  "youHaventAddedUsers": "Vaya, parece que no has agregado a ningún usuario de momento"
+  "youHaventAddedUsers": "Vaya, parece que no has agregado a ningún usuario de momento",
+  "editPhoto": "Editar foto"
 }

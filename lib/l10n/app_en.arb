@@ -70,5 +70,6 @@
   "friendRequestACEPTED_DESC": "You have accepted the friend request from user ",
   "friendRequestDENIED": "Friend request denied",
   "friendRequestDENIED_DESC": "You have denied the friend request from user ",
-  "youHaventAddedUsers": "Oops, it seems like you haven't added any users yet"
+  "youHaventAddedUsers": "Oops, it seems like you haven't added any users yet",
+  "editPhoto": "Edit photo"
 }
