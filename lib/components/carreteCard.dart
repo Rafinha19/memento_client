@@ -6,8 +6,10 @@ import 'package:memento_flutter_client/components/carreteDetail.dart';
 import 'package:memento_flutter_client/repository/AccountRepository.dart';
 import 'package:memento_flutter_client/repository/CarreteRepository.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 import '../Config/Properties.dart';
+import '../Controller/myCarretes_provider.dart';
 
 class carreteCard extends StatefulWidget {
   final Carrete carrete;
@@ -38,6 +40,8 @@ class _carreteCardState extends State<carreteCard> {
 
   @override
   Widget build(BuildContext context) {
+    MyCarretes_provider carrete_provider = Provider.of<MyCarretes_provider>(context);
+
     return Scaffold(
       body: Center(
         child: FutureBuilder<String>(
@@ -51,7 +55,9 @@ class _carreteCardState extends State<carreteCard> {
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
-                              carreteDetail(carrete: widget.carrete, isMyCarrete: widget.isMycarrete,)));
+                              ChangeNotifierProvider.value(
+                                  value: carrete_provider,
+                                  child:  carreteDetail(carrete: widget.carrete, isMyCarrete: widget.isMycarrete,)) ));
                 },
                 onDoubleTap: () {
                   print("liked");

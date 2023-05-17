@@ -55,6 +55,9 @@ class _UploadImageViewState extends State<UploadImageView> {
           toolbarWidgetColor: Colors.white,
           backgroundColor: AppbackgroundColor,
         ),
+        IOSUiSettings(
+          title: AppLocalizations.of(context)!.editPhoto
+        )
       ],
       sourcePath: imageFile.path,
       aspectRatioPresets: [
@@ -99,7 +102,7 @@ class _UploadImageViewState extends State<UploadImageView> {
 
   @override
   Widget build(BuildContext context) {
-    MyCarretes_provider carrete_provider =
+    MyCarretes_provider mycarrete_provider =
         Provider.of<MyCarretes_provider>(context, listen: true);
 
     return Scaffold(
@@ -113,7 +116,7 @@ class _UploadImageViewState extends State<UploadImageView> {
             children: [
               Column(
                 children: [
-                  carrete_provider.isLoading
+                  mycarrete_provider.isLoading
                       ? const CircularProgressIndicator()
                       : Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -126,14 +129,14 @@ class _UploadImageViewState extends State<UploadImageView> {
                                               Localizations.localeOf(context)
                                                   .languageCode)
                                           .format(DateTime(
-                                              carrete_provider
+                                              mycarrete_provider
                                                   .getLastCarrete()
                                                   .ano,
-                                              carrete_provider
+                                              mycarrete_provider
                                                   .getLastCarrete()
                                                   .mes))) +
                                   " " +
-                                  carrete_provider
+                                  mycarrete_provider
                                       .getLastCarrete()
                                       .ano
                                       .toString(),
@@ -149,7 +152,7 @@ class _UploadImageViewState extends State<UploadImageView> {
                                   left: 12.0, top: 12.0, right: 12.0),
                               child: Center(
                                 child: Text(
-                                  carrete_provider
+                                  mycarrete_provider
                                           .getLastCarrete()
                                           .num_fotos
                                           .toString() +
@@ -170,7 +173,7 @@ class _UploadImageViewState extends State<UploadImageView> {
                     behavior: HitTestBehavior.translucent,
                     onTap: () {
                       //Solo permitimos escoger si el ultimo carrete NO esta lleno
-                      if (!carrete_provider.LastCarreteIsFull()) {
+                      if (!mycarrete_provider.LastCarreteIsFull()) {
                         _showSelectPhotoOptions(context);
                       } else {
                         _showLastCarreteIsFullDialog(context);
@@ -186,10 +189,10 @@ class _UploadImageViewState extends State<UploadImageView> {
                               border: Border.all(color: Colors.grey.shade800)),
                           child: Center(
                               child:
-                              carrete_provider.isLoading?
+                              mycarrete_provider.isLoading?
                               const CircularProgressIndicator()
                                   :
-                              carrete_provider.LastCarreteIsFull()
+                              mycarrete_provider.LastCarreteIsFull()
                                   ? Text(
                                       AppLocalizations.of(context)!
                                           .currentReelIsFull,
@@ -224,7 +227,7 @@ class _UploadImageViewState extends State<UploadImageView> {
                         borderRadius: BorderRadius.circular(10)),
                     child: TextButton(
                       onPressed: () {
-                        if (!carrete_provider.LastCarreteIsFull()) {
+                        if (!mycarrete_provider.LastCarreteIsFull()) {
                           _showSelectPhotoOptions(context);
                         } else {
                           _showLastCarreteIsFullDialog(context);
@@ -234,10 +237,10 @@ class _UploadImageViewState extends State<UploadImageView> {
                         AppLocalizations.of(context)!.selectAnImage,
                         style: TextStyle(
                             color:
-                            carrete_provider.isLoading?
+                            mycarrete_provider.isLoading?
                             Colors.white
                                 :
-                            carrete_provider.LastCarreteIsFull()
+                            mycarrete_provider.LastCarreteIsFull()
                                 ? Colors.white38
                                 : Colors.white,
                             fontSize: 18),
@@ -252,7 +255,7 @@ class _UploadImageViewState extends State<UploadImageView> {
                     width: double.infinity,
                     decoration: BoxDecoration(
                         color:
-                        carrete_provider.isLoading?
+                        mycarrete_provider.isLoading?
                         Colors.white
                             :
                         _image != null
@@ -261,7 +264,7 @@ class _UploadImageViewState extends State<UploadImageView> {
                         borderRadius: BorderRadius.circular(10)),
                     child: TextButton(
                       onPressed: () async {
-                        if (carrete_provider.LastCarreteIsFull()) {
+                        if (mycarrete_provider.LastCarreteIsFull()) {
                           return;
                         }
                         LoadingOverlay.of(context).show();
@@ -273,7 +276,7 @@ class _UploadImageViewState extends State<UploadImageView> {
                           if (res == 0) {
                             // ha funcionado bien - reseteamos la foto y lo llevamos al carrete en cuestión a parte de decir que se traiga de nuevo los datos
                             //ESTO SERÍA MEJOR QUE SOLO ACTUALIZASE EL ÚLTIMO CARRETE
-                            await carrete_provider.getMyCarretes();
+                            await mycarrete_provider.getMyCarretes();
                             setState(() {
                               _image = null;
                             });
@@ -282,9 +285,11 @@ class _UploadImageViewState extends State<UploadImageView> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => carreteDetail(
-                                        carrete: carrete_provider
-                                            .getLastCarrete(), isMyCarrete: true,)));
+                                    builder: (context) => ChangeNotifierProvider.value(
+                                        value: mycarrete_provider,
+                                        child:  carreteDetail(
+                                          carrete: mycarrete_provider
+                                              .getLastCarrete(), isMyCarrete: true,)) ));
                           } else if (res == 1) {
                             LoadingOverlay.of(context).hide();
                             displayDialog(

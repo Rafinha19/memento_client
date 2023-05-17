@@ -71,5 +71,7 @@
   "friendRequestDENIED": "Friend request denied",
   "friendRequestDENIED_DESC": "You have denied the friend request from user ",
   "youHaventAddedUsers": "Oops, it seems like you haven't added any users yet",
-  "editPhoto": "Edit photo"
+  "editPhoto": "Edit photo",
+  "deletedImage": "Deleted image",
+  "deletedImage_DESC": "The image has been deleted from the server"
 }

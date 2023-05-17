@@ -107,6 +107,30 @@ class CarreteRepository {
     }
   }
 
+  Future<int> deleteMyPhoto(int id) async {
+    var jsonString = await storage.read(key: "jwt");
+    Map<String, dynamic> jsonData = jsonDecode(jsonString!);
+    String token = jsonData['token'];
+    try {
+      var res = await http.delete(
+        Uri.parse("$SERVER_IP/api/fotos/"+ id.toString()),
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': 'Bearer $token', //'bearer token'
+        },
+      );
+
+      if(res.statusCode == 200){
+        return 0;
+      }else{
+        return 1;
+      }
+    } catch (e) {
+      //return "Connection Error";
+      return 2;
+    }
+  }
+
   Future<List<Carrete>> getMyFriendsCarretes() async {
     var jsonString = await storage.read(key: "jwt");
     Map<String, dynamic> jsonData = jsonDecode(jsonString!);
