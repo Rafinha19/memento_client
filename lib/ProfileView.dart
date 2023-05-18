@@ -9,6 +9,7 @@ import 'package:memento_flutter_client/Controller/usuarioList_provider.dart';
 import 'package:memento_flutter_client/Model/currentUsuarioData.dart';
 import 'package:memento_flutter_client/Controller/currentUsuario_provider.dart';
 import 'package:memento_flutter_client/components/myCarretes.dart';
+import 'package:memento_flutter_client/editProfileView.dart';
 import 'package:memento_flutter_client/repository/AccountRepository.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -140,7 +141,16 @@ class _ProfileViewState extends State<ProfileView> {
                         color: Colors.grey[800],
                         borderRadius: BorderRadius.circular(10)),
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) {
+                            return ChangeNotifierProvider.value(
+                                value: currentUsuario_provider,
+                                child: editProfileView());
+                          }),
+                        );
+
+                      },
                       child: Text(
                         AppLocalizations.of(context)!.editProfile,
                         style: TextStyle(color: Colors.white, fontSize: 15),

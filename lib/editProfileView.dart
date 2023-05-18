@@ -1,0 +1,148 @@
+import 'package:flutter/material.dart';
+import 'package:memento_flutter_client/Config/Properties.dart';
+import 'package:memento_flutter_client/components/editUserDataView.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'Controller/currentUsuario_provider.dart';
+
+class editProfileView extends StatefulWidget {
+  @override
+  _editProfileViewState createState() => _editProfileViewState();
+}
+
+class _editProfileViewState extends State<editProfileView> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    CurrentUsuario_provider currentUsuario_provider =
+    Provider.of<CurrentUsuario_provider>(context);
+
+
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text(
+          'Memento',
+          style: TextStyle(fontSize: 26),
+        ),
+        backgroundColor: AppbackgroundColor,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.only(left: 12.0, top: 18.0, right: 12.0),
+        child: Center(
+          child: SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                currentUsuario_provider.isLoading
+                    ?
+                //true
+                const CircularProgressIndicator()
+                    : Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 12.0),
+                      child: Text(
+                          currentUsuario_provider
+                              .usuario.nombre_usuario,
+                          textAlign: TextAlign.left,
+                          textScaleFactor: 3.0,
+                          overflow: TextOverflow.ellipsis,
+                          ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 20.0),
+                      child: CircleAvatar(
+                        radius: 100, // Image radius
+                        backgroundImage: NetworkImage(
+                            currentUsuario_provider
+                                .usuario.url_foto_perfil),
+                      ),
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top:20,bottom: 30.0),
+                  child: Text(
+                      "Editar perfil",
+                      textAlign: TextAlign.left,
+                      textScaleFactor: 2.0,
+                      overflow: TextOverflow.ellipsis,),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 30.0) ,
+                  child: Container(
+                    height: 55,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                        color: Colors.orange,
+                        borderRadius: BorderRadius.circular(10)),
+                    child: TextButton(
+                      onPressed: () {
+                        print("patacas");
+                      },
+                      child: Text(
+                        "Editar foto de perfil",
+                        style: TextStyle(color: Colors.white, fontSize: 18),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 30.0) ,
+                  child: Container(
+                    height: 55,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                        color: Colors.orange,
+                        borderRadius: BorderRadius.circular(10)),
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) {
+                            return ChangeNotifierProvider.value(
+                                value: currentUsuario_provider,
+                                child: editUserDataView(email: currentUsuario_provider.usuario.email,));
+                          }),
+                        );
+                      },
+                      child: Text(
+                        "Editar datos",
+                        style: TextStyle(color: Colors.white, fontSize: 18),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 20.0) ,
+                  child: Container(
+                    height: 55,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                        color: Colors.orange,
+                        borderRadius: BorderRadius.circular(10)),
+                    child: TextButton(
+                      onPressed: () {
+                        print("patacas");
+                      },
+                      child: Text(
+                        "Editar credenciales",
+                        style: TextStyle(color: Colors.white, fontSize: 18),
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

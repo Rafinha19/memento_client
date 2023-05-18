@@ -108,4 +108,33 @@ class AccountRepository {
     return  "$SERVER_IP/api/users/" + username + "/image";
   }
 
+  Future<int> edtiUserData (String email) async{
+    var jsonString = await storage.read(key: "jwt");
+    Map<String, dynamic> jsonData = jsonDecode(jsonString!);
+    String token = jsonData['token'];
+    final Map<String, dynamic> userData = {
+      'email': email,
+    };
+
+    try {
+      var res = await http.put(
+          Uri.parse("$SERVER_IP/api/users/myData"),
+          headers: {
+            "Content-Type": "application/json",
+            'Authorization': 'Bearer $token', //'bearer token'
+          },
+          body: jsonEncode(userData)
+      );
+      if (res.statusCode == 200) {
+        return 0;
+      } else {
+        return 1;
+      }
+    } catch (e) {
+      //return "Connection Error";
+      return 2;
+    }
+  }
+
+
 }

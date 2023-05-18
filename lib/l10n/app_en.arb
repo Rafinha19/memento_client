@@ -73,5 +73,11 @@
   "youHaventAddedUsers": "Oops, it seems like you haven't added any users yet",
   "editPhoto": "Edit photo",
   "deletedImage": "Deleted image",
-  "deletedImage_DESC": "The image has been deleted from the server"
+  "deletedImage_DESC": "The image has been deleted from the server",
+  "description": "Description",
+  "saveChanges": "Save\nchanges",
+  "saveChangesOneLine": "Save changes",
+  "editUserData": "Edit user data",
+  "changesSaved": "Changes saved",
+  "emailUpdated": "Your email has been updated"
 }

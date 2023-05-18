@@ -67,5 +67,11 @@
   "youHaventAddedUsers": "Vaya, parece que no has agregado a ningún usuario de momento",
   "editPhoto": "Editar foto",
   "deletedImage": "Imagen eliminada",
-  "deletedImage_DESC": "La imagen ha sido eliminada del servidor"
+  "deletedImage_DESC": "La imagen ha sido eliminada del servidor",
+  "description": "Descripción",
+  "saveChanges": "Guardar\ncambios",
+  "saveChangesOneLine": "Guardar cambios",
+  "editUserData": "Editar datos del usuario",
+  "changesSaved": "Cambios guardados",
+  "emailUpdated": "Tu email se ha actualizado"
 }

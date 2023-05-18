@@ -52,7 +52,7 @@ class _editcarreteDescriptionViewState
         },
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             child: Column(
               children: [
                 Row(
@@ -96,8 +96,8 @@ class _editcarreteDescriptionViewState
                             borderSide: const BorderSide(color: Colors.orange, width: 1.0),
                           ),
                           border: OutlineInputBorder(),
-                          labelText: "Descripcion",
-                          hintText: "Descripcion"),
+                          labelText: AppLocalizations.of(context)!.description,
+                          hintText: AppLocalizations.of(context)!.description),
                     ),
                   ),
                 ),
@@ -116,11 +116,11 @@ class _editcarreteDescriptionViewState
                         Navigator.pop(context,updatedCarrete.descripcion);
                       }catch(e){
                         LoadingOverlay.of(context).hide();
-                        displayDialog(context, "There was a problem with the connection", "Please check your connection and try again.");
+                        displayDialog(context,AppLocalizations.of(context)!.connection_error, AppLocalizations.of(context)!.connection_error_description);
                       }
                     },
                     child: Text(
-                      "Guardar\ncambios",
+                      AppLocalizations.of(context)!.saveChanges,
                       style: TextStyle(color: Colors.white, fontSize: 20),
                       textAlign: TextAlign.center,
                     ),
