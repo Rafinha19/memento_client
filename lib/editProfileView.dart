@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:memento_flutter_client/Config/Properties.dart';
+import 'package:memento_flutter_client/components/editUserCredentialsView.dart';
 import 'package:memento_flutter_client/components/editUserDataView.dart';
+import 'package:memento_flutter_client/components/loading_overlay.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -108,7 +110,7 @@ class _editProfileViewState extends State<editProfileView> {
                           MaterialPageRoute(builder: (context) {
                             return ChangeNotifierProvider.value(
                                 value: currentUsuario_provider,
-                                child: editUserDataView(email: currentUsuario_provider.usuario.email,));
+                                child: LoadingOverlay(child: editUserDataView(email: currentUsuario_provider.usuario.email,)));
                           }),
                         );
                       },
@@ -129,7 +131,13 @@ class _editProfileViewState extends State<editProfileView> {
                         borderRadius: BorderRadius.circular(10)),
                     child: TextButton(
                       onPressed: () {
-                        print("patacas");
+                        Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) {
+                            return ChangeNotifierProvider.value(
+                                value: currentUsuario_provider,
+                                child: LoadingOverlay(child: editUserCredentialsView(username: currentUsuario_provider.usuario.nombre_usuario,)));
+                          }),
+                        );
                       },
                       child: Text(
                         "Editar credenciales",

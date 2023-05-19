@@ -136,5 +136,45 @@ class AccountRepository {
     }
   }
 
+  Future<int> edtiUserCredentials (String username, String currentPassword, String newPassword) async{
+    var jsonString = await storage.read(key: "jwt");
+    Map<String, dynamic> jsonData = jsonDecode(jsonString!);
+    String token = jsonData['token'];
+    final Map<String, dynamic> userData = {
+      'username': username,
+      'currentPassword': currentPassword,
+      'newPassword': newPassword,
+    };
+
+    try {
+      var res = await http.put(
+          Uri.parse("$SERVER_IP/api/users/myCredentials"),
+          headers: {
+            "Content-Type": "application/json",
+            'Authorization': 'Bearer $token', //'bearer token'
+          },
+          body: jsonEncode(userData)
+      );
+      if (res.statusCode == 200) {
+        return 0;
+      } else {
+        String jsonString = res.body;
+        Map<String, dynamic> jsonMap = json.decode(jsonString);
+        String message = jsonMap['message'];
+        if(message.compareTo("The username " + username + " already exists") == 0){
+          return 3;
+        }else if(message.compareTo("You have written your password wrong")== 0){
+          return 4;
+        }else{
+          return 1;
+        }
+
+      }
+    } catch (e) {
+      //return "Connection Error";
+      return 2;
+    }
+  }
+
 
 }

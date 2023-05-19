@@ -5,6 +5,7 @@ import 'package:memento_flutter_client/Config/Properties.dart';
 import 'package:memento_flutter_client/repository/AccountRepository.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:memento_flutter_client/components/loading_overlay.dart';
 
 import '../Controller/currentUsuario_provider.dart';
 import 'displayDialog.dart';
@@ -127,7 +128,9 @@ class _editUserDataViewState extends State<editUserDataView> {
                           Navigator.pop(context);
                         }
                         else if(!this.isValidEmail(emailController.text)){
+                          LoadingOverlay.of(context).show();
                           displayDialog(context, AppLocalizations.of(context)!.not_a_valid_email, AppLocalizations.of(context)!.not_a_valid_email_description);
+                          LoadingOverlay.of(context).hide();
                         }else{
                           //El correo es válido podemos pasar a cambiarlo
                           int res = await AccountRepository().edtiUserData(emailController.text);
