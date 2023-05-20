@@ -5,7 +5,7 @@
   "error": "Errror",
   "unexpected_error": "Error inesperado, por favor intentalo de nuevo más tarde.",
   "login_error": "Error al hacer login",
-  "login_pass_mustbe_4long": "La contraseña debe ser de 4 caracteres minimo.",
+  "login_pass_mustbe_4long": "La contraseña debe ser de 4 caracteres mínimo.",
   "login_user_havent_found": "No hemos encontrado ninguna cuenta con esa combinacion de usuario y contraseña.",
   "connection_error": "Connection error.",
   "connection_error_description": "Hubo un problema con la conexión a internet.",
@@ -13,7 +13,7 @@
   "username": "Nombre de usuario",
   "username_hint": "Introduce tu nombre de usuario",
   "password": "Contraseña",
-  "password_hint": "Longitud minima de 4 caracteres",
+  "password_hint": "Longitud mínima de 4 caracteres",
   "login": "Login",
   "dont_have_an_account": "¿No tienes una cuenta?",
   "signup": "Crear una cuenta",
@@ -73,5 +73,14 @@
   "saveChangesOneLine": "Guardar cambios",
   "editUserData": "Editar datos del usuario",
   "changesSaved": "Cambios guardados",
-  "emailUpdated": "Tu email se ha actualizado"
+  "emailUpdated": "Tu email se ha actualizado",
+  "editCredentials": "Editar credenciales",
+  "currentPassword": "Contraseña actual",
+  "newPassword": "Nueva contraseña",
+  "repeatNewPassword": "Repite la nueva contraseña",
+  "newPasswordsDontMatchHint": "Por favor, vuelve a escribir las contraseñas nuevas",
+  "credentialsUpdated": "Tus credenciales se han actualizado",
+  "currentPasswordIsWrong": "Tu contraseña actual está mal",
+  "currentPasswordIsWrongHint": "Por favor, vuelve a escribir tu contraseña actual",
+  "editProfilePicture": "Editar foto de perfil"
 }

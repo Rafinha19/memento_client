@@ -30,7 +30,7 @@ class _editUserCredentialsViewState extends State<editUserCredentialsView> {
   @override
   void initState() {
     super.initState();
-    usernameController.text == widget.username;
+    usernameController.text = widget.username;
   }
 
 
@@ -87,7 +87,7 @@ class _editUserCredentialsViewState extends State<editUserCredentialsView> {
                 Padding(
                   padding: EdgeInsets.only(top:15,bottom: 20.0),
                   child: Text(
-                    "Editar credenciales",
+                    AppLocalizations.of(context)!.editCredentials,
                     textAlign: TextAlign.left,
                     textScaleFactor: 2.0,
                     overflow: TextOverflow.ellipsis,),
@@ -98,10 +98,7 @@ class _editUserCredentialsViewState extends State<editUserCredentialsView> {
                     height: 70,
                     width: double.infinity,
                     child: TextField(
-                      maxLines: null,
                       textAlignVertical: TextAlignVertical.top,
-                      expands: true,
-                      keyboardType: TextInputType.multiline,
                       controller: usernameController,
                       decoration: InputDecoration(
                           enabledBorder: const OutlineInputBorder(
@@ -109,8 +106,8 @@ class _editUserCredentialsViewState extends State<editUserCredentialsView> {
                             borderSide: const BorderSide(color: Colors.orange, width: 1.0),
                           ),
                           border: OutlineInputBorder(),
-                          labelText: "nombre usuario",
-                          hintText: "nombre usuario"),
+                          labelText: AppLocalizations.of(context)!.username,
+                          hintText:  AppLocalizations.of(context)!.username),
                     ),
                   ),
                 ),
@@ -120,10 +117,8 @@ class _editUserCredentialsViewState extends State<editUserCredentialsView> {
                     height: 70,
                     width: double.infinity,
                     child: TextField(
-                      maxLines: null,
+                      obscureText: true,
                       textAlignVertical: TextAlignVertical.top,
-                      expands: true,
-                      keyboardType: TextInputType.multiline,
                       controller: currentPasswordController,
                       decoration: InputDecoration(
                           enabledBorder: const OutlineInputBorder(
@@ -131,8 +126,8 @@ class _editUserCredentialsViewState extends State<editUserCredentialsView> {
                             borderSide: const BorderSide(color: Colors.orange, width: 1.0),
                           ),
                           border: OutlineInputBorder(),
-                          labelText: "Contraseña actual",
-                          hintText: "Contraseña actual"),
+                          labelText: AppLocalizations.of(context)!.currentPassword,
+                          hintText: AppLocalizations.of(context)!.currentPassword),
                     ),
                   ),
                 ),
@@ -142,10 +137,8 @@ class _editUserCredentialsViewState extends State<editUserCredentialsView> {
                     height: 70,
                     width: double.infinity,
                     child: TextField(
-                      maxLines: null,
+                      obscureText: true,
                       textAlignVertical: TextAlignVertical.top,
-                      expands: true,
-                      keyboardType: TextInputType.multiline,
                       controller: newPasswordController,
                       decoration: InputDecoration(
                           enabledBorder: const OutlineInputBorder(
@@ -153,8 +146,8 @@ class _editUserCredentialsViewState extends State<editUserCredentialsView> {
                             borderSide: const BorderSide(color: Colors.orange, width: 1.0),
                           ),
                           border: OutlineInputBorder(),
-                          labelText: "Nueva contraseña",
-                          hintText: "Nueva contraseña"),
+                          labelText: AppLocalizations.of(context)!.newPassword,
+                          hintText: AppLocalizations.of(context)!.password_hint),
                     ),
                   ),
                 ),
@@ -164,10 +157,8 @@ class _editUserCredentialsViewState extends State<editUserCredentialsView> {
                     height: 70,
                     width: double.infinity,
                     child: TextField(
-                      maxLines: null,
+                      obscureText: true,
                       textAlignVertical: TextAlignVertical.top,
-                      expands: true,
-                      keyboardType: TextInputType.multiline,
                       controller: repeatNewPasswordController,
                       decoration: InputDecoration(
                           enabledBorder: const OutlineInputBorder(
@@ -175,8 +166,8 @@ class _editUserCredentialsViewState extends State<editUserCredentialsView> {
                             borderSide: const BorderSide(color: Colors.orange, width: 1.0),
                           ),
                           border: OutlineInputBorder(),
-                          labelText: "Repetir nueva contraseña",
-                          hintText: "Repetir nueva contraseña"),
+                          labelText: AppLocalizations.of(context)!.repeatNewPassword,
+                          hintText: AppLocalizations.of(context)!.repeatNewPassword),
                     ),
                   ),
                 ),
@@ -198,8 +189,12 @@ class _editUserCredentialsViewState extends State<editUserCredentialsView> {
                         //Primero comprobamos que concuerden las contraseñas nuevas y si no avisamos al usuario
                         if (newPassword!=repeatNewPassword){
                           LoadingOverlay.of(context).hide();
-                          displayDialog(context, AppLocalizations.of(context)!.passwords_dont_match, "Las contraseñas nuevas no coinciden");
-                        }else{
+                          displayDialog(context, AppLocalizations.of(context)!.passwords_dont_match, AppLocalizations.of(context)!.newPasswordsDontMatchHint);
+                        }else if(username=='' || currentPassword==''|| newPassword==''||repeatNewPassword==''){
+                          displayDialog(context, AppLocalizations.of(context)!.fill_all_data,AppLocalizations.of(context)!.fill_add_data_description);
+                          LoadingOverlay.of(context).hide();
+                        }
+                        else{
                           //Una vez vemos que coinciden llamamos a la funcion
                           var res = await AccountRepository().edtiUserCredentials(username, currentPassword, newPassword);
                           LoadingOverlay.of(context).hide();
@@ -211,15 +206,15 @@ class _editUserCredentialsViewState extends State<editUserCredentialsView> {
                                   MaterialPageRoute(
                                       builder: (context) =>
                                           LoadingOverlay(child: LoginView())));
-                              displayDialog(context, AppLocalizations.of(context)!.changesSaved, "Se han actualizado las credenciales");
+                              displayDialog(context, AppLocalizations.of(context)!.changesSaved, AppLocalizations.of(context)!.credentialsUpdated);
                             }else if( res == 1){
                               displayDialog(context, AppLocalizations.of(context)!.error, AppLocalizations.of(context)!.unexpected_error);
                             }else if( res == 2){
                               displayDialog(context, AppLocalizations.of(context)!.connection_error, AppLocalizations.of(context)!.connection_error_description);
                             }else if( res == 3){
-                              displayDialog(context, "el nombre de usuario ya existe", "ya existe el username");
+                              displayDialog(context,  AppLocalizations.of(context)!.username_already_registered,  AppLocalizations.of(context)!.username_already_registered_description);
                             }else if( res == 4){
-                              displayDialog(context, "Has puesto mal la contraseña", "la contraseña esta mal");
+                              displayDialog(context,  AppLocalizations.of(context)!.currentPasswordIsWrong,  AppLocalizations.of(context)!.currentPasswordIsWrongHint);
                             }
                           }
                         }

@@ -72,7 +72,7 @@ class _editProfileViewState extends State<editProfileView> {
                 Padding(
                   padding: EdgeInsets.only(top:20,bottom: 30.0),
                   child: Text(
-                      "Editar perfil",
+                      AppLocalizations.of(context)!.editProfile,
                       textAlign: TextAlign.left,
                       textScaleFactor: 2.0,
                       overflow: TextOverflow.ellipsis,),
@@ -90,7 +90,7 @@ class _editProfileViewState extends State<editProfileView> {
                         print("patacas");
                       },
                       child: Text(
-                        "Editar foto de perfil",
+                        AppLocalizations.of(context)!.editProfilePicture,
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
                     ),
@@ -115,7 +115,7 @@ class _editProfileViewState extends State<editProfileView> {
                         );
                       },
                       child: Text(
-                        "Editar datos",
+                        AppLocalizations.of(context)!.editUserData,
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
                     ),
@@ -140,7 +140,7 @@ class _editProfileViewState extends State<editProfileView> {
                         );
                       },
                       child: Text(
-                        "Editar credenciales",
+                        AppLocalizations.of(context)!.editCredentials,
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
                     ),

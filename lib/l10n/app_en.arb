@@ -79,5 +79,14 @@
   "saveChangesOneLine": "Save changes",
   "editUserData": "Edit user data",
   "changesSaved": "Changes saved",
-  "emailUpdated": "Your email has been updated"
+  "emailUpdated": "Your email has been updated",
+  "editCredentials": "Edit credentials",
+  "currentPassword": "Current password",
+  "newPassword": "New password",
+  "repeatNewPassword": "Repeat the new password",
+  "newPasswordsDontMatchHint": "Please, write again the new passwords",
+  "credentialsUpdated": "Your credentials have been updated",
+  "currentPasswordIsWrong": "Your current password is wrong",
+  "currentPasswordIsWrongHint": "Please, write your current password again",
+  "editProfilePicture": "Edit profile picture"
 }
