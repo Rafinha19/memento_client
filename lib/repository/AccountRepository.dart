@@ -176,5 +176,35 @@ class AccountRepository {
     }
   }
 
+  Future<int> updateProfileImage (File image) async{
+    var jsonString = await storage.read(key: "jwt");
+    Map<String, dynamic> jsonData = jsonDecode(jsonString!);
+    String token = jsonData['token'];
+
+    try {
+      var url = Uri.parse("$SERVER_IP/api/users/myprofilepicture");
+      var request = http.MultipartRequest('PUT', url);
+
+      var file = await http.MultipartFile.fromPath('file', image.path);
+      request.files.add(file);
+
+      request.headers.addAll({
+        'Authorization': 'Bearer $token'
+      });
+
+      var res = await request.send();
+
+
+      if(res.statusCode == 200){
+        return 0;
+      }else{
+        return 1;
+      }
+    } catch (e) {
+      //return "Connection Error";
+      return 2;
+    }
+  }
+
 
 }

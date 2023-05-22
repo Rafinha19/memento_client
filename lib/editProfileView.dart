@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:memento_flutter_client/Config/Properties.dart';
+import 'package:memento_flutter_client/components/editProfileImageView.dart';
 import 'package:memento_flutter_client/components/editUserCredentialsView.dart';
 import 'package:memento_flutter_client/components/editUserDataView.dart';
 import 'package:memento_flutter_client/components/loading_overlay.dart';
@@ -87,7 +88,11 @@ class _editProfileViewState extends State<editProfileView> {
                         borderRadius: BorderRadius.circular(10)),
                     child: TextButton(
                       onPressed: () {
-                        print("patacas");
+                        Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) {
+                            return LoadingOverlay(child: editProfileImageView(username: currentUsuario_provider.usuario.nombre_usuario,));
+                          }),
+                        );
                       },
                       child: Text(
                         AppLocalizations.of(context)!.editProfilePicture,
