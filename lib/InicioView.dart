@@ -20,6 +20,9 @@ class _InicioViewState extends State<InicioView> {
   @override
   void initState() {
     super.initState();
+    //Estos clear de caches es para que se de cuenta si ha cambiado la foto de perfil
+    imageCache.clear();
+    imageCache.clearLiveImages();
   }
 
   @override
@@ -30,6 +33,9 @@ class _InicioViewState extends State<InicioView> {
 
     Future refresh() async {
       friendsCarretes_provider.getMyFriendsCarretes();
+      //Estos clear de caches es para que se de cuenta si ha cambiado la foto de perfil
+      imageCache.clear();
+      imageCache.clearLiveImages();
       setState(() {
 
       });

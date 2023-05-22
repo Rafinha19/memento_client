@@ -27,6 +27,9 @@ class _ProfileViewState extends State<ProfileView> {
   @override
   void initState() {
     super.initState();
+    //Estos clear de caches es para que se de cuenta si ha cambiado la foto de perfil
+    imageCache.clear();
+    imageCache.clearLiveImages();
   }
 
   @override
@@ -45,6 +48,9 @@ class _ProfileViewState extends State<ProfileView> {
 
     Future refresh() async {
       carrete_provider.getMyCarretes();
+      //Estos clear de caches es para que se de cuenta si ha cambiado la foto de perfil
+      imageCache.clear();
+      imageCache.clearLiveImages();
       setState(() {});
     }
 
