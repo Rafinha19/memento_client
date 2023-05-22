@@ -7,11 +7,9 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:memento_flutter_client/components/select_photo_options_screen.dart';
 import 'package:memento_flutter_client/repository/AccountRepository.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:memento_flutter_client/components/loading_overlay.dart';
 
-import '../Controller/currentUsuario_provider.dart';
 import 'displayDialog.dart';
 
 class editProfileImageView extends StatefulWidget {
@@ -154,7 +152,7 @@ class _editProfileImageViewState extends State<editProfileImageView> {
                   Padding(
                     padding: EdgeInsets.only(top:30,bottom: 30.0),
                     child: Text(
-                      "Editar foto de perfil",
+                      AppLocalizations.of(context)!.editProfilePicture,
                       textAlign: TextAlign.left,
                       textScaleFactor: 2.0,
                       overflow: TextOverflow.ellipsis,),
@@ -173,7 +171,7 @@ class _editProfileImageViewState extends State<editProfileImageView> {
                             _showSelectPhotoOptions(context);
                           },
                           child: Text(
-                            "Selecciona una nueva foto",
+                            AppLocalizations.of(context)!.selectNewPicture,
                             style: TextStyle(color: Colors.white, fontSize: 18),
                           ),
                         ),
@@ -198,7 +196,7 @@ class _editProfileImageViewState extends State<editProfileImageView> {
                                 imageCache.clear();
                                 imageCache.clearLiveImages();
                                 Navigator.pop(context);
-                                displayDialog(context, AppLocalizations.of(context)!.changesSaved, "foto de perfil actualizada");
+                                displayDialog(context, AppLocalizations.of(context)!.changesSaved, AppLocalizations.of(context)!.profilePictureUpdated);
                               }else if(res == 1){
                                 displayDialog(context, AppLocalizations.of(context)!.error, AppLocalizations.of(context)!.unexpected_error);
                               }else{
@@ -206,11 +204,11 @@ class _editProfileImageViewState extends State<editProfileImageView> {
                               }
 
                             }else{
-                              displayDialog(context, "Selecciona una foto", "Selecciona una foto nueva");
+                              displayDialog(context, AppLocalizations.of(context)!.selectNewPicture, AppLocalizations.of(context)!.selectNewPictureHint);
                             }
                           },
                           child: Text(
-                            "Guardar cambios",
+                            AppLocalizations.of(context)!.saveChangesOneLine,
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 18),
