@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:memento_flutter_client/Model/currentUsuarioData.dart';
+import 'package:memento_flutter_client/Model/datosUsuarioActual.dart';
 import 'package:memento_flutter_client/repository/AccountRepository.dart';
 import 'package:memento_flutter_client/repository/UsersRepository.dart';
 import 'package:provider/provider.dart';

@@ -14,7 +14,7 @@ import 'Config/Properties.dart';
 import 'package:memento_flutter_client/Controller/currentUsuario_provider.dart';
 
 import 'Controller/friendsCarretes_provider.dart';
-import 'Model/currentUsuarioData.dart';
+import 'Model/datosUsuarioActual.dart';
 
 class TabPage extends StatefulWidget {
   TabPage();

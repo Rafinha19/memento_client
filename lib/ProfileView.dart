@@ -6,7 +6,7 @@ import 'package:memento_flutter_client/Controller/friendsCarretes_provider.dart'
 import 'package:memento_flutter_client/Controller/myCarretes_provider.dart';
 import 'package:memento_flutter_client/Controller/solicitudAmistad_provider.dart';
 import 'package:memento_flutter_client/Controller/usuarioList_provider.dart';
-import 'package:memento_flutter_client/Model/currentUsuarioData.dart';
+import 'package:memento_flutter_client/Model/datosUsuarioActual.dart';
 import 'package:memento_flutter_client/Controller/currentUsuario_provider.dart';
 import 'package:memento_flutter_client/components/myCarretes.dart';
 import 'package:memento_flutter_client/editProfileView.dart';

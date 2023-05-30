@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:memento_flutter_client/Model/usuario.dart';
 import 'package:memento_flutter_client/Model/carrete.dart';
 import 'package:memento_flutter_client/Model/solicitud_amistad.dart';
-import 'package:memento_flutter_client/Model/currentUsuarioData.dart';
+import 'package:memento_flutter_client/Model/datosUsuarioActual.dart';
 import 'package:memento_flutter_client/repository/AccountRepository.dart';
 import 'package:memento_flutter_client/repository/AmigoRepository.dart';
 import 'package:memento_flutter_client/repository/CarreteRepository.dart';

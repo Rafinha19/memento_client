@@ -6,7 +6,7 @@ import 'package:memento_flutter_client/Config/Properties.dart';
 import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-import '../Model/currentUsuarioData.dart';
+import '../Model/datosUsuarioActual.dart';
 
 class AccountRepository {
   final storage = FlutterSecureStorage();
