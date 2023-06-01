@@ -175,6 +175,7 @@ class _carreteDetailState extends State<carreteDetail> {
                       children: [
                         Row(
                           children: [
+                            /*
                             Text(
                               "12",
                               style: TextStyle(
@@ -206,7 +207,7 @@ class _carreteDetailState extends State<carreteDetail> {
                             Icon(
                               Icons.mode_comment_outlined,
                               size: 30,
-                            )
+                            )*/
                           ],
                         ),
                         widget.isMyCarrete
