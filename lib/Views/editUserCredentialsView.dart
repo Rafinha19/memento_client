@@ -7,8 +7,8 @@ import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:memento_flutter_client/components/loading_overlay.dart';
 import '../Controller/currentUsuario_provider.dart';
-import '../loginView.dart';
-import 'displayDialog.dart';
+import 'loginView.dart';
+import '../Components/displayDialog.dart';
 
 class editUserCredentialsView extends StatefulWidget {
   final String username;

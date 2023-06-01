@@ -1,19 +1,13 @@
-import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:memento_flutter_client/Model/carrete.dart';
 import 'package:memento_flutter_client/components/displayDialog.dart';
-import 'package:memento_flutter_client/components/zoomableImage.dart';
 import 'package:memento_flutter_client/repository/AccountRepository.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../Config/Properties.dart';
-import '../Controller/currentUsuario_provider.dart';
-import '../repository/CarreteRepository.dart';
-import 'Controller/myCarretes_provider.dart';
-import 'components/carreteDetail.dart';
-import 'components/loading_overlay.dart';
+import 'package:memento_flutter_client/Config/Properties.dart';
+import 'package:memento_flutter_client/repository/CarreteRepository.dart';
+import 'package:memento_flutter_client/components/loading_overlay.dart';
 
 class editcarreteDescriptionView extends StatefulWidget {
   final Carrete carrete;
@@ -109,13 +103,13 @@ class _editcarreteDescriptionViewState
                       borderRadius: BorderRadius.circular(10)),
                   child: TextButton(
                     onPressed: () async {
-                      LoadingOverlay.of(context).show();
+                      //LoadingOverlay.of(context).show();
                       try{
                         Carrete updatedCarrete = await CarreteRepository().edtiCarreteDescription(widget.carrete.id_carrete, descriptionController.text);
-                        LoadingOverlay.of(context).hide();
+                        //LoadingOverlay.of(context).hide();
                         Navigator.pop(context,updatedCarrete.descripcion);
                       }catch(e){
-                        LoadingOverlay.of(context).hide();
+                        //LoadingOverlay.of(context).hide();
                         displayDialog(context,AppLocalizations.of(context)!.connection_error, AppLocalizations.of(context)!.connection_error_description);
                       }
                     },

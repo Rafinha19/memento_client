@@ -5,7 +5,6 @@ import 'dart:ffi';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:memento_flutter_client/Model/solicitud_amistad.dart';
-import 'package:memento_flutter_client/uploadImageView.dart';
 
 import '../Config/Properties.dart';
 

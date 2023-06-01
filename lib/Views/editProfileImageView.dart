@@ -10,7 +10,7 @@ import 'package:memento_flutter_client/repository/AccountRepository.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:memento_flutter_client/components/loading_overlay.dart';
 
-import 'displayDialog.dart';
+import '../Components/displayDialog.dart';
 
 class editProfileImageView extends StatefulWidget {
   final String username;

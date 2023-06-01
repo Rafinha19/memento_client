@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:memento_flutter_client/Config/Properties.dart';
-import 'package:memento_flutter_client/components/editProfileImageView.dart';
-import 'package:memento_flutter_client/components/editUserCredentialsView.dart';
-import 'package:memento_flutter_client/components/editUserDataView.dart';
+import 'package:memento_flutter_client/Views/editProfileImageView.dart';
+import 'package:memento_flutter_client/Views/editUserCredentialsView.dart';
+import 'package:memento_flutter_client/Views/editUserDataView.dart';
 import 'package:memento_flutter_client/components/loading_overlay.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'Controller/currentUsuario_provider.dart';
+import '../Controller/currentUsuario_provider.dart';
 
 class editProfileView extends StatefulWidget {
   @override

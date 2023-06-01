@@ -1,15 +1,15 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:memento_flutter_client/TabPage.dart';
+import 'package:memento_flutter_client/Views/TabPage.dart';
 import 'package:memento_flutter_client/components/loading_overlay.dart';
-import 'package:memento_flutter_client/signUpView.dart';
+import 'package:memento_flutter_client/Views/signUpView.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:memento_flutter_client/repository/AccountRepository.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'components/displayDialog.dart';
+import '../components/displayDialog.dart';
 
 final storage = FlutterSecureStorage();
 

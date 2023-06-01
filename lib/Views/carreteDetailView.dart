@@ -4,15 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:memento_flutter_client/Model/carrete.dart';
 import 'package:memento_flutter_client/components/zoomableImage.dart';
-import 'package:memento_flutter_client/editCarreteDescriptionView.dart';
+import 'package:memento_flutter_client/Views/editCarreteDescriptionView.dart';
 import 'package:memento_flutter_client/repository/AccountRepository.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../Config/Properties.dart';
-import '../Controller/myCarretes_provider.dart';
-import '../repository/CarreteRepository.dart';
-import 'displayDialog.dart';
-import 'loading_overlay.dart';
+import 'package:memento_flutter_client/Config/Properties.dart';
+import 'package:memento_flutter_client/Controller/myCarretes_provider.dart';
+import 'package:memento_flutter_client/repository/CarreteRepository.dart';
+import 'package:memento_flutter_client/Components/displayDialog.dart';
+import 'package:memento_flutter_client/Components/loading_overlay.dart';
 
 class carreteDetail extends StatefulWidget {
   final Carrete carrete;
@@ -272,8 +272,7 @@ class _carreteDetailState extends State<carreteDetail> {
     final descripcion = await Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => LoadingOverlay(
-              child: editcarreteDescriptionView(carrete: widget.carrete))),
+          builder: (context) => LoadingOverlay(child: editcarreteDescriptionView(carrete: widget.carrete))),
     );
 
     // When a BuildContext is used from a StatefulWidget, the mounted property

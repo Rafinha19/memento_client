@@ -3,8 +3,8 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:memento_flutter_client/Controller/currentUsuario_provider.dart';
 import 'package:memento_flutter_client/components/loading_overlay.dart';
-import 'package:memento_flutter_client/loginView.dart';
-import 'package:memento_flutter_client/TabPage.dart';
+import 'package:memento_flutter_client/Views/loginView.dart';
+import 'package:memento_flutter_client/Views/TabPage.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
@@ -28,6 +28,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       localizationsDelegates: [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,

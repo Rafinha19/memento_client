@@ -8,12 +8,12 @@ import 'package:intl/intl.dart';
 import 'package:memento_flutter_client/repository/CarreteRepository.dart';
 import 'package:provider/provider.dart';
 
-import 'Config/Properties.dart';
-import 'Controller/myCarretes_provider.dart';
-import 'components/carreteDetail.dart';
-import 'components/displayDialog.dart';
-import 'components/loading_overlay.dart';
-import 'components/select_photo_options_screen.dart';
+import 'package:memento_flutter_client/Config/Properties.dart';
+import 'package:memento_flutter_client/Controller/myCarretes_provider.dart';
+import 'package:memento_flutter_client/Views/carreteDetailView.dart';
+import 'package:memento_flutter_client/components/displayDialog.dart';
+import 'package:memento_flutter_client/components/loading_overlay.dart';
+import 'package:memento_flutter_client/components/select_photo_options_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // ignore: must_be_immutable

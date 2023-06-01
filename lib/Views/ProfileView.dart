@@ -9,14 +9,14 @@ import 'package:memento_flutter_client/Controller/usuarioList_provider.dart';
 import 'package:memento_flutter_client/Model/datosUsuarioActual.dart';
 import 'package:memento_flutter_client/Controller/currentUsuario_provider.dart';
 import 'package:memento_flutter_client/components/myCarretes.dart';
-import 'package:memento_flutter_client/editProfileView.dart';
+import 'package:memento_flutter_client/Views/editProfileView.dart';
 import 'package:memento_flutter_client/repository/AccountRepository.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'components/loading_overlay.dart';
-import 'friendsView.dart';
-import 'loginView.dart';
+import 'package:memento_flutter_client/components/loading_overlay.dart';
+import 'package:memento_flutter_client/Views/friendsView.dart';
+import 'package:memento_flutter_client/Views/loginView.dart';
 
 class ProfileView extends StatefulWidget {
   @override
@@ -148,6 +148,7 @@ class _ProfileViewState extends State<ProfileView> {
                         borderRadius: BorderRadius.circular(10)),
                     child: TextButton(
                       onPressed: () {
+                        carrete_provider.notifcarActualizacion();
                         Navigator.of(context).push(
                           MaterialPageRoute(builder: (context) {
                             return ChangeNotifierProvider.value(

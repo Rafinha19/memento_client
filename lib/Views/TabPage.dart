@@ -4,17 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:memento_flutter_client/Controller/amigo_provider.dart';
 import 'package:memento_flutter_client/Controller/solicitudAmistad_provider.dart';
 import 'package:memento_flutter_client/Controller/usuarioList_provider.dart';
-import 'package:memento_flutter_client/InicioView.dart';
+import 'package:memento_flutter_client/Views/InicioView.dart';
 import 'package:memento_flutter_client/Controller/myCarretes_provider.dart';
-import 'package:memento_flutter_client/ProfileView.dart';
+import 'package:memento_flutter_client/Views/ProfileView.dart';
 import 'package:memento_flutter_client/components/loading_overlay.dart';
-import 'package:memento_flutter_client/uploadImageView.dart';
+import 'package:memento_flutter_client/Views/uploadImageView.dart';
 import 'package:provider/provider.dart';
-import 'Config/Properties.dart';
+import '../Config/Properties.dart';
 import 'package:memento_flutter_client/Controller/currentUsuario_provider.dart';
 
-import 'Controller/friendsCarretes_provider.dart';
-import 'Model/datosUsuarioActual.dart';
+import '../Controller/friendsCarretes_provider.dart';
+import '../Model/datosUsuarioActual.dart';
 
 class TabPage extends StatefulWidget {
   TabPage();

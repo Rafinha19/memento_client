@@ -32,13 +32,16 @@ class MyCarretes_provider extends ChangeNotifier {
 
 
 
-
   Carrete getLastCarrete(){
     return this.carretes.first;
   }
 
   bool LastCarreteIsFull(){
     return this.getLastCarrete().num_fotos == 9;
+  }
+
+  void notifcarActualizacion(){
+    notifyListeners();
   }
 
 

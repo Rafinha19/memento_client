@@ -11,7 +11,7 @@ import 'package:memento_flutter_client/components/userList.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'Controller/amigo_provider.dart';
+import '../Controller/amigo_provider.dart';
 
 class friendsView extends StatefulWidget {
   @override

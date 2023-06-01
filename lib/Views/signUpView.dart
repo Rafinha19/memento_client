@@ -1,15 +1,15 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:memento_flutter_client/TabPage.dart';
+import 'package:memento_flutter_client/Views/TabPage.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:memento_flutter_client/Config/Properties.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:memento_flutter_client/repository/AccountRepository.dart';
 
-import 'components/displayDialog.dart';
-import 'components/loading_overlay.dart';
+import '../components/displayDialog.dart';
+import '../components/loading_overlay.dart';
 
 final storage = FlutterSecureStorage();
 
@@ -183,7 +183,7 @@ class _signUpViewState extends State<signUpView> {
                       },
                       child:
                       Text(
-                        'Sign up',
+                        AppLocalizations.of(context)!.signup,
                         style: TextStyle(color: Colors.white, fontSize: 25),
                       ),
                     ),

@@ -8,7 +8,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:memento_flutter_client/components/loading_overlay.dart';
 
 import '../Controller/currentUsuario_provider.dart';
-import 'displayDialog.dart';
+import '../Components/displayDialog.dart';
 class editUserDataView extends StatefulWidget {
   final String email;
   editUserDataView({Key? key, required this.email})

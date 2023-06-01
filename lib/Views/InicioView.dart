@@ -9,7 +9,7 @@ import 'package:memento_flutter_client/repository/CarreteRepository.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'Controller/myCarretes_provider.dart';
+import '../Controller/myCarretes_provider.dart';
 
 class InicioView extends StatefulWidget {
   @override
