@@ -52,7 +52,7 @@ class _userListState extends State<userList> {
                   children: [
                     Padding(
                       padding: EdgeInsets.only(top: 10.0, bottom: 5.0),
-                      child: Text(AppLocalizations.of(context)!.user_list,style: TextStyle(color: Colors.white, fontSize: 20),),
+                      child: Text(AppLocalizations.of(context)!.addFriends,style: TextStyle(color: Colors.white, fontSize: 20),),
                     ),
                     usuarioList_provider.isLoading?
                         const CircularProgressIndicator()
