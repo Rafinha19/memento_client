@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:memento_flutter_client/Model/carrete.dart';
+import 'package:memento_flutter_client/Views/mementoView.dart';
 import 'package:memento_flutter_client/components/zoomableImage.dart';
 import 'package:memento_flutter_client/Views/editCarreteDescriptionView.dart';
 import 'package:memento_flutter_client/repository/AccountRepository.dart';
@@ -83,7 +84,7 @@ class _carreteDetailState extends State<carreteDetail> {
                                 child: Text(widget.carrete.propietario)),
                           ],
                         ),
-                        widget.isMyCarrete
+                        widget.isMyCarrete && widget.carrete.num_fotos==9
                             ? Container(
                                 height: 35,
                                 width: 150,
@@ -92,7 +93,17 @@ class _carreteDetailState extends State<carreteDetail> {
                                     borderRadius: BorderRadius.circular(10)),
                                 child: TextButton(
                                   onPressed: () {
-                                    print("Generar memento");
+                                    Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                                      return  mementoView(CarreteRepository().toUpperCaseFirstLetter(
+                                          DateFormat(
+                                              'MMMM',
+                                              Localizations.localeOf(context)
+                                                  .languageCode)
+                                              .format(DateTime(widget.carrete.ano,
+                                              widget.carrete.mes))) +
+                                          " " +
+                                          widget.carrete.ano.toString(), widget.carrete,token);
+                                    }));
                                   },
                                   child: Text(
                                     "Generar Memento",

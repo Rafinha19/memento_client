@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 //Para ejecutar en el navegador
 //const SERVER_IP = 'http://localhost:8080';
 //Ejecutar en teelfono fisico
-//const SERVER_IP = 'http://192.168.0.8:8080';
-const SERVER_IP = 'http://192.168.1.50:8080';
+const SERVER_IP = 'http://192.168.0.8:8080';
+//const SERVER_IP = 'http://192.168.1.50:8080';
 
 
 Color AppbackgroundColor = Colors.grey.shade900;

@@ -37,6 +37,8 @@ dependencies:
   card_swiper : ^2.0.1
   image_picker: ^0.8.7
   image_cropper: ^2.0.3
+  pdf: ^3.9.0
+  printing: ^5.4.2
 
 dev_dependencies:
   flutter_test:
@@ -62,8 +64,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assets/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
