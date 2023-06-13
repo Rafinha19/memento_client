@@ -34,7 +34,7 @@
   "username_already_registered_description": "Por favor, intenta usar otro nombre de usuario o haz login si ya tienes una cuenta",
   "email_already_in_use": "Ese correo ya esta en uso",
   "email_already_in_use_description": "Ya existe una cuenta registrada con ese correo",
-  "sign_out": "Cerrar sesion",
+  "sign_out": "Cerrar sesión",
   "currentReel": "Carrete actual ",
   "reel_singular": " carrete",
   "reel_plural":" carretes",
@@ -85,5 +85,8 @@
   "editProfilePicture": "Editar foto de perfil",
   "selectNewPicture": "Selecciona una nueva foto",
   "profilePictureUpdated": "Tu foto de perfil se ha actualizado",
-  "selectNewPictureHint": "Selecciona una nueva foto de perfil"
+  "selectNewPictureHint": "Selecciona una nueva foto de perfil",
+  "generateMemento": "Generar Memento",
+  "youcantGeneratetheMemento": "No puedes generar el Memento",
+  "youcantGeneratetheMementoDESC": "Es necesario que el carrete esté lleno para poder generar el Memento"
 }

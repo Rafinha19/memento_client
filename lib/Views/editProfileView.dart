@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:memento_flutter_client/Config/Properties.dart';
 import 'package:memento_flutter_client/Views/editProfileImageView.dart';
+import 'package:memento_flutter_client/Views/editProfileImageView.dart';
 import 'package:memento_flutter_client/Views/editUserCredentialsView.dart';
 import 'package:memento_flutter_client/Views/editUserDataView.dart';
 import 'package:memento_flutter_client/components/loading_overlay.dart';

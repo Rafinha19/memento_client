@@ -91,5 +91,8 @@
   "editProfilePicture": "Edit profile picture",
   "selectNewPicture": "Select a new picture",
   "profilePictureUpdated": "Your profile picture has been updated",
-  "selectNewPictureHint": "Select a new profile picture"
+  "selectNewPictureHint": "Select a new profile picture",
+  "generateMemento": "Generate Memento",
+  "youcantGeneratetheMemento": "You can't generate the Memento",
+  "youcantGeneratetheMementoDESC": "The reel has to be full in order to generate the Memento"
 }

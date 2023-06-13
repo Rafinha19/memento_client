@@ -84,29 +84,34 @@ class _carreteDetailState extends State<carreteDetail> {
                                 child: Text(widget.carrete.propietario)),
                           ],
                         ),
-                        widget.isMyCarrete && widget.carrete.num_fotos==9
+                        widget.isMyCarrete
                             ? Container(
                                 height: 35,
                                 width: 150,
                                 decoration: BoxDecoration(
-                                    color: Colors.orange,
+                                    color: widget.carrete.num_fotos==9? Colors.orange : Colors.grey.shade800,
                                     borderRadius: BorderRadius.circular(10)),
                                 child: TextButton(
                                   onPressed: () {
-                                    Navigator.of(context).push(MaterialPageRoute(builder: (context){
-                                      return  mementoView(CarreteRepository().toUpperCaseFirstLetter(
-                                          DateFormat(
-                                              'MMMM',
-                                              Localizations.localeOf(context)
-                                                  .languageCode)
-                                              .format(DateTime(widget.carrete.ano,
-                                              widget.carrete.mes))) +
-                                          " " +
-                                          widget.carrete.ano.toString(), widget.carrete,token);
-                                    }));
+                                    if(widget.carrete.num_fotos == 9){
+                                      Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                                        return  mementoView(CarreteRepository().toUpperCaseFirstLetter(
+                                            DateFormat(
+                                                'MMMM',
+                                                Localizations.localeOf(context)
+                                                    .languageCode)
+                                                .format(DateTime(widget.carrete.ano,
+                                                widget.carrete.mes))) +
+                                            " " +
+                                            widget.carrete.ano.toString(), widget.carrete,token);
+                                      }));
+                                    }else{
+                                      displayDialog(context, AppLocalizations.of(context)!.youcantGeneratetheMemento, AppLocalizations.of(context)!.youcantGeneratetheMementoDESC);
+                                    }
+
                                   },
                                   child: Text(
-                                    "Generar Memento",
+                                    AppLocalizations.of(context)!.generateMemento,
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 15),
                                     textAlign: TextAlign.center,

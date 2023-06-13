@@ -98,9 +98,6 @@ class mementoView extends StatelessWidget {
           'Authorization': 'Bearer $token',
         });
 
-    final netImage = await networkImage('https://www.nfet.net/nfet.jpg');
-    final servImage =
-    await networkImage('http://192.168.0.8:8080/api/users/rafa/image');
     final pdf = pw.Document();
     final ByteData byteslogo = await rootBundle.load('assets/velaMemento.png');
     final Uint8List byteListLogo = byteslogo.buffer.asUint8List();
@@ -117,7 +114,7 @@ class mementoView extends StatelessWidget {
                       pw.Padding(
                           padding: const pw.EdgeInsets.symmetric(
                               vertical: 20, horizontal: 30),
-                          child: pw.Text('Junio 2023',
+                          child: pw.Text(mesAno!,
                               style:  pw.TextStyle(fontSize: 40, fontWeight: pw.FontWeight.bold)))
                     ]),
                 pw.Column(
