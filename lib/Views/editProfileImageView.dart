@@ -53,6 +53,7 @@ class _editProfileImageViewState extends State<editProfileImageView> {
           statusBarColor: AppbackgroundColor,
           toolbarWidgetColor: Colors.white,
           backgroundColor: AppbackgroundColor,
+          hideBottomControls: true,
         ),
         IOSUiSettings(title: AppLocalizations.of(context)!.editPhoto)
       ],
