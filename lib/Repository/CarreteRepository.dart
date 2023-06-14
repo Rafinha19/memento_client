@@ -9,7 +9,6 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:memento_flutter_client/Config/Properties.dart';
 
 class CarreteRepository {
-
   final storage = FlutterSecureStorage();
 
   //esta funcion devuelve todos tus carretes
@@ -27,7 +26,8 @@ class CarreteRepository {
       );
       if (res.statusCode == 200) {
         List<dynamic> carretesJson = jsonDecode(res.body);
-        List<Carrete> carretes = carretesJson.map((c) => Carrete.fromJson(c)).toList();
+        List<Carrete> carretes =
+            carretesJson.map((c) => Carrete.fromJson(c)).toList();
         //developer.log(carretes[0].ano_mes);
         return carretes;
       } else {
@@ -44,9 +44,8 @@ class CarreteRepository {
     return text.substring(0, 1).toUpperCase() + text.substring(1);
   }
 
-
-
-  Future<Carrete> edtiCarreteDescription (int id_carrete, String description) async{
+  Future<Carrete> edtiCarreteDescription(
+      int id_carrete, String description) async {
     var jsonString = await storage.read(key: "jwt");
     Map<String, dynamic> jsonData = jsonDecode(jsonString!);
     String token = jsonData['token'];
@@ -57,16 +56,15 @@ class CarreteRepository {
 
     try {
       var res = await http.put(
-        Uri.parse("$SERVER_IP/api/carretes/description/$id_carrete"),
-        headers: {
-          "Content-Type": "application/json",
-          'Authorization': 'Bearer $token', //'bearer token'
-        },
-        body: jsonEncode(editCarreteDescription)
-      );
+          Uri.parse("$SERVER_IP/api/carretes/description/$id_carrete"),
+          headers: {
+            "Content-Type": "application/json",
+            'Authorization': 'Bearer $token', //'bearer token'
+          },
+          body: jsonEncode(editCarreteDescription));
       if (res.statusCode == 200) {
         dynamic carretesJson = jsonDecode(res.body);
-        Carrete carrete =Carrete.fromJson(carretesJson);
+        Carrete carrete = Carrete.fromJson(carretesJson);
         return carrete;
       } else {
         throw Exception('Error al obtener los carretes');
@@ -77,28 +75,24 @@ class CarreteRepository {
     }
   }
 
-
   Future<int> uploadPhoto(File image) async {
     var jsonString = await storage.read(key: "jwt");
     Map<String, dynamic> jsonData = jsonDecode(jsonString!);
     String token = jsonData['token'];
     try {
-
       var url = Uri.parse("$SERVER_IP/api/carretes/lastcarrete/images");
       var request = http.MultipartRequest('POST', url);
 
       var archivo = await http.MultipartFile.fromPath('file', image.path);
       request.files.add(archivo);
 
-      request.headers.addAll({
-        'Authorization': 'Bearer $token'
-      });
+      request.headers.addAll({'Authorization': 'Bearer $token'});
 
       var res = await request.send();
 
-      if(res.statusCode == 200){
+      if (res.statusCode == 200) {
         return 0;
-      }else{
+      } else {
         return 1;
       }
     } catch (e) {
@@ -113,16 +107,16 @@ class CarreteRepository {
     String token = jsonData['token'];
     try {
       var res = await http.delete(
-        Uri.parse("$SERVER_IP/api/fotos/"+ id.toString()),
+        Uri.parse("$SERVER_IP/api/fotos/" + id.toString()),
         headers: {
           "Content-Type": "application/json",
           'Authorization': 'Bearer $token', //'bearer token'
         },
       );
 
-      if(res.statusCode == 200){
+      if (res.statusCode == 200) {
         return 0;
-      }else{
+      } else {
         return 1;
       }
     } catch (e) {
@@ -145,7 +139,8 @@ class CarreteRepository {
       );
       if (res.statusCode == 200) {
         List<dynamic> carretesJson = jsonDecode(res.body);
-        List<Carrete> carretes = carretesJson.map((c) => Carrete.fromJson(c)).toList();
+        List<Carrete> carretes =
+            carretesJson.map((c) => Carrete.fromJson(c)).toList();
         return carretes;
       } else {
         throw Exception('Error al obtener los amigos');
