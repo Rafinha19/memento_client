@@ -104,18 +104,12 @@ class _LoginViewState extends State<LoginView> {
                                 context,
                                 AppLocalizations.of(context)!.login_error,
                                 AppLocalizations.of(context)!.login_errorDESC);
-                          } else if (jwt == "CONN_ERR") {
+                          } else if (jwt == "CONN_ERR" ||jwt == "SERV_ERR") {
                             displayDialog(
                                 context,
                                 AppLocalizations.of(context)!.connection_error,
                                 AppLocalizations.of(context)!
                                     .connection_error_description);
-                          } else if (jwt == "SERV_ERR") {
-                            displayDialog(
-                                context,
-                                AppLocalizations.of(context)!.server_error,
-                                AppLocalizations.of(context)!
-                                    .server_error_description);
                           } else if (jwt != null) {
                             storage.write(key: "jwt", value: jwt);
                             Navigator.push(

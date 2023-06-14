@@ -9,7 +9,7 @@
   "login_pass_mustbe_4long": "La contraseña debe ser de 4 caracteres mínimo",
   "login_user_havent_found": "No hemos encontrado ninguna cuenta con esa combinacion de usuario y contraseña",
   "connection_error": "Error de conexión",
-  "connection_error_description": "Hubo un problema con la conexión a internet",
+  "connection_error_description": "Hubo un problema con la conexión a internet, por favor comprueba tu conexión y vuelve a intentarlo más tarde",
   "server_error_description": "Hubo un problema con el servidor, por favor vuelve a intentarlo más tarde",
   "username": "Nombre de usuario",
   "username_hint": "Introduce tu nombre de usuario",

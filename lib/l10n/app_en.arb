@@ -15,7 +15,7 @@
   "login_pass_mustbe_4long": "Password must be 4 characters long",
   "login_user_havent_found": "We haven't found any account with that combination of username and password",
   "connection_error": "Connection error",
-  "connection_error_description": "There was a problem with the internet connection",
+  "connection_error_description": "There was a problem with the internet connection, please check your connection and try again later",
   "server_error_description": "There was a problem with the server, please try again later",
   "username": "Username",
   "username_hint": "Enter your username",
