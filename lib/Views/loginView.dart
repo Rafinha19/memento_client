@@ -102,8 +102,8 @@ class _LoginViewState extends State<LoginView> {
                           } else if (jwt == "401") {
                             displayDialog(
                                 context,
-                                AppLocalizations.of(context)!.error,
-                                AppLocalizations.of(context)!.login_error);
+                                AppLocalizations.of(context)!.login_error,
+                                AppLocalizations.of(context)!.login_errorDESC);
                           } else if (jwt == "CONN_ERR") {
                             displayDialog(
                                 context,

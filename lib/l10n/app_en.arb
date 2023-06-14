@@ -11,6 +11,7 @@
   "error": "Errror",
   "unexpected_error": "Unexpected error, please try again later",
   "login_error": "Login error",
+  "login_errorDESC": "We haven't found an account with that combination of username and password",
   "login_pass_mustbe_4long": "Password must be 4 characters long",
   "login_user_havent_found": "We haven't found any account with that combination of username and password",
   "connection_error": "Connection error",
