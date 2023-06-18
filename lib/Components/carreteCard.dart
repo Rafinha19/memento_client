@@ -82,7 +82,7 @@ class _carreteCardState extends State<carreteCard> {
                                 children: [
                                   Row(
                                     children: [
-                                      Text("Carrete actual"),
+                                      Text(AppLocalizations.of(context)!.currentReel),
                                     ],
                                   ),
                                   Text(widget.carrete.num_fotos.toString() + "/9")
