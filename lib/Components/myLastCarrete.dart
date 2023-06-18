@@ -34,7 +34,7 @@ class _myLastCarreteState extends State<myLastCarrete> {
       Container() //Esto se hace para no mostrar un monton de circular progess indicator
           :
       SizedBox(
-        height: 200,
+        height: 190,
         width: double.infinity,
         child: carreteCard(
             carrete: carrete_provider.carretes[0],

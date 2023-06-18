@@ -74,7 +74,22 @@ class _carreteCardState extends State<carreteCard> {
                       widget.isInicioCarrete
                           ? Padding(
                               padding:EdgeInsets.only(top: 10.0, left: 10,right: 10),
-                              child: Row(
+                              child:
+                              widget.ismyLastcarrete?
+
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text("Carrete actual"),
+                                    ],
+                                  ),
+                                  Text(widget.carrete.num_fotos.toString() + "/9")
+                                ],
+                              )
+                                  :
+                              Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Row(
